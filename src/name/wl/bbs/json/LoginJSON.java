@@ -10,7 +10,7 @@ import name.wl.bbs.util.*;
 
 public class LoginJSON extends ApiJSON
 {
-    private static String loginApi = "/token.json";
+    private static String API = "/token.json";
 
     protected String user = null;
     protected String pass = null;
@@ -29,15 +29,15 @@ public class LoginJSON extends ApiJSON
         params.put("user", this.user);
         params.put("pass", this.pass);
 
-        HTTPRequestThread requestThread = new HTTPRequestThread(ApiJSON.getURL(loginApi, params));
+        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API, params));
         Event.observe(requestThread, "LOADED", this.requestListener);
         requestThread.start();
     }
 
-    public void loadContent(final String jsonString)
+    public void loadContent(final String json)
     {
         Logger.debug("loadContent");
-        super.loadContent(jsonString);
+        super.loadContent(json);
 
         if (this.success) {
             try {

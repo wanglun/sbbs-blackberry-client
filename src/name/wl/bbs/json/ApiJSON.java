@@ -8,7 +8,10 @@ import name.wl.bbs.util.*;
 
 public class ApiJSON
 {
-    protected static final String API = "http://bbs.seu.edu.cn/api";
+    protected static final String BASEAPI = "http://bbs.seu.edu.cn/api";
+
+    protected static final boolean AUTH = true;
+    protected static final boolean NOAUTH = false;
 
     protected JSONObject data = null;
     protected int time;
@@ -53,7 +56,7 @@ public class ApiJSON
                 s += "&token=" + "test";
         }
 
-        return API + method + s;
+        return BASEAPI + method + s;
     }
 
     protected Listener requestListener = new Listener()
