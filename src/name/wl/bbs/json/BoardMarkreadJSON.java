@@ -25,7 +25,7 @@ public class BoardMarkreadJSON extends ApiJSON
 
     public void load()
     {
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API, AUTH));
+        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API + this.board.getName() + "/markread.json", AUTH));
         Event.observe(requestThread, "LOADED", this.requestListener);
         requestThread.start();
     }
