@@ -101,7 +101,7 @@ public class BoardJSON extends ApiJSON
                 }
                 /* parse the json */
             } catch (Exception e) {
-                Logger.debug("sections parse error");
+                Logger.debug("parse error");
                 this.success = false;
             }
         }
