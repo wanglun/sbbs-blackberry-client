@@ -10,22 +10,22 @@ import name.wl.bbs.json.ApiJSON;
 import name.wl.bbs.util.*;
 import name.wl.bbs.hjlp.*;
 
-public class SectionsJSON extends ApiJSON
+public class FavJSON extends ApiJSON
 {
-    private static String API = "/sections.json";
+    private static String API = "/fav/get.json";
 
     /* 可选 自动增加..作为上层目录 */
     private boolean up = false;
 
     private Vector boards;
 
-    public SectionsJSON()
+    public FavJSON()
     {
     }
 
     public void load()
     {
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API));
+        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API, AUTH));
         Event.observe(requestThread, "LOADED", this.requestListener);
         requestThread.start();
     }
