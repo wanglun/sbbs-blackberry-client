@@ -55,7 +55,7 @@ public class TopicPostJSON extends ApiJSON
         params.put("noquote", new Boolean(this.noquote).toString());
         params.put("anony", new Boolean(this.anony).toString());
 
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API), params);
+        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API, AUTH), params);
         Event.observe(requestThread, "LOADED", this.requestListener);
         requestThread.start();
     }
