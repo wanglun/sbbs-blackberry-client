@@ -15,6 +15,7 @@ public class LoginJSON extends ApiJSON
     protected String user = null;
     protected String pass = null;
     protected String token = null;
+    protected String name = null;
 
     public LoginJSON(String user, String pass)
     {
@@ -38,7 +39,15 @@ public class LoginJSON extends ApiJSON
         Logger.debug("loadContent");
         super.loadContent(jsonString);
 
-        // handle root
+        if (this.success) {
+            try {
+                this.name = this.data.getString("name");
+                this.token = this.data.getString("token");
+            } catch (Exception e) {
+                Logger.debug("token parse error");
+                this.success = false;
+            }
+        }
 
         Event.trigger(this, "LOADED");
     }

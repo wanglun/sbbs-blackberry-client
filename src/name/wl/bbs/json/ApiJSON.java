@@ -10,7 +10,7 @@ public class ApiJSON
 {
     protected static final String API = "http://bbs.seu.edu.cn/api";
 
-    protected JSONObject root;
+    protected JSONObject data = null;
     protected int time;
     protected int cost;
     protected boolean success;
@@ -66,7 +66,6 @@ public class ApiJSON
 
     protected void loadContent(final String jsonString)
     {
-        JSONObject data = null;
         Logger.debug(jsonString);
         try {
             data = new JSONObject(jsonString);
@@ -92,9 +91,8 @@ public class ApiJSON
 
             if (!this.success) {
                 this.error = data.getString("error");
-            } else {
-                this.root = data.getJSONObject("root");
             }
+
         } catch (Exception e) {
             this.success = false;
         }
