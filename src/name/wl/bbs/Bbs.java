@@ -9,6 +9,8 @@ import name.wl.bbs.screens.*;
  */
 public class Bbs extends UiApplication 
 {
+    public static final long APPLICATION_GUID = 0xe757c870033b1010L;
+    public static final String APPLICATION_NAME = "SBBS Client";
 
     public static void main(String[] args)
     {
