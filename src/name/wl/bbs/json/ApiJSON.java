@@ -3,8 +3,8 @@ package name.wl.bbs.json;
 import java.util.Hashtable;
 import org.json.me.JSONObject;
 
-import name.wl.bbs.Listener;
 import name.wl.bbs.http.*;
+import name.wl.bbs.util.*;
 
 public class ApiJSON
 {
@@ -47,10 +47,10 @@ public class ApiJSON
             s += URLUTF8Encoder.encodeParams(params);
         }
         if (auth) {
-            if (s != "")
-                s += "&token=" + "test";
-            else
+            if (s.equals(""))
                 s += "?token=" + "test";
+            else
+                s += "&token=" + "test";
         }
 
         return API + method + s;
@@ -67,11 +67,11 @@ public class ApiJSON
     protected void loadContent(final String jsonString)
     {
         JSONObject data = null;
-        System.out.println(jsonString);
+        Logger.debug(jsonString);
         try {
             data = new JSONObject(jsonString);
         } catch (Exception e) {
-            System.out.println("EXCEPTION");
+            Logger.debug("EXCEPTION");
             e.printStackTrace();
 
             this.success = false;

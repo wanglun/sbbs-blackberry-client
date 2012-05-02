@@ -8,8 +8,7 @@ import net.rim.device.api.ui.Manager;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.BitmapField;
 
-import name.wl.bbs.Listener;
-import name.wl.bbs.Event;
+import name.wl.bbs.util.*;
 
 /**
  * HTTPBitmapField

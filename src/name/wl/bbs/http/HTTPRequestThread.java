@@ -2,7 +2,7 @@ package name.wl.bbs.http;
 
 import java.util.Hashtable;
 
-import name.wl.bbs.Event;
+import name.wl.bbs.util.*;
 
 /**
  * Threaded HTTPRequest

@@ -1,4 +1,4 @@
-package name.wl.bbs;
+package name.wl.bbs.util;
 
 public interface Listener 
 {

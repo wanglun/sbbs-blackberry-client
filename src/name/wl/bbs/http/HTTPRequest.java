@@ -12,6 +12,8 @@ import javax.microedition.io.HttpsConnection;
 
 import java.util.Hashtable;
 
+import name.wl.bbs.util.*;
+
 public class HTTPRequest
 {
     /**
@@ -174,7 +176,7 @@ public class HTTPRequest
     protected boolean response() throws IOException
     {
         boolean success;
-        System.out.println("http response");
+        Logger.debug("http response");
         // Check response code for success
         if (this.connection.getResponseCode() == HttpConnection.HTTP_OK) {
             // Read response and set http response text
@@ -198,10 +200,10 @@ public class HTTPRequest
             this.inputstream.close();
 
             success = true;
-            System.out.println("http response OK");
+            Logger.debug("http response OK");
         } else {
             success = false;
-            System.out.println("http response Fail");
+            Logger.debug("http response Fail");
         }
 
         return success;

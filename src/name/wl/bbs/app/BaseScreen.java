@@ -1,10 +1,12 @@
-package name.wl.bbs.screens;
+package name.wl.bbs.app;
 
 import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.component.Dialog;
 import net.rim.device.api.ui.component.LabelField;
 import net.rim.device.api.ui.component.RichTextField;
+
+import name.wl.bbs.util.*;
 
 public class BaseScreen extends MainScreen
 {

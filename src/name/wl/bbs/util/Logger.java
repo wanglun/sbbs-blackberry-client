@@ -3,7 +3,7 @@ package name.wl.bbs.util;
 import net.rim.device.api.system.DeviceInfo;
 import net.rim.device.api.system.EventLogger;
 
-import name.wl.bbs.Bbs;
+import name.wl.bbs.app.Bbs;
 
 /**
  * <p>
@@ -28,10 +28,10 @@ public class Logger {
     public static String LOG_PREFIX_ERROR = "E: ";
     public static String LOG_PREFIX_SEVERE = "S: ";
 
-    public static boolean DEBUG = false;
+    public static boolean DEBUG = true;
 
     static {
-        EventLogger.register(Bbs.APPLICATION_GUID, Bbs.APPLICATION_NAME,
+        EventLogger.register(Bbs.APP_GUID, Bbs.APP_NAME,
                 EventLogger.VIEWER_STRING);
     }
 
@@ -74,7 +74,7 @@ public class Logger {
     public static void logEvent(boolean logging, int level, String eventData) {
         if (logging) {
             // Trap event into the BB log.
-            EventLogger.logEvent(Bbs.APPLICATION_GUID, eventData.getBytes(), EventLogger.ALWAYS_LOG);
+            EventLogger.logEvent(Bbs.APP_GUID, eventData.getBytes(), EventLogger.ALWAYS_LOG);
             System.out.println(eventData);
         } else if (DeviceInfo.isSimulator()) {
             System.out.println(eventData);

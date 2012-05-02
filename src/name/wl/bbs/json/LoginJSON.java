@@ -4,11 +4,9 @@ import java.util.Hashtable;
 import org.json.me.JSONArray;
 import org.json.me.JSONObject;
 
-import name.wl.bbs.Event;
-import name.wl.bbs.Listener;
 import name.wl.bbs.http.HTTPRequestThread;
-
 import name.wl.bbs.json.ApiJSON;
+import name.wl.bbs.util.*;
 
 public class LoginJSON extends ApiJSON
 {
@@ -37,7 +35,7 @@ public class LoginJSON extends ApiJSON
 
     public void loadContent(final String jsonString)
     {
-        System.out.println("loadContent");
+        Logger.debug("loadContent");
         super.loadContent(jsonString);
 
         // handle root

@@ -1,7 +1,8 @@
-package name.wl.bbs.screens;
+package name.wl.bbs.app;
 
 import name.wl.bbs.json.LoginJSON;
-import name.wl.bbs.Session;
+
+import name.wl.bbs.util.*;
 
 public class TestScreen extends BaseScreen
 {

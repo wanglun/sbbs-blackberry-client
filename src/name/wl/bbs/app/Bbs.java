@@ -1,16 +1,13 @@
-package name.wl.bbs;
+package name.wl.bbs.app;
 
 import net.rim.device.api.ui.UiApplication;
 
-import name.wl.bbs.screens.*;
+import name.wl.bbs.util.*;
 
-/**
- * This class acts as an entry point to the Blackberry application RedditBB
- */
 public class Bbs extends UiApplication 
 {
-    public static final long APPLICATION_GUID = 0xe757c870033b1010L;
-    public static final String APPLICATION_NAME = "SBBS Client";
+    public static final long APP_GUID = 0xe757c870033b1010L;
+    public static final String APP_NAME = "SBBS Client";
 
     public static void main(String[] args)
     {

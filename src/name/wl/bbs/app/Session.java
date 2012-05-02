@@ -1,8 +1,9 @@
-package name.wl.bbs;
+package name.wl.bbs.app;
 
 import java.util.Hashtable;
 
 import name.wl.bbs.json.LoginJSON;
+import name.wl.bbs.util.*;
 
 public class Session
 {

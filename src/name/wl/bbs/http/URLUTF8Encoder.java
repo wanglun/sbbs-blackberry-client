@@ -132,7 +132,7 @@ public class URLUTF8Encoder
             String key = (String) keys.nextElement();
             String value = (String) params.get(key);
 
-            if (output != "") {
+            if (output.equals("") == false) {
                 output += "&";
             }
             output += encode(key) + "=" + encode(value);

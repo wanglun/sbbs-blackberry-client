@@ -11,6 +11,8 @@ import java.util.Hashtable;
 import javax.microedition.io.Connector;
 import javax.microedition.io.HttpConnection;
 
+import name.wl.bbs.util.*;
+
 public class HTTPRequestMultipart
 {
     static final String BOUNDARY = "----------V2ymHFg03ehbqgZCaKO6jy";
