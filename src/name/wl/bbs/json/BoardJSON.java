@@ -109,4 +109,3 @@ public class BoardJSON extends ApiJSON
         Event.trigger(this, "LOADED");
     }
 }
-

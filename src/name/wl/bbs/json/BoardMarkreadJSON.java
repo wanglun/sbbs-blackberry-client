@@ -8,13 +8,19 @@ import org.json.me.JSONObject;
 import name.wl.bbs.http.HTTPRequestThread;
 import name.wl.bbs.json.ApiJSON;
 import name.wl.bbs.util.*;
+import name.wl.bbs.hjlp.Board;
 
-public class ClearNotificationsJSON extends ApiJSON
+public class BoardMarkreadJSON extends ApiJSON
 {
-    private static String API = "/clear_notifications.json";
+    /* "/board/test/markread.json" */
+    private static String API = "/board/";
 
-    public ClearNotificationsJSON()
+    private Board board;
+    private int result;
+
+    public BoardMarkreadJSON(Board board)
     {
+        this.board = board;
     }
 
     public void load()
@@ -29,6 +35,19 @@ public class ClearNotificationsJSON extends ApiJSON
         Logger.debug("loadContent");
         super.loadContent(json);
 
+        if (this.success) {
+            try {
+                this.result = this.data.getInt("result");
+            } catch (Exception e) {
+                this.success = false;
+            }
+        }
+
         Event.trigger(this, "LOADED");
+    }
+
+    public int getResult()
+    {
+        return this.result;
     }
 }
