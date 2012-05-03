@@ -12,10 +12,11 @@ public class HotTopicsJSON extends ApiJSON
     private static String API = "/hot/topics.json";
 
     /* --·µ»Ø-- */
-    private Vector[] topics;
+    private Vector topics;
 
     public HotTopicsJSON()
     {
+        this.topics = null;
     }
 
     public void load()
@@ -32,8 +33,7 @@ public class HotTopicsJSON extends ApiJSON
 
         if (this.success) {
             try {
-                // this.topics
-                /* parse the json */
+                this.topics = Topic.TopicsJSON(this.data.getString("topics"));
             } catch (Exception e) {
                 Logger.debug("parse error");
                 this.success = false;

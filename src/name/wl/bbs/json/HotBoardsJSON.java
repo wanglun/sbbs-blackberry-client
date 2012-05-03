@@ -16,6 +16,7 @@ public class HotBoardsJSON extends ApiJSON
 
     public HotBoardsJSON()
     {
+        this.boards = null;
     }
 
     public void load()
@@ -32,8 +33,7 @@ public class HotBoardsJSON extends ApiJSON
 
         if (this.success) {
             try {
-                // this.boards
-                /* parse the json */
+                this.boards = Board.BoardsJSON(this.data.getString("boards"));
             } catch (Exception e) {
                 Logger.debug("parse error");
                 this.success = false;

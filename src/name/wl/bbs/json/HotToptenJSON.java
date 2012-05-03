@@ -16,6 +16,7 @@ public class HotToptenJSON extends ApiJSON
 
     public HotToptenJSON()
     {
+        this.topics = null;
     }
 
     public void load()
@@ -32,8 +33,7 @@ public class HotToptenJSON extends ApiJSON
 
         if (this.success) {
             try {
-                // this.topics
-                /* parse the json */
+                this.topics = Topic.TopicsJSON(this.data.getString("topics"));
             } catch (Exception e) {
                 Logger.debug("parse error");
                 this.success = false;

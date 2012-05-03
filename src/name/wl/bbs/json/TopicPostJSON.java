@@ -67,7 +67,7 @@ public class TopicPostJSON extends ApiJSON
 
         if (this.success) {
             try {
-                // this.topic
+                this.topic = Topic.TopicJSON(this.data.getString("topic"));
             } catch (Exception e) {
                 Logger.debug("token parse error");
                 this.success = false;

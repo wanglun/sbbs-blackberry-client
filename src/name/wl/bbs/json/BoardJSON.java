@@ -70,6 +70,10 @@ public class BoardJSON extends ApiJSON
         this.mode = mode;
         this.start = start;
         this.limit = limit;
+
+        this.total = 0;
+        this.topics = null;
+        this.boards = null;
     }
 
     public void load()
@@ -94,10 +98,10 @@ public class BoardJSON extends ApiJSON
                 /* °æÃæ */
                 if (!this.board.isLeaf()) {
                     this.total = this.data.getInt("total");
-                    //this.topics = Topic.Topics(this.data.getString("topics"));
+                    this.topics = Topic.TopicsJSON(this.data.getString("topics"));
                 } else {
                     /* Ä¿Â¼ */
-                    // this.boards
+                    this.boards = Board.BoardsJSON(this.data.getString("boards"));
                 }
                 /* parse the json */
             } catch (Exception e) {

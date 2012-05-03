@@ -48,6 +48,8 @@ public class TopicJSON extends ApiJSON
         this.raw = raw;
         this.start = start;
         this.limit = limit;
+
+        this.topics = null;
     }
 
     public void load()
@@ -70,7 +72,7 @@ public class TopicJSON extends ApiJSON
 
         if (this.success) {
             try {
-                /* parse the json */
+                this.topics = Topic.TopicsJSON(this.data.getString("topics"));
             } catch (Exception e) {
                 Logger.debug("parse error");
                 this.success = false;

@@ -21,6 +21,8 @@ public class BoardMarkreadJSON extends ApiJSON
     public BoardMarkreadJSON(Board board)
     {
         this.board = board;
+
+        this.result = 0;
     }
 
     public void load()

@@ -37,8 +37,7 @@ public class UserJSON extends ApiJSON
 
         if (this.success) {
             try {
-                /* parse the json */
-                // this.user
+                this.user = User.UserJSON(this.data.getString("user"));
             } catch (Exception e) {
                 Logger.debug("parse error");
                 this.success = false;

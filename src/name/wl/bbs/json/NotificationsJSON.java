@@ -18,6 +18,9 @@ public class NotificationsJSON extends ApiJSON
 
     public NotificationsJSON()
     {
+        this.mails = null;
+        this.ats = null;
+        this.replies = null;
     }
 
     public void load()

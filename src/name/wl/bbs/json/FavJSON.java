@@ -20,6 +20,7 @@ public class FavJSON extends ApiJSON
 
     public FavJSON()
     {
+        this.boards = null;
     }
 
     public void load()
@@ -36,7 +37,7 @@ public class FavJSON extends ApiJSON
 
         if (this.success) {
             try {
-                /* parse the json */
+                this.boards = Board.BoardsJSON(this.data.getString("boards"));
             } catch (Exception e) {
                 Logger.debug("parse error");
                 this.success = false;

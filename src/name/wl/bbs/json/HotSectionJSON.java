@@ -20,6 +20,7 @@ public class HotSectionJSON extends ApiJSON
     public HotSectionJSON(int section)
     {
         this.section = section;
+        this.topics = null;
     }
 
     public void load()
@@ -39,8 +40,7 @@ public class HotSectionJSON extends ApiJSON
 
         if (this.success) {
             try {
-                // this.topics
-                /* parse the json */
+                this.topics = Topic.TopicsJSON(this.data.getString("topics"));
             } catch (Exception e) {
                 Logger.debug("parse error");
                 this.success = false;
