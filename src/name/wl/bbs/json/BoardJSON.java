@@ -90,7 +90,6 @@ public class BoardJSON extends ApiJSON
 
     public void loadContent(final String json)
     {
-        Logger.debug("loadContent");
         super.loadContent(json);
 
         if (this.success) {
