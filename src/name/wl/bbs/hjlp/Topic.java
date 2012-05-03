@@ -66,38 +66,41 @@ public class Topic
     {
     }
 
-    public Topic(String json) throws JSONException
+    public static Topic TopicJSON(String json) throws JSONException
     {
+        Topic topic = new Topic();
         JSONObject data = new JSONObject(json);
 
-        this.id = data.getInt("id");
-        this.gid = data.getInt("gid");
-        this.board = data.getString("board");
-        this.size = data.getInt("size");
-        this.read = data.getInt("read");
-        this.replies = data.getInt("replies");
-        this.reid = data.getInt("reid");
-        this.unread = data.getBoolean("unread");
-        this.top = data.getBoolean("top");
-        this.mark = data.getBoolean("mark");
-        this.norep = data.getBoolean("norep");
-        this.author = data.getString("author");
-        this.time = data.getLong("time");
-        this.title = data.getString("title");
-        this.content = data.getString("content");
-        this.quote = data.getString("quote");
-        this.quoter = data.getString("quoter");
-        this.last_author = data.getString("last_author");
-        this.last_time = data.getLong("last_time");
+        topic.setId(data.getInt("id"));
+        topic.setGid(data.getInt("gid"));
+        topic.setBoard(data.getString("board"));
+        topic.setSize(data.getInt("size"));
+        topic.setRead(data.getInt("read"));
+        topic.setReplies(data.getInt("replies"));
+        topic.setReid(data.getInt("reid"));
+        topic.setUnread(data.getBoolean("unread"));
+        topic.setTop(data.getBoolean("top"));
+        topic.setMark(data.getBoolean("mark"));
+        topic.setNorep(data.getBoolean("norep"));
+        topic.setAuthor(data.getString("author"));
+        topic.setTime(data.getLong("time"));
+        topic.setTitle(data.getString("title"));
+        topic.setContent(data.getString("content"));
+        topic.setQuote(data.getString("quote"));
+        topic.setQuoter(data.getString("quoter"));
+        topic.setLastAuthor(data.getString("last_author"));
+        topic.setLastTime(data.getLong("last_time"));
+
+        return topic;
     }
 
-    public static Vector Topics(String json) throws JSONException
+    public static Vector TopicsJSON(String json) throws JSONException
     {
         Vector topics = new Vector();
         JSONArray arr = new JSONArray(json);
 
         for (int i = 0; i < arr.length(); i++) {
-            topics.addElement(new Topic(arr.getString(i)));
+            topics.addElement(TopicJSON(arr.getString(i)));
         }
 
         return topics;
@@ -196,5 +199,100 @@ public class Topic
     public long getLastTime()
     {
         return last_time;
+    }
+
+    private void setId(int id)
+    {
+        this.id = id;
+    }
+
+    private void setGid(int gid)
+    {
+        this.gid = gid;
+    }
+
+    private void setBoard(String board)
+    {
+        this.board = board;
+    }
+
+    private void setSize(int size)
+    {
+        this.size = size;
+    }
+
+    private void setRead(int read)
+    {
+        this.read = read;
+    }
+
+    private void setReplies(int replies)
+    {
+        this.replies = replies;
+    }
+
+    private void setReid(int reid)
+    {
+        this.reid = reid;
+    }
+
+    private void setUnread(boolean unread)
+    {
+        this.unread = unread;
+    }
+
+    private void setTop(boolean top)
+    {
+        this.top = top;
+    }
+
+    private void setMark(boolean mark)
+    {
+        this.mark = mark;
+    }
+
+    private void setNorep(boolean norep)
+    {
+        this.norep = norep;
+    }
+
+    private void setAuthor(String author)
+    {
+        this.author = author;
+    }
+
+    private void setTime(long time)
+    {
+        this.time = time;
+    }
+
+    private void setTitle(String title)
+    {
+        this.title = title;
+    }
+
+    private void setContent(String content)
+    {
+        this.content = content;
+    }
+
+    private void setQuote(String quote)
+    {
+        this.quote = quote;
+    }
+
+    private void setQuoter(String quoter)
+    {
+        this.quoter = quoter;
+    }
+
+    private void setLastAuthor(String last_author)
+    {
+        this.last_author = last_author;
+    }
+
+    private void setLastTime(long last_time)
+    {
+        this.last_time = last_time;
     }
 }
