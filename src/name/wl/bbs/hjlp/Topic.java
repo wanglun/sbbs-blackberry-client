@@ -106,6 +106,55 @@ public class Topic
         return topics;
     }
 
+    public static Topic MailJSON(String json) throws JSONException
+    {
+        Topic topic = new Topic();
+        JSONObject data = new JSONObject(json);
+
+        topic.setId(data.getInt("id"));
+        topic.setAuthor(data.getString("sender"));
+        topic.setTitle(data.getString("title"));
+
+        return topic;
+    }
+
+    public static Vector MailsJSON(String json) throws JSONException
+    {
+        Vector topics = new Vector();
+        JSONArray arr = new JSONArray(json);
+
+        for (int i = 0; i < arr.length(); i++) {
+            topics.addElement(MailJSON(arr.getString(i)));
+        }
+
+        return topics;
+    }
+
+    public static Topic NotificationJSON(String json) throws JSONException
+    {
+        Topic topic = new Topic();
+        JSONObject data = new JSONObject(json);
+
+        topic.setId(data.getInt("id"));
+        topic.setAuthor(data.getString("user"));
+        topic.setBoard(data.getString("board"));
+        topic.setTitle(data.getString("title"));
+
+        return topic;
+    }
+
+    public static Vector NotificationsJSON(String json) throws JSONException
+    {
+        Vector topics = new Vector();
+        JSONArray arr = new JSONArray(json);
+
+        for (int i = 0; i < arr.length(); i++) {
+            topics.addElement(NotificationJSON(arr.getString(i)));
+        }
+
+        return topics;
+    }
+
     public int getId()
     {
         return id;
