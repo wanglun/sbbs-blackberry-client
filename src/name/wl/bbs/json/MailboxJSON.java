@@ -64,7 +64,7 @@ public class MailboxJSON extends ApiJSON
 
         if (this.success) {
             try {
-                this.mails = Topic.TopicsJSON(this.data.getString("mails"));
+                this.mails = Mail.TopicsJSON(this.data.getString("mails"));
             } catch (Exception e) {
                 Logger.debug("sections parse error");
                 this.success = false;

@@ -43,7 +43,7 @@ public class MailJSON extends ApiJSON
 
         if (this.success) {
             try {
-                this.mail = Topic.TopicJSON(this.data.getString("mail"));
+                this.mail = Mail.TopicJSON(this.data.getString("mail"));
             } catch (Exception e) {
                 Logger.debug("parse error");
                 this.success = false;
