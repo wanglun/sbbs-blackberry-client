@@ -155,6 +155,34 @@ public class Topic
         return topics;
     }
 
+    public static Topic SearchJSON(String json) throws JSONException
+    {
+        Topic topic = new Topic();
+        JSONObject data = new JSONObject(json);
+
+        topic.setId(data.getInt("id"));
+        topic.setTitle(data.getString("title"));
+        topic.setBoard(data.getString("board"));
+        topic.setAuthor(data.getString("author"));
+        topic.setTime(data.getLong("time"));
+        topic.setMark(data.getBoolean("mark"));
+        topic.setRead(data.getInt("read"));
+
+        return topic;
+    }
+
+    public static Vector SearchesJSON(String json) throws JSONException
+    {
+        Vector topics = new Vector();
+        JSONArray arr = new JSONArray(json);
+
+        for (int i = 0; i < arr.length(); i++) {
+            topics.addElement(SearchJSON(arr.getString(i)));
+        }
+
+        return topics;
+    }
+
     public int getId()
     {
         return id;

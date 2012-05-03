@@ -20,6 +20,8 @@ public class SearchBoardsJSON extends ApiJSON
     public SearchBoardsJSON(String name)
     {
         this.name = name;
+
+        this.boards = null;
     }
 
     public void load()
@@ -39,8 +41,7 @@ public class SearchBoardsJSON extends ApiJSON
 
         if (this.success) {
             try {
-                // this.boards
-                /* parse the json */
+                this.boards = Board.SearchesJSON(this.data.getString("boards"));
             } catch (Exception e) {
                 Logger.debug("parse error");
                 this.success = false;

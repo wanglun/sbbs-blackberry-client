@@ -46,6 +46,8 @@ public class SearchTopicsJSON extends ApiJSON
         this.start = start;
         this.limit = limit;
         this.charset = charset;
+
+        this.topics = null;
     }
 
     public void load()
@@ -68,8 +70,7 @@ public class SearchTopicsJSON extends ApiJSON
 
         if (this.success) {
             try {
-                // this.topics
-                /* parse the json */
+                this.topics = Topic.SearchesJSON(this.data.getString("topics"));
             } catch (Exception e) {
                 Logger.debug("parse error");
                 this.success = false;

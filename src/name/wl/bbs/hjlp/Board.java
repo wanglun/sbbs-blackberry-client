@@ -68,6 +68,29 @@ public class Board
         return boards;
     }
 
+    public static Board SearchJSON(String json) throws JSONException
+    {
+        Board board = new Board();
+        JSONObject data = new JSONObject(json);
+
+        board.setName(data.getString("name"));
+        board.setDescription(data.getString("description"));
+
+        return board;
+    }
+
+    public static Vector SearchesJSON(String json) throws JSONException
+    {
+        Vector boards = new Vector();
+        JSONArray arr = new JSONArray(json);
+
+        for (int i = 0; i < arr.length(); i++) {
+            boards.addElement(SearchJSON(arr.getString(i)));
+        }
+
+        return boards;
+    }
+
     public String getName()
     {
         return name;
