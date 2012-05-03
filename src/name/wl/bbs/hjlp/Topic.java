@@ -169,11 +169,13 @@ public class Topic
         Topic topic = new Topic();
         JSONObject data = new JSONObject(json);
 
-        topic.setId(data.getInt("id"));
+        // FIXME 目前返回的是String
+        topic.setId(Integer.parseInt(data.getString("id")));
         topic.setTitle(data.getString("title"));
         topic.setBoard(data.getString("board"));
         topic.setAuthor(data.getString("author"));
-        topic.setTime(data.getLong("time"));
+        // API目前返回的是String FIXME
+        topic.setTime(Long.parseLong(data.getString("time")));
         topic.setMark(data.getBoolean("mark"));
         topic.setRead(data.getInt("read"));
 
@@ -187,6 +189,36 @@ public class Topic
 
         for (int i = 0; i < arr.length(); i++) {
             topics.addElement(SearchJSON(arr.getString(i)));
+        }
+
+        return topics;
+    }
+
+    public static Topic HotJSON(String json) throws JSONException
+    {
+        Topic topic = new Topic();
+        JSONObject data = new JSONObject(json);
+
+        topic.setTitle(data.getString("title"));
+        topic.setAuthor(data.getString("author"));
+        topic.setBoard(data.getString("board"));
+        // API目前返回的是String FIXME
+        topic.setTime(Long.parseLong(data.getString("time")));
+        topic.setId(data.getInt("id"));
+        topic.setReplies(data.getInt("replies"));
+        // API目前返回的是String FIXME
+        topic.setRead(Integer.parseInt(data.getString("read")));
+
+        return topic;
+    }
+
+    public static Vector HotsJSON(String json) throws JSONException
+    {
+        Vector topics = new Vector();
+        JSONArray arr = new JSONArray(json);
+
+        for (int i = 0; i < arr.length(); i++) {
+            topics.addElement(HotJSON(arr.getString(i)));
         }
 
         return topics;

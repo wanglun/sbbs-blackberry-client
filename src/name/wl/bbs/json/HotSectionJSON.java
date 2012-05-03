@@ -39,7 +39,7 @@ public class HotSectionJSON extends ApiJSON
 
         if (this.success) {
             try {
-                this.topics = Topic.TopicsJSON(this.data.getString("topics"));
+                this.topics = Topic.HotsJSON(this.data.getString("topics"));
             } catch (Exception e) {
                 Logger.debug("parse error");
                 this.success = false;
