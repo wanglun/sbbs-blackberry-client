@@ -32,7 +32,7 @@ public class FriendsJSON extends ApiJSON
 
         if (this.success) {
             try {
-                this.friends = User.UsersJSON(this.data.getString("friends"));
+                this.friends = Friend.UsersJSON(this.data.getString("friends"));
             } catch (Exception e) {
                 Logger.debug("parse error");
                 this.success = false;

@@ -69,8 +69,12 @@ public class User
         user.setMedals(data.getInt("medals"));
         user.setLogins(data.getInt("logins"));
         user.setLife(data.getInt("life"));
-        user.setGender(data.getString("gender"));
-        user.setAstro(data.getString("astro"));
+
+        try {
+            user.setGender(data.getString("gender"));
+            user.setAstro(data.getString("astro"));
+        } catch (Exception e) {
+        }
 
         return user;
     }
@@ -152,67 +156,67 @@ public class User
         return astro;
     }
 
-    private void setId(String id)
+    protected void setId(String id)
     {
         this.id = id;
     }
 
-    private void setName(String name)
+    protected void setName(String name)
     {
         this.name = name;
     }
 
-    private void setAvatar(String avatar)
+    protected void setAvatar(String avatar)
     {
         this.avatar = avatar;
     }
 
-    private void setLastlogin(int lastlogin)
+    protected void setLastlogin(int lastlogin)
     {
         this.lastlogin = lastlogin;
     }
 
-    private void setLevel(String level)
+    protected void setLevel(String level)
     {
         this.level = level;
     }
 
-    private void setPosts(int posts)
+    protected void setPosts(int posts)
     {
         this.posts = posts;
     }
 
-    private void setPerform(int perform)
+    protected void setPerform(int perform)
     {
         this.perform = perform;
     }
 
-    private void setExperience(int experience)
+    protected void setExperience(int experience)
     {
         this.experience = experience;
     }
 
-    private void setMedals(int medals)
+    protected void setMedals(int medals)
     {
         this.medals = medals;
     }
 
-    private void setLogins(int logins)
+    protected void setLogins(int logins)
     {
         this.logins = logins;
     }
 
-    private void setLife(int life)
+    protected void setLife(int life)
     {
         this.life = life;
     }
 
-    private void setGender(String gender)
+    protected void setGender(String gender)
     {
         this.gender = gender.charAt(0);
     }
 
-    private void setAstro(String astro)
+    protected void setAstro(String astro)
     {
         this.astro = astro;
     }
