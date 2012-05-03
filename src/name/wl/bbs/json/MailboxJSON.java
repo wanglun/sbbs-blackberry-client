@@ -14,6 +14,7 @@ public class MailboxJSON extends ApiJSON
 {
     private static String API = "/mailbox/get.json";
 
+    /* --参数-- */
     private static int INBOX = 0;
     private static int SENT = 1;
     private static int DELETED = 2;
@@ -27,6 +28,7 @@ public class MailboxJSON extends ApiJSON
     /* 可选 最多话题个数 */
     private int limit;
 
+    /* --返回-- */
     /* 信件 */
     private Vector mails;
 

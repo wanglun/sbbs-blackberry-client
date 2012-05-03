@@ -13,6 +13,7 @@ public class TopicPostJSON extends ApiJSON
 {
     private static String API = "/topic/post.json";
 
+    /* --参数-- */
     private Board board;
     private String title;
     private String content;
@@ -21,6 +22,7 @@ public class TopicPostJSON extends ApiJSON
     private boolean noquote;
     private boolean anony;
 
+    /* --返回-- */
     /* 发文成功后 返回的话题 */
     private Topic topic;
 

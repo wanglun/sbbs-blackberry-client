@@ -12,10 +12,13 @@ public class LoginJSON extends ApiJSON
 {
     private static String API = "/token.json";
 
-    protected String user = null;
-    protected String pass = null;
-    protected String token = null;
-    protected String name = null;
+    /* --²ÎÊý-- */
+    private String user = null;
+    private String pass = null;
+
+    /* --·µ»Ø-- */
+    private String token = null;
+    private String name = null;
 
     public LoginJSON(String user, String pass)
     {

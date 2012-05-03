@@ -14,9 +14,10 @@ public class HotSectionJSON extends ApiJSON
 {
     private static String API = "/hot/section.json";
 
+    /* --参数-- */
     private int section;
 
-    /* 返回 */
+    /* --返回-- */
     private Vector topics;
 
     public HotSectionJSON(int section)

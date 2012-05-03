@@ -14,9 +14,11 @@ public class FavJSON extends ApiJSON
 {
     private static String API = "/fav/get.json";
 
+    /* --参数-- */
     /* 可选 自动增加..作为上层目录 */
     private boolean up = false;
 
+    /* --返回-- */
     private Vector boards;
 
     public FavJSON()

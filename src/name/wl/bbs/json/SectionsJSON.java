@@ -14,9 +14,11 @@ public class SectionsJSON extends ApiJSON
 {
     private static String API = "/sections.json";
 
+    /* --参数-- */
     /* 可选 自动增加..作为上层目录 */
     private boolean up = false;
 
+    /* --返回-- */
     private Vector boards;
 
     public SectionsJSON()

@@ -14,6 +14,8 @@ public class ApiJSON
     protected static final boolean NOAUTH = false;
 
     protected JSONObject data = null;
+
+    /* --·µ»Ø-- */
     protected int time;
     protected int cost;
     protected boolean success;

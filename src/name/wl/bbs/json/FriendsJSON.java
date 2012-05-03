@@ -14,6 +14,7 @@ public class FriendsJSON extends ApiJSON
 {
     private static String API = "/friends.json";
 
+    /* --·µ»Ø-- */
     private Vector friends;
 
     public FriendsJSON()

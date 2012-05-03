@@ -13,13 +13,14 @@ public class MailSendJSON extends ApiJSON
 {
     private static String API = "/mail/send.json";
 
+    /* --参数-- */
     private User user;
     private String title;
     private String content;
     private int reid;
     private boolean noquote;
 
-    /* 返回 */
+    /* --返回-- */
     private int result;
 
     public MailSendJSON(User user, String title, String content)

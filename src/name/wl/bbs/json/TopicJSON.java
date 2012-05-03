@@ -15,6 +15,7 @@ public class TopicJSON extends ApiJSON
     /* "/topic/:board/:id.json?limit=2" */
     private static String API = "/topic/";
 
+    /* --参数-- */
     private Board board;
 
     private int id;
@@ -29,6 +30,7 @@ public class TopicJSON extends ApiJSON
     /* 可选 最多话题个数 */
     private int limit;
 
+    /* --返回-- */
     private Vector topics;
 
     public TopicJSON(Board board)

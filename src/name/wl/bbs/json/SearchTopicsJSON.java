@@ -14,6 +14,7 @@ public class SearchTopicsJSON extends ApiJSON
 {
     private static String API = "/search/topics.json";
 
+    /* --参数-- */
     private String keys;
 
     /* 可选 起始下标 */
@@ -27,7 +28,7 @@ public class SearchTopicsJSON extends ApiJSON
     /* 可选 关键词编码 默认UTF-8 */
     private String charset;
 
-    /* 返回 */
+    /* --返回-- */
     private Vector topics;
 
     public SearchTopicsJSON(String keys)

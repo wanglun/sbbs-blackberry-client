@@ -14,11 +14,13 @@ public class MailJSON extends ApiJSON
 {
     private static String API = "/mail/get.json";
 
+    /* --²ÎÊý-- */
     /* MailboxJSON.INBOX etc */
     private int type;
 
     private int id;
 
+    /* --·µ»Ø-- */
     private Topic mail;
 
     public MailJSON(int type, int id)

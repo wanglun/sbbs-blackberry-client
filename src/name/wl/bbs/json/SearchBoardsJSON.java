@@ -14,9 +14,10 @@ public class SearchBoardsJSON extends ApiJSON
 {
     private static String API = "/search/boards.json";
 
+    /* --参数-- */
     private String name;
 
-    /* 返回 */
+    /* --返回-- */
     private Vector boards;
 
     public SearchBoardsJSON(String name)

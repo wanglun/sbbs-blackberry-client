@@ -14,7 +14,7 @@ public class HotTopicsJSON extends ApiJSON
 {
     private static String API = "/hot/topics.json";
 
-    /* ·µ»Ø */
+    /* --·µ»Ø-- */
     private Vector[] topics;
 
     public HotTopicsJSON()

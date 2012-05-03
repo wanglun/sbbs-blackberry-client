@@ -13,9 +13,10 @@ public class NotificationsJSON extends ApiJSON
 {
     private static String API = "/notifications.json";
 
-    protected Vector mails;
-    protected Vector ats;
-    protected Vector replies;
+    /* --·µ»Ø-- */
+    private Vector mails;
+    private Vector ats;
+    private Vector replies;
 
     public NotificationsJSON()
     {

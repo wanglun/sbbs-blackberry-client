@@ -18,6 +18,7 @@ public class BoardJSON extends ApiJSON
      * */
     private static String API = "/board/";
 
+    /* --参数-- */
     private Board board;
 
     /* 普通模式 */
@@ -42,6 +43,8 @@ public class BoardJSON extends ApiJSON
     private static int LIMIT = 10;
     /* 可选 最多话题个数 */
     private int limit;
+
+    /* --返回-- */
 
     /* 返回的文章数目 */
     private int total;
@@ -94,7 +97,7 @@ public class BoardJSON extends ApiJSON
                 /* 版面 */
                 if (!this.board.isLeaf()) {
                     this.total = this.data.getInt("total");
-                    // this.topics
+                    this.topics = Topic.Topics(this.data.getString("topics"));
                 } else {
                     /* 目录 */
                     // this.boards

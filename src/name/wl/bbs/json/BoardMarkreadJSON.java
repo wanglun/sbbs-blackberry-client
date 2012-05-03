@@ -15,7 +15,10 @@ public class BoardMarkreadJSON extends ApiJSON
     /* "/board/test/markread.json" */
     private static String API = "/board/";
 
+    /* --²ÎÊý-- */
     private Board board;
+
+    /* --·µ»Ø-- */
     private int result;
 
     public BoardMarkreadJSON(Board board)

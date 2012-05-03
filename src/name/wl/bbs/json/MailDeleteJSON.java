@@ -13,12 +13,13 @@ public class MailDeleteJSON extends ApiJSON
 {
     private static String API = "/mail/delete.json";
 
+    /* --参数-- */
     /* MailboxJSON.INBOX etc */
     private int type;
 
     private int id;
 
-    /* 返回 */
+    /* --返回-- */
     private int result;
 
     public MailDeleteJSON(int type, int id)

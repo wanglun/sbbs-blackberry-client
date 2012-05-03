@@ -14,7 +14,7 @@ public class HotBoardsJSON extends ApiJSON
 {
     private static String API = "/hot/boards.json";
 
-    /* ·µ»Ø */
+    /* --·µ»Ø-- */
     private Vector boards;
 
     public HotBoardsJSON()

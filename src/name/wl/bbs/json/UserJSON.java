@@ -15,8 +15,10 @@ public class UserJSON extends ApiJSON
     /* "/user/:id.json" */
     private static String API = "/user/";
 
+    /* --²ÎÊý-- */
     private String id;
 
+    /* --·µ»Ø-- */
     private User user;
 
     public UserJSON(String id)
