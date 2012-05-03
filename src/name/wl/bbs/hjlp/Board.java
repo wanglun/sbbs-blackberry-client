@@ -20,7 +20,6 @@ public class Board
     /* 版主 */
     private Vector bm;
 
-
     /* sections & favourate */
     /* 分区包含的版面 */
     private Vector boards;
@@ -30,6 +29,8 @@ public class Board
 
     public Board()
     {
+        this.bm = new Vector();
+        this.boards = new Vector();
     }
 
     public Board(String name)
@@ -45,9 +46,7 @@ public class Board
         board.setName(data.getString("name"));
         board.setDescription(data.getString("description"));
         board.setCount(data.getInt("count"));
-        /* FIXME */
-        //this.bm = data.getString("bm");
-
+        board.setBm(data.getString("bm"));
         board.setLeaf(data.getBoolean("leaf"));
 
         if (!board.isLeaf()) {
@@ -124,9 +123,13 @@ public class Board
         this.users = users;
     }
 
-    private void setBm(Vector bm)
+    private void setBm(String bm) throws JSONException
     {
-        this.bm = bm;
+        JSONArray arr = new JSONArray(bm);
+
+        for (int i = 0; i < arr.length(); i++) {
+            this.bm.addElement(new User(arr.getString(i)));
+        }
     }
 
     private void setBoards(Vector boards)
