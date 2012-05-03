@@ -45,12 +45,24 @@ public class Board
 
         board.setName(data.getString("name"));
         board.setDescription(data.getString("description"));
-        board.setCount(data.getInt("count"));
-        board.setBm(data.getString("bm"));
-        board.setLeaf(data.getBoolean("leaf"));
+
+        try {
+            board.setLeaf(data.getBoolean("leaf"));
+        } catch (Exception e) {
+            board.setLeaf(false);
+        }
 
         if (!board.isLeaf()) {
-            board.setBoards(BoardsJSON(data.getString("boards")));
+            try {
+                board.setBoards(BoardsJSON(data.getString("boards")));
+            } catch (JSONException e) {
+            }
+        } else {
+            try {
+                board.setCount(data.getInt("count"));
+                board.setBm(data.getString("bm"));
+            } catch (JSONException e) {
+            }
         }
 
         return board;
@@ -126,27 +138,27 @@ public class Board
         return leaf;
     }
 
-    private void setName(String name)
+    protected void setName(String name)
     {
         this.name = name;
     }
 
-    private void setDescription(String description)
+    protected void setDescription(String description)
     {
         this.description = description;
     }
 
-    private void setCount(int count)
+    protected void setCount(int count)
     {
         this.count = count;
     }
 
-    private void setUsers(int users)
+    protected void setUsers(int users)
     {
         this.users = users;
     }
 
-    private void setBm(String bm) throws JSONException
+    protected void setBm(String bm) throws JSONException
     {
         JSONArray arr = new JSONArray(bm);
 
@@ -155,12 +167,12 @@ public class Board
         }
     }
 
-    private void setBoards(Vector boards)
+    protected void setBoards(Vector boards)
     {
         this.boards = boards;
     }
 
-    private void setLeaf(boolean leaf)
+    protected void setLeaf(boolean leaf)
     {
         this.leaf = leaf;
     }
