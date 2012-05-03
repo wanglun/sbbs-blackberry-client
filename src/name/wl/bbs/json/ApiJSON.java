@@ -1,7 +1,7 @@
 package name.wl.bbs.json;
 
-import java.util.Hashtable;
-import org.json.me.JSONObject;
+import java.util.*;
+import org.json.me.*;
 
 import name.wl.bbs.http.*;
 import name.wl.bbs.util.*;

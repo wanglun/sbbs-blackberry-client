@@ -1,12 +1,9 @@
 package name.wl.bbs.json;
 
-import java.util.Hashtable;
-import java.util.Vector;
-import org.json.me.JSONArray;
-import org.json.me.JSONObject;
+import java.util.*;
+import org.json.me.*;
 
-import name.wl.bbs.http.HTTPRequestThread;
-import name.wl.bbs.json.ApiJSON;
+import name.wl.bbs.http.*;
 import name.wl.bbs.util.*;
 import name.wl.bbs.hjlp.*;
 
@@ -97,7 +94,7 @@ public class BoardJSON extends ApiJSON
                 /* °æÃæ */
                 if (!this.board.isLeaf()) {
                     this.total = this.data.getInt("total");
-                    this.topics = Topic.Topics(this.data.getString("topics"));
+                    //this.topics = Topic.Topics(this.data.getString("topics"));
                 } else {
                     /* Ä¿Â¼ */
                     // this.boards
