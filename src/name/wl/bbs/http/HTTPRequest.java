@@ -162,6 +162,7 @@ public class HTTPRequest
             this.connection.close();
         } catch (final Exception error) {
             // Error handler
+            Logger.debug("R1: " + error.toString());
         }
 
         return success;
@@ -176,7 +177,6 @@ public class HTTPRequest
     protected boolean response() throws IOException
     {
         boolean success;
-        Logger.debug("http response");
         // Check response code for success
         if (this.connection.getResponseCode() == HttpConnection.HTTP_OK) {
             // Read response and set http response text
@@ -200,10 +200,8 @@ public class HTTPRequest
             this.inputstream.close();
 
             success = true;
-            Logger.debug("http response OK");
         } else {
             success = false;
-            Logger.debug("http response Fail");
         }
 
         return success;

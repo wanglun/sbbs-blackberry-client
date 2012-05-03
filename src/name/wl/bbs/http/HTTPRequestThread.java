@@ -34,8 +34,8 @@ public class HTTPRequestThread extends Thread
     public void run()
     {
         this.request.request();
-        Event.trigger(this, "LOADED");
 
+        Event.trigger(this, "LOADED");
     }
 
     public HTTPRequest getHTTPRequest()
