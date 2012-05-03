@@ -72,24 +72,57 @@ public class Topic
         JSONObject data = new JSONObject(json);
 
         topic.setId(data.getInt("id"));
-        topic.setGid(data.getInt("gid"));
         topic.setBoard(data.getString("board"));
         topic.setSize(data.getInt("size"));
         topic.setRead(data.getInt("read"));
-        topic.setReplies(data.getInt("replies"));
         topic.setReid(data.getInt("reid"));
         topic.setUnread(data.getBoolean("unread"));
         topic.setTop(data.getBoolean("top"));
         topic.setMark(data.getBoolean("mark"));
-        topic.setNorep(data.getBoolean("norep"));
         topic.setAuthor(data.getString("author"));
         topic.setTime(data.getLong("time"));
         topic.setTitle(data.getString("title"));
-        topic.setContent(data.getString("content"));
-        topic.setQuote(data.getString("quote"));
-        topic.setQuoter(data.getString("quoter"));
-        topic.setLastAuthor(data.getString("last_author"));
-        topic.setLastTime(data.getLong("last_time"));
+
+        try {
+            topic.setContent(data.getString("content"));
+        } catch (JSONException e) {
+            topic.setContent("");
+        }
+        try {
+            topic.setGid(data.getInt("gid"));
+        } catch (JSONException e) {
+            topic.setGid(0);
+        }
+        try {
+            topic.setReplies(data.getInt("replies"));
+        } catch (JSONException e) {
+            topic.setReplies(-1);
+        }
+        try {
+            topic.setNorep(data.getBoolean("norep"));
+        } catch (JSONException e) {
+            topic.setNorep(false);
+        }
+        try {
+            topic.setQuote(data.getString("quote"));
+        } catch (JSONException e) {
+            topic.setQuote("");
+        }
+        try {
+            topic.setQuoter(data.getString("quoter"));
+        } catch (JSONException e) {
+            topic.setQuoter("");
+        }
+        try {
+            topic.setLastAuthor(data.getString("last_author"));
+        } catch (JSONException e) {
+            topic.setLastAuthor("");
+        }
+        try {
+            topic.setLastTime(data.getLong("last_time"));
+        } catch (JSONException e) {
+            topic.setLastTime(0);
+        }
 
         return topic;
     }
@@ -101,30 +134,6 @@ public class Topic
 
         for (int i = 0; i < arr.length(); i++) {
             topics.addElement(TopicJSON(arr.getString(i)));
-        }
-
-        return topics;
-    }
-
-    public static Topic MailJSON(String json) throws JSONException
-    {
-        Topic topic = new Topic();
-        JSONObject data = new JSONObject(json);
-
-        topic.setId(data.getInt("id"));
-        topic.setAuthor(data.getString("sender"));
-        topic.setTitle(data.getString("title"));
-
-        return topic;
-    }
-
-    public static Vector MailsJSON(String json) throws JSONException
-    {
-        Vector topics = new Vector();
-        JSONArray arr = new JSONArray(json);
-
-        for (int i = 0; i < arr.length(); i++) {
-            topics.addElement(MailJSON(arr.getString(i)));
         }
 
         return topics;
@@ -278,97 +287,97 @@ public class Topic
         return last_time;
     }
 
-    private void setId(int id)
+    protected void setId(int id)
     {
         this.id = id;
     }
 
-    private void setGid(int gid)
+    protected void setGid(int gid)
     {
         this.gid = gid;
     }
 
-    private void setBoard(String board)
+    protected void setBoard(String board)
     {
         this.board = board;
     }
 
-    private void setSize(int size)
+    protected void setSize(int size)
     {
         this.size = size;
     }
 
-    private void setRead(int read)
+    protected void setRead(int read)
     {
         this.read = read;
     }
 
-    private void setReplies(int replies)
+    protected void setReplies(int replies)
     {
         this.replies = replies;
     }
 
-    private void setReid(int reid)
+    protected void setReid(int reid)
     {
         this.reid = reid;
     }
 
-    private void setUnread(boolean unread)
+    protected void setUnread(boolean unread)
     {
         this.unread = unread;
     }
 
-    private void setTop(boolean top)
+    protected void setTop(boolean top)
     {
         this.top = top;
     }
 
-    private void setMark(boolean mark)
+    protected void setMark(boolean mark)
     {
         this.mark = mark;
     }
 
-    private void setNorep(boolean norep)
+    protected void setNorep(boolean norep)
     {
         this.norep = norep;
     }
 
-    private void setAuthor(String author)
+    protected void setAuthor(String author)
     {
         this.author = author;
     }
 
-    private void setTime(long time)
+    protected void setTime(long time)
     {
         this.time = time;
     }
 
-    private void setTitle(String title)
+    protected void setTitle(String title)
     {
         this.title = title;
     }
 
-    private void setContent(String content)
+    protected void setContent(String content)
     {
         this.content = content;
     }
 
-    private void setQuote(String quote)
+    protected void setQuote(String quote)
     {
         this.quote = quote;
     }
 
-    private void setQuoter(String quoter)
+    protected void setQuoter(String quoter)
     {
         this.quoter = quoter;
     }
 
-    private void setLastAuthor(String last_author)
+    protected void setLastAuthor(String last_author)
     {
         this.last_author = last_author;
     }
 
-    private void setLastTime(long last_time)
+    protected void setLastTime(long last_time)
     {
         this.last_time = last_time;
     }
