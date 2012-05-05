@@ -10,6 +10,7 @@ import name.wl.bbs.util.*;
 public class HTTPRequestThread extends Thread 
 {
     protected HTTPRequest request;
+    Listener listener;
 
     public HTTPRequestThread(String url)
     {
@@ -31,11 +32,17 @@ public class HTTPRequestThread extends Thread
         this.request = new HTTPRequest(url, params, file, fileField, fileName, fileType);
     }
 
+    /* override */
+    public void start(Listener l)
+    {
+        this.listener = l;
+        super.start();
+    }
+
     public void run()
     {
         this.request.request();
-
-        Event.trigger(this, "LOADED");
+        this.listener.callback(this);
     }
 
     public HTTPRequest getHTTPRequest()
