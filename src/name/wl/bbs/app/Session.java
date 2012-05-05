@@ -35,8 +35,7 @@ public class Session
     {
         this.user = user;
         LoginJSON login = new LoginJSON(user, pass);
-        Event.observe(login, "LOADED", this.loginListener);
-        login.load();
+        login.load(this.loginListener);
 
         return true;
     }

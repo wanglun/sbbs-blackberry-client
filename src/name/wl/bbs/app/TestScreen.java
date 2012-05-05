@@ -17,6 +17,6 @@ public class TestScreen extends BaseScreen
     public void testSections()
     {
         SectionsJSON json = new SectionsJSON();
-        json.load();
+        json.load(null);
     }
 }
