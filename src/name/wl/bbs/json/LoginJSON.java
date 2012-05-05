@@ -25,21 +25,17 @@ public class LoginJSON extends ApiJSON
         this.pass = pass;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        Hashtable params = new Hashtable();
-        params.put("user", this.user);
-        params.put("pass", this.pass);
+        Hashtable gets = new Hashtable();
+        gets.put("user", this.user);
+        gets.put("pass", this.pass);
 
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API, params));
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API, gets, listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 this.name = this.data.getString("name");
@@ -49,8 +45,6 @@ public class LoginJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 
     public String getToken()

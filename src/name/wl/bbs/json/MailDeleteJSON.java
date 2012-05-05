@@ -26,21 +26,17 @@ public class MailDeleteJSON extends ApiJSON
         this.id = id;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        Hashtable params = new Hashtable();
-        params.put("type", Integer.toString(this.type));
-        params.put("id", Integer.toString(this.id));
+        Hashtable posts = new Hashtable();
+        posts.put("type", Integer.toString(this.type));
+        posts.put("id", Integer.toString(this.id));
 
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API, AUTH), params);
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API, null, posts, listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 this.result = this.data.getInt("result");
@@ -49,7 +45,5 @@ public class MailDeleteJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 }

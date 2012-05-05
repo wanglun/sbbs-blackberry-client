@@ -76,22 +76,18 @@ public class BoardJSON extends ApiJSON
         this.boards = null;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        Hashtable params = new Hashtable();
-        params.put("mode", Integer.toString(this.mode));
-        params.put("start", Integer.toString(this.start));
-        params.put("limit", Integer.toString(this.limit));
+        Hashtable gets = new Hashtable();
+        gets.put("mode", Integer.toString(this.mode));
+        gets.put("start", Integer.toString(this.start));
+        gets.put("limit", Integer.toString(this.limit));
 
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API + this.board.getName() + ".json", params));
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API + this.board.getName() + ".json", gets, listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 /* ∞Ê√Ê */
@@ -108,7 +104,5 @@ public class BoardJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 }

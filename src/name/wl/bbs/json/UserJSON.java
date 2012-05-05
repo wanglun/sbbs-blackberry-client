@@ -23,17 +23,13 @@ public class UserJSON extends ApiJSON
         this.id = id;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API + this.id + ".json"));
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API + this.id + ".json", listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 this.user = User.UserJSON(this.data.getString("user"));
@@ -42,8 +38,5 @@ public class UserJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 }
-

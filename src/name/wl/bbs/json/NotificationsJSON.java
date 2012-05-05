@@ -23,17 +23,13 @@ public class NotificationsJSON extends ApiJSON
         this.replies = null;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API, AUTH));
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API, listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 this.mails = Mail.NotificationsJSON(this.data.getString("mails"));
@@ -44,8 +40,6 @@ public class NotificationsJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 
     public Vector getMails()

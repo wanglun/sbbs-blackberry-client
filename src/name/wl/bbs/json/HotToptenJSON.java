@@ -19,17 +19,13 @@ public class HotToptenJSON extends ApiJSON
         this.topics = null;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API));
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API, listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 this.topics = Topic.HotsJSON(this.data.getString("topics"));
@@ -38,7 +34,5 @@ public class HotToptenJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 }

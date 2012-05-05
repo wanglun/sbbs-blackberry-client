@@ -26,21 +26,17 @@ public class MailJSON extends ApiJSON
         this.id = id;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        Hashtable params = new Hashtable();
-        params.put("type", Integer.toString(this.type));
-        params.put("id", Integer.toString(this.id));
+        Hashtable gets = new Hashtable();
+        gets.put("type", Integer.toString(this.type));
+        gets.put("id", Integer.toString(this.id));
 
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API, params, AUTH));
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API, gets, listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 this.mail = Mail.TopicJSON(this.data.getString("mail"));
@@ -49,7 +45,5 @@ public class MailJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 }

@@ -24,20 +24,16 @@ public class SearchBoardsJSON extends ApiJSON
         this.boards = null;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        Hashtable params = new Hashtable();
-        params.put("name", this.name);
+        Hashtable gets = new Hashtable();
+        gets.put("name", this.name);
 
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API));
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API, gets, listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 this.boards = Board.SearchesJSON(this.data.getString("boards"));
@@ -46,7 +42,5 @@ public class SearchBoardsJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 }

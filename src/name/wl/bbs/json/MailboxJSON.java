@@ -46,22 +46,18 @@ public class MailboxJSON extends ApiJSON
         this.mails = null;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        Hashtable params = new Hashtable();
-        params.put("type", Integer.toString(this.type));
-        params.put("start", Integer.toString(this.start));
-        params.put("limit", Integer.toString(this.limit));
+        Hashtable gets = new Hashtable();
+        gets.put("type", Integer.toString(this.type));
+        gets.put("start", Integer.toString(this.start));
+        gets.put("limit", Integer.toString(this.limit));
 
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API, AUTH));
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API, gets, listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 this.mails = Mail.TopicsJSON(this.data.getString("mails"));
@@ -70,7 +66,5 @@ public class MailboxJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 }

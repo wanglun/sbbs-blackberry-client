@@ -52,23 +52,18 @@ public class TopicJSON extends ApiJSON
         this.topics = null;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        Hashtable params = new Hashtable();
-        params.put("raw", new Boolean(raw).toString());
-        params.put("start", Integer.toString(this.start));
-        params.put("limit", Integer.toString(this.limit));
+        Hashtable gets = new Hashtable();
+        gets.put("raw", new Boolean(raw).toString());
+        gets.put("start", Integer.toString(this.start));
+        gets.put("limit", Integer.toString(this.limit));
 
-        HTTPRequestThread requestThread = new HTTPRequestThread(
-                getURL(API + this.board.getName() + "/" + this.id + ".json", params, AUTH));
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API + this.board.getName() + "/" + this.id + ".json", gets, listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 this.topics = Topic.TopicsJSON(this.data.getString("topics"));
@@ -77,7 +72,5 @@ public class TopicJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 }

@@ -15,6 +15,8 @@ public class ApiJSON
 
     protected JSONObject data = null;
 
+    protected Listener listener = null;
+
     /* --·µ»Ø-- */
     protected int time;
     protected int cost;
@@ -28,22 +30,25 @@ public class ApiJSON
     protected static String getURL(String method)
     {
         Hashtable params = null;
-        boolean auth = false;
+        boolean auth = true;
 
         return getURL(method, params, auth);
     }
+
     protected static String getURL(String method, boolean auth)
     {
         Hashtable params = null;
 
         return getURL(method, params, auth);
     }
+
     protected static String getURL(String method, Hashtable params)
     {
-        boolean auth = false;
+        boolean auth = true;
 
         return getURL(method, params, auth);
     }
+
     protected static String getURL(String method, Hashtable params, boolean auth)
     {
         String s = "";
@@ -59,6 +64,37 @@ public class ApiJSON
         }
 
         return BASEAPI + method + s;
+    }
+
+    protected void load(String api, Listener listener)
+    {
+        load(api, null, listener, true);
+    }
+
+    protected void load(String api, Hashtable gets, Listener listener)
+    {
+        load(api, gets, listener, true);
+    }
+
+    protected void load(String api, Hashtable gets, Listener listener, boolean auth)
+    {
+        this.listener = listener;
+
+        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(api, gets, auth));
+        requestThread.start(this.requestListener);
+    }
+
+    protected void load(String api, Hashtable gets, Hashtable posts, Listener listener)
+    {
+        load(api, gets, posts, listener, true);
+    }
+
+    protected void load(String api, Hashtable gets, Hashtable posts, Listener listener, boolean auth)
+    {
+        this.listener = listener;
+
+        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(api, gets, auth), posts);
+        requestThread.start(this.requestListener);
     }
 
     protected Listener requestListener = new Listener()
@@ -101,6 +137,15 @@ public class ApiJSON
         } catch (Exception e) {
             this.success = false;
         }
+
+        parseContent(jsonString);
+
+        if (this.listener != null)
+            this.listener.callback(this);
+    }
+
+    void parseContent(String jsonString)
+    {
     }
 
     public boolean getSuccess()

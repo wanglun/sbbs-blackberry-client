@@ -38,24 +38,20 @@ public class MailSendJSON extends ApiJSON
         this.noquote = noquote;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        Hashtable params = new Hashtable();
-        params.put("user", this.user.getId());
-        params.put("title", this.title);
-        params.put("content", this.content);
-        params.put("reid", Integer.toString(this.reid));
-        params.put("noquote", new Boolean(this.noquote).toString());
+        Hashtable posts = new Hashtable();
+        posts.put("user", this.user.getId());
+        posts.put("title", this.title);
+        posts.put("content", this.content);
+        posts.put("reid", Integer.toString(this.reid));
+        posts.put("noquote", new Boolean(this.noquote).toString());
 
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API, AUTH), params);
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API, null, posts, listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 this.result = this.data.getInt("result");
@@ -64,7 +60,5 @@ public class MailSendJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 }

@@ -15,17 +15,12 @@ public class ClearNotificationsJSON extends ApiJSON
     {
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API, AUTH));
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API, listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
-        Event.trigger(this, "LOADED");
     }
 }

@@ -23,20 +23,16 @@ public class HotSectionJSON extends ApiJSON
         this.topics = null;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        Hashtable params = new Hashtable();
-        params.put("section", Integer.toString(this.section));
+        Hashtable gets = new Hashtable();
+        gets.put("section", Integer.toString(this.section));
 
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API, params));
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API, gets, listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 this.topics = Topic.HotsJSON(this.data.getString("topics"));
@@ -45,7 +41,5 @@ public class HotSectionJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 }

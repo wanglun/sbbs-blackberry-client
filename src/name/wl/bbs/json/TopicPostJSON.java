@@ -44,26 +44,22 @@ public class TopicPostJSON extends ApiJSON
         this.anony = anony;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        Hashtable params = new Hashtable();
-        params.put("board", this.board.getName());
-        params.put("title", this.title);
-        params.put("content", this.content);
-        params.put("reid", Integer.toString(this.reid));
-        params.put("notopten", new Boolean(this.notopten).toString());
-        params.put("noquote", new Boolean(this.noquote).toString());
-        params.put("anony", new Boolean(this.anony).toString());
+        Hashtable posts = new Hashtable();
+        posts.put("board", this.board.getName());
+        posts.put("title", this.title);
+        posts.put("content", this.content);
+        posts.put("reid", Integer.toString(this.reid));
+        posts.put("notopten", new Boolean(this.notopten).toString());
+        posts.put("noquote", new Boolean(this.noquote).toString());
+        posts.put("anony", new Boolean(this.anony).toString());
 
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API, AUTH), params);
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API, null, posts, listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 this.topic = Topic.TopicJSON(this.data.getString("topic"));
@@ -72,7 +68,5 @@ public class TopicPostJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 }

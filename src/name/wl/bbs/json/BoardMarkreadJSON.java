@@ -25,17 +25,13 @@ public class BoardMarkreadJSON extends ApiJSON
         this.result = 0;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API + this.board.getName() + "/markread.json", AUTH));
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API + this.board.getName() + "/markread.json", listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 this.result = this.data.getInt("result");
@@ -43,8 +39,6 @@ public class BoardMarkreadJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 
     public int getResult()

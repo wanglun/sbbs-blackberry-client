@@ -50,23 +50,19 @@ public class SearchTopicsJSON extends ApiJSON
         this.topics = null;
     }
 
-    public void load()
+    public void load(Listener listener)
     {
-        Hashtable params = new Hashtable();
-        params.put("keys", this.keys);
-        params.put("start", Integer.toString(this.start));
-        params.put("limit", Integer.toString(this.limit));
-        params.put("charset", this.charset);
+        Hashtable gets = new Hashtable();
+        gets.put("keys", this.keys);
+        gets.put("start", Integer.toString(this.start));
+        gets.put("limit", Integer.toString(this.limit));
+        gets.put("charset", this.charset);
 
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(API, params));
-        Event.observe(requestThread, "LOADED", this.requestListener);
-        requestThread.start();
+        super.load(API, gets, listener);
     }
 
-    public void loadContent(final String json)
+    public void parseContent(final String json)
     {
-        super.loadContent(json);
-
         if (this.success) {
             try {
                 this.topics = Topic.SearchesJSON(this.data.getString("topics"));
@@ -75,7 +71,5 @@ public class SearchTopicsJSON extends ApiJSON
                 this.success = false;
             }
         }
-
-        Event.trigger(this, "LOADED");
     }
 }
