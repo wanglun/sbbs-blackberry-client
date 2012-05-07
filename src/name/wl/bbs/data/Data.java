@@ -18,6 +18,61 @@ class Data
     {
     }
 
+    public void store()
+    {
+        try {
+            RecordStore store = RecordStore.openRecordStore(NAME, true);
+            int count = store.getNumRecords();
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            DataOutputStream os = new DataOutputStream(baos);
+
+            // write timestamp
+            storeData(os);
+
+            os.close();
+
+            byte[] data = baos.toByteArray();
+            if (count == 0) {
+                store.addRecord(data, 0, data.length);
+            } else {
+                store.setRecord(1, data, 0, data.length);
+            }
+            store.closeRecordStore();
+        } catch (Exception e) {
+            Logger.debug(e.toString());
+        }
+    }
+
+    public boolean load()
+    {
+        try {
+            RecordStore store = RecordStore.openRecordStore(NAME, true);
+            int count = store.getNumRecords();
+
+            if (count == 0)
+                return false;
+
+            byte[] data = store.getRecord(1);
+            DataInputStream is = new DataInputStream(new ByteArrayInputStream(data));
+
+            loadData(is);
+
+            store.closeRecordStore();
+        } catch (Exception e) {
+            Logger.debug(e.toString());
+        }
+
+        return true;
+    }
+
+    private void storeData(DataOutputStream os)
+    {
+    }
+    private void loadData(DataInputStream is)
+    {
+    }
+
     public void storeJSON(String json)
     {
         try {
