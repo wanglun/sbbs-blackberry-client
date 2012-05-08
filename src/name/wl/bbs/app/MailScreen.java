@@ -45,6 +45,7 @@ public class MailScreen extends BaseScreen
     {
         switch (key) {
             case 'r':
+                bbs.pushScreen(new MailSendScreen(mail));
                 break;
         }
 

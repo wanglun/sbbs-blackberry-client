@@ -45,7 +45,10 @@ public class MailSendJSON extends ApiJSON
         posts.put("title", this.title);
         posts.put("content", this.content);
         posts.put("reid", Integer.toString(this.reid));
-        posts.put("noquote", new Boolean(this.noquote).toString());
+
+        if (this.noquote) {
+            posts.put("noquote", "true");
+        }
 
         super.load(API, null, posts, listener);
     }
@@ -60,5 +63,9 @@ public class MailSendJSON extends ApiJSON
                 this.success = false;
             }
         }
+    }
+
+    public int getResult() {
+        return this.result;
     }
 }

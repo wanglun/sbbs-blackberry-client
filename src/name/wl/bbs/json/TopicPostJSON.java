@@ -51,9 +51,13 @@ public class TopicPostJSON extends ApiJSON
         posts.put("title", this.title);
         posts.put("content", this.content);
         posts.put("reid", Integer.toString(this.reid));
-        posts.put("notopten", new Boolean(this.notopten).toString());
-        posts.put("noquote", new Boolean(this.noquote).toString());
-        posts.put("anony", new Boolean(this.anony).toString());
+
+        if (this.notopten)
+            posts.put("notopten", "true");
+        if (this.noquote)
+            posts.put("noquote", "true");
+        if (this.anony)
+            posts.put("anony", "true");
 
         super.load(API, null, posts, listener);
     }
