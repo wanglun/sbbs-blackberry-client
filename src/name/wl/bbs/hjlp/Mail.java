@@ -5,19 +5,46 @@ import java.util.*;
 
 public class Mail extends Topic
 {
-    public static Topic TopicJSON(String json) throws JSONException
+    private int type;
+
+    public static Mail TopicJSON(int type, String json) throws JSONException
     {
-        Topic topic = new Topic();
+        Mail mail = new Mail();
         JSONObject data = new JSONObject(json);
 
-        topic.setId(data.getInt("id"));
-        topic.setSize(data.getInt("size"));
-        topic.setUnread(data.getBoolean("unread"));
-        topic.setAuthor(data.getString("author"));
-        topic.setTime(data.getLong("time"));
-        topic.setTitle(data.getString("title"));
+        mail.setId(data.getInt("id"));
+        mail.setSize(data.getInt("size"));
+        mail.setUnread(data.getBoolean("unread"));
+        mail.setAuthor(data.getString("author"));
+        mail.setTime(data.getLong("time"));
+        mail.setTitle(data.getString("title"));
 
-        return topic;
+        try {
+            mail.setContent(data.getString("content"));
+        } catch (JSONException e) {
+            mail.setContent("");
+        }
+        try {
+            mail.setQuote(data.getString("quote"));
+        } catch (JSONException e) {
+            mail.setQuote("");
+        }
+
+        mail.setType(type);
+
+        return mail;
+    }
+
+    public static Vector TopicsJSON(int type, String json) throws JSONException
+    {
+        Vector topics = new Vector();
+        JSONArray arr = new JSONArray(json);
+
+        for (int i = 0; i < arr.length(); i++) {
+            topics.addElement(TopicJSON(type, arr.getString(i)));
+        }
+
+        return topics;
     }
 
     public static Topic NotificationJSON(String json) throws JSONException
@@ -30,5 +57,15 @@ public class Mail extends Topic
         topic.setTitle(data.getString("title"));
 
         return topic;
+    }
+
+    public void setType(int type)
+    {
+        this.type = type;
+    }
+
+    public int getType()
+    {
+        return this.type;
     }
 }

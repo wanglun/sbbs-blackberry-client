@@ -12,9 +12,9 @@ public class MailboxJSON extends ApiJSON
     private static String API = "/mailbox/get.json";
 
     /* --参数-- */
-    private static int INBOX = 0;
-    private static int SENT = 1;
-    private static int DELETED = 2;
+    public static int INBOX = 0;
+    public static int SENT = 1;
+    public static int DELETED = 2;
     /* 类型 */
     private int type;
 
@@ -60,11 +60,16 @@ public class MailboxJSON extends ApiJSON
     {
         if (this.success) {
             try {
-                this.mails = Mail.TopicsJSON(this.data.getString("mails"));
+                this.mails = Mail.TopicsJSON(type, this.data.getString("mails"));
             } catch (Exception e) {
                 Logger.debug("sections parse error");
                 this.success = false;
             }
         }
+    }
+
+    public Vector getMails()
+    {
+        return this.mails;
     }
 }

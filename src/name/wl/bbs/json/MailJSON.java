@@ -18,7 +18,12 @@ public class MailJSON extends ApiJSON
     private int id;
 
     /* --·µ»Ø-- */
-    private Topic mail;
+    private Mail mail;
+
+    public MailJSON(Mail mail)
+    {
+        this(mail.getType(), mail.getId());
+    }
 
     public MailJSON(int type, int id)
     {
@@ -39,11 +44,16 @@ public class MailJSON extends ApiJSON
     {
         if (this.success) {
             try {
-                this.mail = Mail.TopicJSON(this.data.getString("mail"));
+                this.mail = Mail.TopicJSON(this.type, this.data.getString("mail"));
             } catch (Exception e) {
                 Logger.debug("parse error");
                 this.success = false;
             }
         }
+    }
+
+    public Mail getMail()
+    {
+        return this.mail;
     }
 }
