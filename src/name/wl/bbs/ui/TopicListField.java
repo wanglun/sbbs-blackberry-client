@@ -14,28 +14,14 @@ import name.wl.bbs.app.ThreadScreen;
 public class TopicListField extends BbsObjectListField
 {
     private Vector topics;
-    private Vector current;
+    private Listener listener;
 
-    // 当前打开的话题序号
-    private int opened = -1;
-
-    public TopicListField(Vector topics)
+    public TopicListField(Vector topics, Listener listener)
     {
         this.topics = topics;
+        this.setSize(topics.size());
 
-        this.setCurrent(topics);
-    }
-
-    public void setCurrent(Vector current)
-    {
-        this.current = current;
-
-        this.setSize(current.size());
-    }
-
-    public boolean setPrevious()
-    {
-        return false;
+        this.listener = listener;
     }
 
     protected boolean keyChar(char key, int status, int time)
@@ -44,8 +30,8 @@ public class TopicListField extends BbsObjectListField
         switch (key) {
             case Keypad.KEY_ENTER:
             case 'o':
-                Topic t = (Topic)current.elementAt(idx);
-                bbs.pushScreen(new ThreadScreen(t));
+                Topic t = (Topic)topics.elementAt(idx);
+                listener.callback(t);
                 break;
         }
 
@@ -54,14 +40,9 @@ public class TopicListField extends BbsObjectListField
 
     public void drawListRow(ListField listField, Graphics graphics, int index, int y, int width)
     {
-        Topic t = (Topic)current.elementAt(index);
+        Topic t = (Topic)topics.elementAt(index);
 
-        if (this.opened == index) {
-            graphics.drawText("*", 0, y, DrawStyle.ELLIPSIS, 16);
-        } else {
-            graphics.drawText("+", 0, y, DrawStyle.ELLIPSIS, 16);
-        }
-
+        graphics.drawText("*", 0, y, DrawStyle.ELLIPSIS, 16);
         graphics.drawText(t.getTitle(), 16, y, DrawStyle.ELLIPSIS, width - 16);
     }
 }

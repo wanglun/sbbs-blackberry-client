@@ -29,7 +29,7 @@ public class BoardScreen extends BaseScreen
             BoardJSON obj = (BoardJSON)o;
             if (obj.getSuccess()) {
                 topics = obj.getTopics();
-                list = new TopicListField(topics);
+                list = new TopicListField(topics, topicListener);
                 bbs.invokeLater(new Runnable() {
                     public void run() {
                         BoardScreen.this.add(list);
@@ -42,6 +42,13 @@ public class BoardScreen extends BaseScreen
                     }
                 });
             }
+        }
+    };
+
+    public Listener topicListener = new Listener() {
+        public void callback(Object o)
+        {
+            bbs.pushScreen(new ThreadScreen((Topic)o));
         }
     };
 
