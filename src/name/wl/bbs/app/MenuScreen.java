@@ -19,6 +19,7 @@ public class MenuScreen extends BaseScreen
         items.addElement(new MenuListItem("Fav", favListener));
         items.addElement(new MenuListItem("Mail", mailListener));
         items.addElement(new MenuListItem("Talk", talkListener));
+        items.addElement(new MenuListItem("Notification", notificationListener));
 
         list = new MenuListField(items);
         add(list);
@@ -56,6 +57,13 @@ public class MenuScreen extends BaseScreen
         public void callback(Object o)
         {
             bbs.pushScreen(new TalkMenuScreen());
+        }
+    };
+
+    public Listener notificationListener = new Listener() {
+        public void callback(Object o)
+        {
+            bbs.pushScreen(new NotificationMenuScreen());
         }
     };
 }

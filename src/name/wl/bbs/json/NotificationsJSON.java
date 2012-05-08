@@ -32,9 +32,12 @@ public class NotificationsJSON extends ApiJSON
     {
         if (this.success) {
             try {
-                this.mails = Mail.NotificationsJSON(this.data.getString("mails"));
-                this.ats = Topic.NotificationsJSON(this.data.getString("ats"));
-                this.replies = Topic.NotificationsJSON(this.data.getString("replies"));
+                if (this.data.has("mails"))
+                    this.mails = Mail.NotificationsJSON(this.data.getString("mails"));
+                if (this.data.has("ats"))
+                    this.ats = Topic.NotificationsJSON(this.data.getString("ats"));
+                if (this.data.has("replies"))
+                    this.replies = Topic.NotificationsJSON(this.data.getString("replies"));
             } catch (Exception e) {
                 Logger.debug("notifications parse error");
                 this.success = false;
