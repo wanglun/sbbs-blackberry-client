@@ -18,6 +18,8 @@ public class Bbs extends UiApplication
     private Vector HotTopics = null;
     private Vector HotBoards = null;
 
+    private static Bbs bbs = null;
+
     public static void main(String[] args)
     {
         Bbs instance = new Bbs();
@@ -26,12 +28,19 @@ public class Bbs extends UiApplication
 
     public Bbs() 
     {
+        bbs = this;
+
         pushScreen(new SplashScreen());
 
         if (isLoggedIn()) {
         } else {
             //pushScreen(new LoginScreen());
         }
+    }
+
+    public static Bbs getInstance()
+    {
+        return bbs;
     }
 
     public void setUser(String user)

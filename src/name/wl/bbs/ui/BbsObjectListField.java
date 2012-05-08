@@ -1,12 +1,17 @@
 package name.wl.bbs.ui;
 
+import name.wl.bbs.app.Bbs;
+
 import net.rim.device.api.ui.component.*;
 
 public class BbsObjectListField extends ObjectListField
 {
+    protected Bbs bbs;
+    
     public BbsObjectListField()
     {
         super();
+        bbs = Bbs.getInstance();
     }
 
     public boolean setPrevious()

@@ -91,7 +91,7 @@ public class BoardJSON extends ApiJSON
         if (this.success) {
             try {
                 /* ∞Ê√Ê */
-                if (!this.board.isLeaf()) {
+                if (this.board.isLeaf()) {
                     this.total = this.data.getInt("total");
                     this.topics = Topic.TopicsJSON(this.data.getString("topics"));
                 } else {
@@ -104,5 +104,15 @@ public class BoardJSON extends ApiJSON
                 this.success = false;
             }
         }
+    }
+
+    public Vector getTopics()
+    {
+        return this.topics;
+    }
+
+    public int getTotal()
+    {
+        return this.total;
     }
 }

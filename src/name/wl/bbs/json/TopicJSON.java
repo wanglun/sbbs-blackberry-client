@@ -13,7 +13,7 @@ public class TopicJSON extends ApiJSON
     private static String API = "/topic/";
 
     /* --²ÎÊý-- */
-    private Board board;
+    private Topic topic;
 
     private int id;
 
@@ -30,21 +30,21 @@ public class TopicJSON extends ApiJSON
     /* --·µ»Ø-- */
     private Vector topics;
 
-    public TopicJSON(Board board)
+    public TopicJSON(Topic topic)
     {
-        this(board, false, 0, LIMIT);
+        this(topic, false, 0, LIMIT);
     }
-    public TopicJSON(Board board, boolean raw)
+    public TopicJSON(Topic topic, boolean raw)
     {
-        this(board, raw, 0, LIMIT);
+        this(topic, raw, 0, LIMIT);
     }
-    public TopicJSON(Board board, boolean raw, int start)
+    public TopicJSON(Topic topic, boolean raw, int start)
     {
-        this(board, raw, start, LIMIT);
+        this(topic, raw, start, LIMIT);
     }
-    public TopicJSON(Board board, boolean raw, int start, int limit)
+    public TopicJSON(Topic topic, boolean raw, int start, int limit)
     {
-        this.board = board;
+        this.topic = topic;
         this.raw = raw;
         this.start = start;
         this.limit = limit;
@@ -59,7 +59,7 @@ public class TopicJSON extends ApiJSON
         gets.put("start", Integer.toString(this.start));
         gets.put("limit", Integer.toString(this.limit));
 
-        super.load(API + this.board.getName() + "/" + this.id + ".json", gets, listener);
+        super.load(API + this.topic.getBoard() + "/" + this.topic.getId() + ".json", gets, listener);
     }
 
     public void parseContent(final String json)
@@ -72,5 +72,10 @@ public class TopicJSON extends ApiJSON
                 this.success = false;
             }
         }
+    }
+
+    public Vector getTopics()
+    {
+        return this.topics;
     }
 }
