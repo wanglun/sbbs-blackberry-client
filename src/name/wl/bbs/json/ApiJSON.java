@@ -2,9 +2,12 @@ package name.wl.bbs.json;
 
 import java.util.*;
 import org.json.me.*;
+import net.rim.device.api.ui.UiApplication;
 
 import name.wl.bbs.http.*;
 import name.wl.bbs.util.*;
+
+import name.wl.bbs.app.Bbs;
 
 public class ApiJSON
 {
@@ -17,6 +20,8 @@ public class ApiJSON
 
     protected Listener listener = null;
 
+    protected static Bbs bbs = null;
+
     /* --·µ»Ø-- */
     protected int time;
     protected int cost;
@@ -25,6 +30,7 @@ public class ApiJSON
 
     public ApiJSON()
     {
+        bbs = (Bbs)UiApplication.getUiApplication();
     }
 
     protected static String getURL(String method)
@@ -58,9 +64,9 @@ public class ApiJSON
         }
         if (auth) {
             if (s.equals(""))
-                s += "?token=" + "test";
+                s += "?token=" + bbs.getToken();
             else
-                s += "&token=" + "test";
+                s += "&token=" + bbs.getToken();
         }
 
         return BASEAPI + method + s;

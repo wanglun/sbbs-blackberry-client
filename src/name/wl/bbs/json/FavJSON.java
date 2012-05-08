@@ -39,4 +39,8 @@ public class FavJSON extends ApiJSON
             }
         }
     }
+    public Vector getBoards()
+    {
+        return this.boards;
+    }
 }

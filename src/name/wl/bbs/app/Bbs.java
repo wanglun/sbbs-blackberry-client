@@ -10,7 +10,10 @@ public class Bbs extends UiApplication
     public static final long APP_GUID = 0xe757c870033b1010L;
     public static final String APP_NAME = "SBBS Client";
 
-    public Session session;
+    private String user = null;
+    private String token = null;
+    private boolean loggenIn = false;
+
     private Vector sections = null;
     private Vector HotTopics = null;
     private Vector HotBoards = null;
@@ -23,13 +26,41 @@ public class Bbs extends UiApplication
 
     public Bbs() 
     {
-        session = Session.getInstance();
-
         pushScreen(new SplashScreen());
 
-        if (session.isLoggedIn()) {
+        if (isLoggedIn()) {
         } else {
             //pushScreen(new LoginScreen());
         }
+    }
+
+    public void setUser(String user)
+    {
+        this.user = user;
+    }
+
+    public String getUser()
+    {
+        return this.user;
+    }
+
+    public void setToken(String token)
+    {
+        this.token = token;
+    }
+
+    public String getToken()
+    {
+        return this.token;
+    }
+
+    public void setLoggedIn(boolean loggenIn)
+    {
+        this.loggenIn = loggenIn;
+    }
+
+    public boolean isLoggedIn()
+    {
+        return this.loggenIn;
     }
 }

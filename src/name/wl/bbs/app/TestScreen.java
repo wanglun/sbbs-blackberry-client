@@ -8,9 +8,6 @@ public class TestScreen extends BaseScreen
 {
     public TestScreen()
     {
-        Session s = Session.getInstance();
-        s.login("irun", "wxhsbbsxbj");
-
         testSections();
     }
 

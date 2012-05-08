@@ -22,4 +22,9 @@ public class BaseScreen extends MainScreen
 
         //add(new RichTextField("Hello World!" ,Field.NON_FOCUSABLE));
     }
+
+    public void alert(String info)
+    {
+        Dialog.alert(info);
+    }
 }

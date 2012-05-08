@@ -107,6 +107,7 @@ public class HTTPRequest
         boolean success = true;
 
         try {
+            Logger.debug("R0: start request");
             // Make HTTP Connection, HTTP or HTTPS
             if (this.isHTTPS()) {
                 this.connection = (HttpsConnection) Connector.open(this.url);
