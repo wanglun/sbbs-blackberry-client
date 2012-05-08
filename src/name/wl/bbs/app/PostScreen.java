@@ -62,8 +62,8 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
             boolean notoptenBool = notopten.getChecked();
             boolean noquoteBool = noquote.getChecked();
             boolean anonyBool = anony.getChecked();
-            if (title.getText().length() == 0 ||
-                    content.getText().length() == 0) {
+            if (titleStr.length() == 0 ||
+                    contentStr.length() == 0) {
                 alert("title OR content is empty");
             } else {
                 TopicPostJSON json;

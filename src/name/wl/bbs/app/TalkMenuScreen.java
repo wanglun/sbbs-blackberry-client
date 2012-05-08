@@ -15,12 +15,20 @@ public class TalkMenuScreen extends BaseScreen
     public TalkMenuScreen()
     {
         items = new Vector();
+        items.addElement(new MenuListItem("Query", queryListener));
         items.addElement(new MenuListItem("Online", onlineListener));
         items.addElement(new MenuListItem("All", allListener));
 
         list = new MenuListField(items);
         add(list);
     }
+
+    public Listener queryListener = new Listener() {
+        public void callback(Object o)
+        {
+            bbs.pushScreen(new UserQueryScreen());
+        }
+    };
 
     public Listener onlineListener = new Listener() {
         public void callback(Object o)
