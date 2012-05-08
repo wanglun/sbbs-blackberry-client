@@ -39,4 +39,9 @@ public class SectionsJSON extends ApiJSON
             }
         }
     }
+
+    public Vector getBoards()
+    {
+        return this.boards;
+    }
 }

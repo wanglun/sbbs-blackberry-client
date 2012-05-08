@@ -5,19 +5,19 @@ import net.rim.device.api.ui.*;
 import name.wl.bbs.ui.*;
 import name.wl.bbs.util.*;
 import name.wl.bbs.hjlp.*;
-import name.wl.bbs.json.FavJSON;
+import name.wl.bbs.json.SectionsJSON;
 
-public class FavScreen extends BaseScreen
+public class SectionsScreen extends BaseScreen
 {
-    private FavJSON fav;
+    private SectionsJSON sections;
     private Vector boards;
-    private FavListField list;
+    private SectionListField list;
 
-    public FavScreen()
+    public SectionsScreen()
     {
-        fav = new FavJSON();
+        sections = new SectionsJSON();
 
-        fav.load(loadListener);
+        sections.load(loadListener);
     }
 
     public void close()
@@ -31,19 +31,19 @@ public class FavScreen extends BaseScreen
     public Listener loadListener = new Listener() {
         public void callback(Object o)
         {
-            FavJSON obj = (FavJSON)o;
+            SectionsJSON obj = (SectionsJSON)o;
             if (obj.getSuccess()) {
                 boards = obj.getBoards();
-                list = new FavListField(boards);
+                list = new SectionListField(boards);
                 bbs.invokeLater(new Runnable() {
                     public void run() {
-                        FavScreen.this.add(list);
+                        SectionsScreen.this.add(list);
                     }
                 });
             } else {
                 bbs.invokeLater(new Runnable() {
                     public void run() {
-                        alert("load fav failed!");
+                        alert("load sections failed!");
                     }
                 });
             }
