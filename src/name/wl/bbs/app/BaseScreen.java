@@ -26,4 +26,9 @@ public class BaseScreen extends MainScreen
     {
         Dialog.alert(info);
     }
+
+    protected boolean keyChar(char key, int status, int time)
+    {
+        return super.keyChar(key, status, time);
+    }
 }

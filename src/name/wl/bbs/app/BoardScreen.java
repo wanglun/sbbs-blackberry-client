@@ -44,4 +44,15 @@ public class BoardScreen extends BaseScreen
             }
         }
     };
+
+    protected boolean keyChar(char key, int status, int time)
+    {
+        switch (key) {
+            case 'p':
+                bbs.pushScreen(new PostScreen(board));
+                break;
+        }
+
+        return super.keyChar(key, status, time);
+    }
 }

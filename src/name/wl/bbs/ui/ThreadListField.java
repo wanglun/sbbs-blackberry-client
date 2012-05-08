@@ -9,6 +9,7 @@ import net.rim.device.api.ui.component.ObjectListField;
 
 import name.wl.bbs.util.*;
 import name.wl.bbs.hjlp.*;
+import name.wl.bbs.app.PostScreen;
 
 public class ThreadListField extends BbsObjectListField
 {
@@ -42,6 +43,10 @@ public class ThreadListField extends BbsObjectListField
         int idx = this.getSelectedIndex();
         switch (key) {
             case Keypad.KEY_ENTER:
+                break;
+            case 'r':
+                Topic t = (Topic)current.elementAt(idx);
+                bbs.pushScreen(new PostScreen(null, t));
                 break;
         }
 

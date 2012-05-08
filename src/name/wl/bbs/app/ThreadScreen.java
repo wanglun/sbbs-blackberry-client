@@ -43,4 +43,15 @@ public class ThreadScreen extends BaseScreen
             }
         }
     };
+
+    protected boolean keyChar(char key, int status, int time)
+    {
+        switch (key) {
+            case 'p':
+                bbs.pushScreen(new PostScreen(new Board(topic.getBoard())));
+                break;
+        }
+
+        return super.keyChar(key, status, time);
+    }
 }
