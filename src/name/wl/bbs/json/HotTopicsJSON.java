@@ -35,4 +35,9 @@ public class HotTopicsJSON extends ApiJSON
             }
         }
     }
+
+    public Vector getTopics()
+    {
+        return this.topics;
+    }
 }

@@ -57,11 +57,10 @@ public class BoardListField extends BbsObjectListField
                     this.preVector.push(this.current);
                     this.preIndex.push(new Integer(idx));
                     this.setCurrent(b.getBoards());
-                    return true;
                 } else {
                     bbs.pushScreen(new BoardScreen(b));
                 }
-                break;
+                return true;
         }
 
         return super.keyChar(key, status, time);

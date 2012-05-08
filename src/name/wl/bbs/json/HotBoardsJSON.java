@@ -35,4 +35,9 @@ public class HotBoardsJSON extends ApiJSON
             }
         }
     }
+
+    public Vector getBoards()
+    {
+        return this.boards;
+    }
 }
