@@ -47,7 +47,7 @@ public class LoginScreen extends BaseScreen implements FieldChangeListener
                 bbs.invokeLater(new Runnable() {
                     public void run() {
                         bbs.popScreen(LoginScreen.this);
-                        bbs.pushScreen(new FavScreen());
+                        bbs.pushScreen(new MenuScreen());
                     }
                 });
             } else {

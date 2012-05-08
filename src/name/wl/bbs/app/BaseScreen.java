@@ -5,6 +5,7 @@ import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.component.Dialog;
 import net.rim.device.api.ui.component.LabelField;
 import net.rim.device.api.ui.component.RichTextField;
+import net.rim.device.api.ui.component.BasicEditField;
 
 import name.wl.bbs.util.*;
 
@@ -29,6 +30,14 @@ public class BaseScreen extends MainScreen
 
     protected boolean keyChar(char key, int status, int time)
     {
+        if (getFieldWithFocus() instanceof  BasicEditField) {
+        } else {
+            switch (key) {
+                case 'b':
+                    return true;
+            }
+        }
+
         return super.keyChar(key, status, time);
     }
 }
