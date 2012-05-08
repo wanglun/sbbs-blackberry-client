@@ -36,6 +36,10 @@ public class BbsObjectListField extends ObjectListField
             case 'q':
                 if (this.setPrevious()) {
                     return true;
+                } else {
+                    if (bbs.getScreenCount() > 1) {
+                        bbs.popScreen(getScreen());
+                    }
                 }
                 break;
         }
