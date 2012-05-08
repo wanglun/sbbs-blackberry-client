@@ -10,15 +10,15 @@ import net.rim.device.api.ui.component.ObjectListField;
 import name.wl.bbs.util.*;
 import name.wl.bbs.hjlp.*;
 
-public class TopicListField extends BbsObjectListField
+public class UserListField extends BbsObjectListField
 {
-    private Vector topics;
+    private Vector users;
     private Listener listener;
 
-    public TopicListField(Vector topics, Listener listener)
+    public UserListField(Vector users, Listener listener)
     {
-        this.topics = topics;
-        this.setSize(topics.size());
+        this.users = users;
+        this.setSize(users.size());
 
         this.listener = listener;
     }
@@ -29,8 +29,8 @@ public class TopicListField extends BbsObjectListField
         switch (key) {
             case Keypad.KEY_ENTER:
             case 'o':
-                Topic t = (Topic)topics.elementAt(idx);
-                listener.callback(t);
+                User u = (User)users.elementAt(idx);
+                listener.callback(u);
                 break;
         }
 
@@ -39,9 +39,9 @@ public class TopicListField extends BbsObjectListField
 
     public void drawListRow(ListField listField, Graphics graphics, int index, int y, int width)
     {
-        Topic t = (Topic)topics.elementAt(index);
+        User u = (User)users.elementAt(index);
 
         graphics.drawText("*", 0, y, DrawStyle.ELLIPSIS, 16);
-        graphics.drawText(t.getTitle(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+        graphics.drawText(u.getName(), 16, y, DrawStyle.ELLIPSIS, width - 16);
     }
 }

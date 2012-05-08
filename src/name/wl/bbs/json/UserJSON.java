@@ -23,6 +23,11 @@ public class UserJSON extends ApiJSON
         this.id = id;
     }
 
+    public UserJSON(User user)
+    {
+        this.id = user.getId();
+    }
+
     public void load(Listener listener)
     {
         super.load(API + this.id + ".json", listener);
@@ -38,5 +43,10 @@ public class UserJSON extends ApiJSON
                 this.success = false;
             }
         }
+    }
+
+    public User getUser()
+    {
+        return this.user;
     }
 }
