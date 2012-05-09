@@ -41,7 +41,7 @@ public class Mail extends Topic
         return topics;
     }
 
-    public static Mail MailNotificationJSON(String json) throws JSONException
+    public static Mail NotificationJSON(int type, String json) throws JSONException
     {
         Mail mail = new Mail();
         JSONObject data = new JSONObject(json);
@@ -49,17 +49,18 @@ public class Mail extends Topic
         mail.setId(data.getInt("id"));
         mail.setAuthor(data.getString("sender"));
         mail.setTitle(data.getString("title"));
+        mail.setType(type);
 
         return mail;
     }
 
-    public static Vector NotificationsJSON(String json) throws JSONException
+    public static Vector NotificationsJSON(int type, String json) throws JSONException
     {
         Vector topics = new Vector();
         JSONArray arr = new JSONArray(json);
 
         for (int i = 0; i < arr.length(); i++) {
-            topics.addElement(MailNotificationJSON(arr.getString(i)));
+            topics.addElement(NotificationJSON(arr.getString(i)));
         }
 
         return topics;

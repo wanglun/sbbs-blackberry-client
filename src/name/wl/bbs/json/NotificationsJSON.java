@@ -33,7 +33,7 @@ public class NotificationsJSON extends ApiJSON
         if (this.success) {
             try {
                 if (this.data.has("mails"))
-                    this.mails = Mail.NotificationsJSON(this.data.getString("mails"));
+                    this.mails = Mail.NotificationsJSON(MailboxJSON.INBOX, this.data.getString("mails"));
                 if (this.data.has("ats"))
                     this.ats = Topic.NotificationsJSON(this.data.getString("ats"));
                 if (this.data.has("replies"))
