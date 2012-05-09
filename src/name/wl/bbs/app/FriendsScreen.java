@@ -10,17 +10,18 @@ import name.wl.bbs.json.*;
 
 public class FriendsScreen extends BaseScreen
 {
-    boolean all;
-
-    private FriendsJSON friendsJSON;
     private Vector friends;
     private FriendListField list;
 
     public FriendsScreen(boolean all)
     {
-        this.all = all;
-        this.friendsJSON = new FriendsJSON(all);
-        this.friendsJSON.load(loadListener);
+        if (all) {
+            FriendsAllJSON friendsJSON = new FriendsAllJSON();
+            friendsJSON.load(loadListener);
+        } else {
+            FriendsJSON friendsJSON = new FriendsJSON();
+            friendsJSON.load(loadListener);
+        }
     }
 
     public Listener loadListener = new Listener() {
