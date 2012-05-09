@@ -11,16 +11,18 @@ public class SectionsJSON extends ApiJSON
 {
     private static String API = "/sections.json";
 
+    private static boolean CACHE = true;
+    private static String KEY = "sbbs_sections";
+
     /* --参数-- */
     /* 可选 自动增加..作为上层目录 */
     private boolean up = false;
 
     /* --返回-- */
-    private Vector boards;
+    private static Vector boards;
 
     public SectionsJSON()
     {
-        this.boards = null;
     }
 
     public void load(Listener listener)
@@ -38,6 +40,26 @@ public class SectionsJSON extends ApiJSON
                 this.success = false;
             }
         }
+    }
+
+    public boolean isParsed()
+    {
+        if (this.boards != null) {
+            this.success = true;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void setCache(String json)
+    {
+        Cache.set(KEY, json);
+    }
+
+    public String getCache()
+    {
+        return Cache.get(KEY);
     }
 
     public Vector getBoards()

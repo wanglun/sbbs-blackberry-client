@@ -42,6 +42,11 @@ public class ApiJSON
         return null;
     }
 
+    public boolean isParsed()
+    {
+        return false;
+    }
+
     protected static String getURL(String method)
     {
         Hashtable params = null;
@@ -104,6 +109,11 @@ public class ApiJSON
     protected void load(String api, Hashtable gets, Hashtable posts, Listener listener, boolean auth)
     {
         this.listener = listener;
+
+        if (isParsed()) {
+            callback();
+            return;
+        }
 
         String json = getCache();
         if (json != null) {
@@ -172,6 +182,11 @@ public class ApiJSON
             setCache(jsonString);
         }
 
+        callback();
+    }
+
+    private void callback()
+    {
         if (this.listener != null)
             this.listener.callback(this);
     }
@@ -182,6 +197,10 @@ public class ApiJSON
 
     public void loadCached()
     {
+        if (isParsed()) {
+            return;
+        }
+
         String json = getCache();
         if (json != null) {
             parseHeader(json);
