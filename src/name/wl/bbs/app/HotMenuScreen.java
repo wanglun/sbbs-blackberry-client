@@ -40,7 +40,7 @@ public class HotMenuScreen extends BaseScreen
     public Listener sectionsListener = new Listener() {
         public void callback(Object o)
         {
-            //bbs.pushScreen(new FriendsScreen(true));
+            bbs.pushScreen(new HotSectionMenuScreen());
         }
     };
 }

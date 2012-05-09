@@ -11,6 +11,9 @@ public class HotSectionJSON extends ApiJSON
 {
     private static String API = "/hot/section.json";
 
+    private static boolean CACHE = true;
+    private static String KEY = "sbbs_hot_section";
+
     /* --²ÎÊý-- */
     private int section;
 
@@ -31,6 +34,12 @@ public class HotSectionJSON extends ApiJSON
         super.load(API, gets, listener);
     }
 
+    public void refresh(Listener listener)
+    {
+        this.needRefresh = true;
+        load(listener);
+    }
+
     public void parseContent(final String json)
     {
         if (this.success) {
@@ -41,5 +50,30 @@ public class HotSectionJSON extends ApiJSON
                 this.success = false;
             }
         }
+    }
+
+    public boolean isParsed()
+    {
+        if (this.topics != null) {
+            this.success = true;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void setCache(String json)
+    {
+        Cache.set(KEY + section, json);
+    }
+
+    public String getCache()
+    {
+        return Cache.get(KEY + section);
+    }
+
+    public Vector getTopics()
+    {
+        return this.topics;
     }
 }
