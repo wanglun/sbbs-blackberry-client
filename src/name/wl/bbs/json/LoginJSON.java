@@ -12,6 +12,7 @@ public class LoginJSON extends ApiJSON
     private static final String API = "/token.json";
 
     private static boolean CACHE = true;
+    private static String KEY = "sbbs_token";
 
     /* --²ÎÊý-- */
     private String user = null;
@@ -47,6 +48,16 @@ public class LoginJSON extends ApiJSON
                 this.success = false;
             }
         }
+    }
+
+    public void setCache(String json)
+    {
+        Cache.set(KEY, json);
+    }
+
+    public String getCache()
+    {
+        return Cache.get(KEY);
     }
 
     public String getToken()

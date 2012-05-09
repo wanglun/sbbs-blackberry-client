@@ -33,7 +33,7 @@ public class ApiJSON
         bbs = (Bbs)UiApplication.getUiApplication();
     }
 
-    public void setCache()
+    public void setCache(String json)
     {
     }
 
@@ -164,7 +164,7 @@ public class ApiJSON
         parseContent(jsonString);
 
         if (this.success) {
-            setCache();
+            setCache(jsonString);
         }
 
         callback();
