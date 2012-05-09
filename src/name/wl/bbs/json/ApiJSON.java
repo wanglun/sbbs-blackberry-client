@@ -128,7 +128,7 @@ public class ApiJSON
         }
     };
 
-    protected void loadContent(final String jsonString)
+    protected void parseHeader(final String jsonString)
     {
         Logger.debug(jsonString);
         try {
@@ -160,24 +160,33 @@ public class ApiJSON
         } catch (Exception e) {
             this.success = false;
         }
+    }
 
+    protected void loadContent(final String jsonString)
+    {
+
+        parseHeader(jsonString);
         parseContent(jsonString);
 
         if (this.success) {
             setCache(jsonString);
         }
 
-        callback();
-    }
-
-    void callback()
-    {
         if (this.listener != null)
             this.listener.callback(this);
     }
 
     void parseContent(String jsonString)
     {
+    }
+
+    public void loadCached()
+    {
+        String json = getCache();
+        if (json != null) {
+            parseHeader(json);
+            parseContent(json);
+        }
     }
 
     public boolean getSuccess()

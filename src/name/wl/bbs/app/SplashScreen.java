@@ -1,6 +1,7 @@
 package name.wl.bbs.app;
 
 import name.wl.bbs.ui.*;
+import name.wl.bbs.json.LoginJSON;
 
 public class SplashScreen extends BaseScreen
 {
@@ -15,6 +16,16 @@ public class SplashScreen extends BaseScreen
     {
         public void run()
         {
+            // get the cached token
+            LoginJSON login = new LoginJSON();
+            login.loadCached();
+            if (login.getSuccess()) {
+                bbs.setId(login.getId());
+                bbs.setName(login.getName());
+                bbs.setToken(login.getToken());
+                bbs.setLoggedIn(true);
+            }
+
             destroy();
         }
     }

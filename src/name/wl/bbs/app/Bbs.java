@@ -10,7 +10,8 @@ public class Bbs extends UiApplication
     public static final long APP_GUID = 0xe757c870033b1010L;
     public static final String APP_NAME = "SBBS Client";
 
-    private String user = null;
+    private String id = null;
+    private String name = null;
     private String token = null;
     private boolean loggenIn = false;
 
@@ -43,14 +44,24 @@ public class Bbs extends UiApplication
         return bbs;
     }
 
-    public void setUser(String user)
+    public void setId(String id)
     {
-        this.user = user;
+        this.id = id;
     }
 
-    public String getUser()
+    public String getId()
     {
-        return this.user;
+        return this.id;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public String getName()
+    {
+        return this.name;
     }
 
     public void setToken(String token)

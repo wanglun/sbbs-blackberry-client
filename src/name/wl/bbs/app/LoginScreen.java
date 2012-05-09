@@ -41,6 +41,8 @@ public class LoginScreen extends BaseScreen implements FieldChangeListener
         {
             LoginJSON obj = (LoginJSON) r;
             if (obj.getSuccess()) {
+                bbs.setId(obj.getId());
+                bbs.setName(obj.getName());
                 bbs.setToken(obj.getToken());
                 bbs.setLoggedIn(true);
 

@@ -19,8 +19,13 @@ public class LoginJSON extends ApiJSON
     private String pass = null;
 
     /* --·µ»Ø-- */
-    private String token = null;
+    private String id = null;
     private String name = null;
+    private String token = null;
+
+    public LoginJSON()
+    {
+    }
 
     public LoginJSON(String user, String pass)
     {
@@ -41,6 +46,7 @@ public class LoginJSON extends ApiJSON
     {
         if (this.success) {
             try {
+                this.id = this.data.getString("id");
                 this.name = this.data.getString("name");
                 this.token = this.data.getString("token");
             } catch (Exception e) {
@@ -63,5 +69,15 @@ public class LoginJSON extends ApiJSON
     public String getToken()
     {
         return this.token;
+    }
+
+    public String getId()
+    {
+        return this.id;
+    }
+
+    public String getName()
+    {
+        return this.name;
     }
 }
