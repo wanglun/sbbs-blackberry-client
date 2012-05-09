@@ -88,17 +88,9 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
         {
             TopicPostJSON obj = (TopicPostJSON) r;
             if (obj.getSuccess()) {
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert("post success");
-                    }
-                });
+                alert("post success");
             } else {
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert("post failed");
-                    }
-                });
+                alert("post failed");
             }
         }
     };

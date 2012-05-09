@@ -53,11 +53,7 @@ public class LoginScreen extends BaseScreen implements FieldChangeListener
                     }
                 });
             } else {
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert("user OR passwd is invalid");
-                    }
-                });
+                alert("user OR passwd is invalid");
             }
         }
     };

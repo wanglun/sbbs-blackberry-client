@@ -12,7 +12,7 @@ public class FriendsJSON extends ApiJSON
     private static String API = "/friends.json";
 
     private static boolean CACHE = true;
-    private static String KEY = "sbbs_topten";
+    private static String KEY = "sbbs_friends";
 
     /* --·µ»Ø-- */
     protected static Vector friends;
@@ -24,6 +24,12 @@ public class FriendsJSON extends ApiJSON
     public void load(Listener listener)
     {
         super.load(API, listener);
+    }
+
+    public void refresh(Listener listener)
+    {
+        this.needRefresh = true;
+        load(listener);
     }
 
     public void parseContent(final String json)

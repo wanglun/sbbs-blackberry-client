@@ -46,6 +46,15 @@ public class BoardListField extends BbsObjectListField
         }
     }
 
+    public void setBoards(Vector boards)
+    {
+        this.boards = boards;
+        this.preVector = new Stack();
+        this.preIndex = new Stack();
+
+        this.setCurrent(boards);
+    }
+
     protected boolean keyChar(char key, int status, int time)
     {
         int idx = this.getSelectedIndex();

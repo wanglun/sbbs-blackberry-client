@@ -41,12 +41,38 @@ public class SectionsScreen extends BaseScreen
                     }
                 });
             } else {
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert("load sections failed!");
-                    }
-                });
+                alert("load sections failed!");
             }
         }
     };
+
+    public Listener refreshListener = new Listener() {
+        public void callback(Object o)
+        {
+            SectionsJSON obj = (SectionsJSON)o;
+            if (obj.getSuccess()) {
+                boards = obj.getBoards();
+                bbs.invokeLater(new Runnable() {
+                    public void run() {
+                        list.setBoards(boards);
+                    }
+                });
+            } else {
+                alert("load sections failed!");
+            }
+        }
+    };
+
+    protected boolean keyChar(char key, int status, int time)
+    {
+        switch (key) {
+            case 'r':
+                if (this.list != null) {
+                    sections.refresh(refreshListener);
+                }
+                return true;
+        }
+
+        return super.keyChar(key, status, time);
+    }
 }

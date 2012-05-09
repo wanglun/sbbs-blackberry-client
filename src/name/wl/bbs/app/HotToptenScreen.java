@@ -33,11 +33,24 @@ public class HotToptenScreen extends BaseScreen
                     }
                 });
             } else {
+                alert("load board failed!");
+            }
+        }
+    };
+
+    public Listener refreshListener = new Listener() {
+        public void callback(Object o)
+        {
+            HotToptenJSON obj = (HotToptenJSON)o;
+            if (obj.getSuccess()) {
+                topics = obj.getTopics();
                 bbs.invokeLater(new Runnable() {
                     public void run() {
-                        alert("load board failed!");
+                        list.setTopics(topics);
                     }
                 });
+            } else {
+                alert("load board failed!");
             }
         }
     };
@@ -52,8 +65,11 @@ public class HotToptenScreen extends BaseScreen
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
-            case 'p':
-                break;
+            case 'r':
+                if (list != null) {
+                    hottopicsJSON.refresh(refreshListener);
+                }
+                return true;
         }
 
         return super.keyChar(key, status, time);

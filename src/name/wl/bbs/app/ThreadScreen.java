@@ -35,11 +35,7 @@ public class ThreadScreen extends BaseScreen
                     }
                 });
             } else {
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert("load board failed!");
-                    }
-                });
+                alert("load board failed!");
             }
         }
     };

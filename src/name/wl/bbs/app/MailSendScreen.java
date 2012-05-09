@@ -75,17 +75,9 @@ public class MailSendScreen extends BaseScreen implements FieldChangeListener
         {
             final MailSendJSON obj = (MailSendJSON) r;
             if (obj.getSuccess()) {
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert("send success: result code " + obj.getResult());
-                    }
-                });
+                alert("send success: result code " + obj.getResult());
             } else {
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert("send failed");
-                    }
-                });
+                alert("send failed");
             }
         }
     };

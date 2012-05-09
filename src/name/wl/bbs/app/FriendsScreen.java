@@ -10,11 +10,15 @@ import name.wl.bbs.json.*;
 
 public class FriendsScreen extends BaseScreen
 {
+    private boolean all = false;
+
     private Vector friends;
     private FriendListField list;
 
     public FriendsScreen(boolean all)
     {
+        this.all = all;
+
         if (all) {
             FriendsAllJSON friendsJSON = new FriendsAllJSON();
             friendsJSON.load(loadListener);
@@ -37,11 +41,24 @@ public class FriendsScreen extends BaseScreen
                     }
                 });
             } else {
+                alert("load friends failed!");
+            }
+        }
+    };
+
+    public Listener refreshListener = new Listener() {
+        public void callback(Object o)
+        {
+            FriendsJSON obj = (FriendsJSON)o;
+            if (obj.getSuccess()) {
+                friends = obj.getFriends();
                 bbs.invokeLater(new Runnable() {
                     public void run() {
-                        alert("load friends failed!");
+                        list.setUsers(friends);
                     }
                 });
+            } else {
+                alert("load friends failed!");
             }
         }
     };
@@ -58,6 +75,17 @@ public class FriendsScreen extends BaseScreen
         switch (key) {
             case 'm':
                 break;
+            case 'r':
+                if (list != null) {
+                    if (all) {
+                        FriendsAllJSON friendsJSON = new FriendsAllJSON();
+                        friendsJSON.refresh(refreshListener);
+                    } else {
+                        FriendsJSON friendsJSON = new FriendsJSON();
+                        friendsJSON.refresh(refreshListener);
+                    }
+                }
+                return true;
         }
 
         return super.keyChar(key, status, time);

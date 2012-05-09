@@ -26,17 +26,9 @@ public class UserScreen extends BaseScreen
             UserJSON obj = (UserJSON)o;
             if (obj.getSuccess()) {
                 user = obj.getUser();
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert(user.getId());
-                    }
-                });
+                alert(user.getId());
             } else {
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert("load user info failed!");
-                    }
-                });
+                alert("load user info failed!");
             }
         }
     };

@@ -11,7 +11,7 @@ public class FavScreen extends BaseScreen
 {
     private FavJSON fav;
     private Vector boards;
-    private FavListField list;
+    private FavListField list = null;
 
     public FavScreen()
     {
@@ -41,12 +41,38 @@ public class FavScreen extends BaseScreen
                     }
                 });
             } else {
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert("load fav failed!");
-                    }
-                });
+                alert("load fav failed!");
             }
         }
     };
+
+    public Listener refreshListener = new Listener() {
+        public void callback(Object o)
+        {
+            FavJSON obj = (FavJSON)o;
+            if (obj.getSuccess()) {
+                boards = obj.getBoards();
+                bbs.invokeLater(new Runnable() {
+                    public void run() {
+                        list.setBoards(boards);
+                    }
+                });
+            } else {
+                alert("refresh fav failed!");
+            }
+        }
+    };
+
+    protected boolean keyChar(char key, int status, int time)
+    {
+        switch (key) {
+            case 'r':
+                if (this.list != null) {
+                    fav.refresh(refreshListener);
+                }
+                return true;
+        }
+
+        return super.keyChar(key, status, time);
+    }
 }

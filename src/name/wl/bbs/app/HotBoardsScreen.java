@@ -41,12 +41,38 @@ public class HotBoardsScreen extends BaseScreen
                     }
                 });
             } else {
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert("load hotboardsJSON failed!");
-                    }
-                });
+                alert("load hotboardsJSON failed!");
             }
         }
     };
+
+    public Listener refreshListener = new Listener() {
+        public void callback(Object o)
+        {
+            HotBoardsJSON obj = (HotBoardsJSON)o;
+            if (obj.getSuccess()) {
+                boards = obj.getBoards();
+                bbs.invokeLater(new Runnable() {
+                    public void run() {
+                        list.setBoards(boards);
+                    }
+                });
+            } else {
+                alert("load hotboardsJSON failed!");
+            }
+        }
+    };
+
+    protected boolean keyChar(char key, int status, int time)
+    {
+        switch (key) {
+            case 'r':
+                if (list != null) {
+                    hotboardsJSON.refresh(refreshListener);
+                }
+                return true;
+        }
+
+        return super.keyChar(key, status, time);
+    }
 }

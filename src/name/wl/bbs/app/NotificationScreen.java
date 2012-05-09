@@ -51,11 +51,7 @@ public class NotificationScreen extends BaseScreen
                     }
                 });
             } else {
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert("load notifications failed!");
-                    }
-                });
+                alert("load notifications failed!");
             }
         }
     };

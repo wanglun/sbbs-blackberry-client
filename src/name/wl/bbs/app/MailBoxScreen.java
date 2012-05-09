@@ -36,11 +36,7 @@ public class MailBoxScreen extends BaseScreen
                     }
                 });
             } else {
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert("load mails failed!");
-                    }
-                });
+                alert("load mails failed!");
             }
         }
     };

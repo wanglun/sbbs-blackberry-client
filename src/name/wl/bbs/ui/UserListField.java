@@ -23,6 +23,12 @@ public class UserListField extends BbsObjectListField
         this.listener = listener;
     }
 
+    public void setUsers(Vector users)
+    {
+        this.users = users;
+        this.setSize(users.size());
+    }
+
     protected boolean keyChar(char key, int status, int time)
     {
         int idx = this.getSelectedIndex();

@@ -23,6 +23,12 @@ public class TopicListField extends BbsObjectListField
         this.listener = listener;
     }
 
+    public void setTopics(Vector topics)
+    {
+        this.topics = topics;
+        this.setSize(topics.size());
+    }
+
     protected boolean keyChar(char key, int status, int time)
     {
         int idx = this.getSelectedIndex();

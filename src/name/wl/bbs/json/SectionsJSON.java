@@ -30,6 +30,12 @@ public class SectionsJSON extends ApiJSON
         super.load(API, listener);
     }
 
+    public void refresh(Listener listener)
+    {
+        this.needRefresh = true;
+        load(listener);
+    }
+
     public void parseContent(final String json)
     {
         if (this.success) {

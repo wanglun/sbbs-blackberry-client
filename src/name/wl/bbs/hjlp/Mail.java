@@ -60,7 +60,7 @@ public class Mail extends Topic
         JSONArray arr = new JSONArray(json);
 
         for (int i = 0; i < arr.length(); i++) {
-            topics.addElement(NotificationJSON(arr.getString(i)));
+            topics.addElement(NotificationJSON(type, arr.getString(i)));
         }
 
         return topics;

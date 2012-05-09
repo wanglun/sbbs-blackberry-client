@@ -26,17 +26,9 @@ public class MailScreen extends BaseScreen
             MailJSON obj = (MailJSON)o;
             if (obj.getSuccess()) {
                 mail = obj.getMail();
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert(mail.getContent());
-                    }
-                });
+                alert(mail.getContent());
             } else {
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        alert("load board failed!");
-                    }
-                });
+                alert("load board failed!");
             }
         }
     };

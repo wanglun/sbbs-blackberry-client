@@ -23,9 +23,13 @@ public class BaseScreen extends MainScreen
         //add(new RichTextField("Hello World!" ,Field.NON_FOCUSABLE));
     }
 
-    public void alert(String info)
+    public void alert(final String info)
     {
-        Dialog.alert(info);
+        bbs.invokeLater(new Runnable() {
+            public void run() {
+                Dialog.alert(info);
+            }
+        });
     }
 
     protected boolean keyChar(char key, int status, int time)
