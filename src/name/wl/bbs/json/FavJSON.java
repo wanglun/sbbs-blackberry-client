@@ -11,21 +11,29 @@ public class FavJSON extends ApiJSON
 {
     private static String API = "/fav/get.json";
 
+    private static boolean CACHE = true;
+    private static String KEY = "sbbs_fav";
+
     /* --参数-- */
     /* 可选 自动增加..作为上层目录 */
     private boolean up = false;
 
     /* --返回-- */
-    private Vector boards;
+    private static Vector boards;
 
     public FavJSON()
     {
-        this.boards = null;
     }
 
     public void load(Listener listener)
     {
         super.load(API, listener);
+    }
+
+    public void refresh(Listener listener)
+    {
+        this.needRefresh = true;
+        load(listener);
     }
 
     public void parseContent(final String json)
@@ -39,6 +47,27 @@ public class FavJSON extends ApiJSON
             }
         }
     }
+
+    public boolean isParsed()
+    {
+        if (this.boards != null) {
+            this.success = true;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void setCache(String json)
+    {
+        Cache.set(KEY, json);
+    }
+
+    public String getCache()
+    {
+        return Cache.get(KEY);
+    }
+
     public Vector getBoards()
     {
         return this.boards;

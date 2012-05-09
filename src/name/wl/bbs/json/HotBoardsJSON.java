@@ -11,12 +11,14 @@ public class HotBoardsJSON extends ApiJSON
 {
     private static String API = "/hot/boards.json";
 
+    private static boolean CACHE = true;
+    private static String KEY = "sbbs_hottopics";
+
     /* --·µ»Ø-- */
-    private Vector boards;
+    private static Vector boards;
 
     public HotBoardsJSON()
     {
-        this.boards = null;
     }
 
     public void load(Listener listener)
@@ -34,6 +36,26 @@ public class HotBoardsJSON extends ApiJSON
                 this.success = false;
             }
         }
+    }
+
+    public boolean isParsed()
+    {
+        if (this.boards != null) {
+            this.success = true;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void setCache(String json)
+    {
+        Cache.set(KEY, json);
+    }
+
+    public String getCache()
+    {
+        return Cache.get(KEY);
     }
 
     public Vector getBoards()

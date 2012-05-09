@@ -18,6 +18,8 @@ public class ApiJSON
 
     protected JSONObject data = null;
 
+    protected boolean needRefresh = false;
+
     protected Listener listener = null;
 
     protected static Bbs bbs = null;
@@ -35,16 +37,30 @@ public class ApiJSON
 
     public void setCache(String json)
     {
+        String key = getKey();
+        if (key != null) {
+            Cache.set(key, json);
+        }
     }
 
     public String getCache()
     {
+        String key = getKey();
+        if (key != null) {
+            return Cache.get(key);
+        }
+
         return null;
     }
 
     public boolean isParsed()
     {
         return false;
+    }
+
+    public String getKey()
+    {
+        return null;
     }
 
     protected static String getURL(String method)
@@ -110,15 +126,17 @@ public class ApiJSON
     {
         this.listener = listener;
 
-        if (isParsed()) {
-            callback();
-            return;
-        }
+        if (this.needRefresh == false) {
+            if (isParsed()) {
+                callback();
+                return;
+            }
 
-        String json = getCache();
-        if (json != null) {
-            loadContent(json);
-            return;
+            String json = getCache();
+            if (json != null) {
+                loadContent(json);
+                return;
+            }
         }
 
         HTTPRequestThread requestThread;

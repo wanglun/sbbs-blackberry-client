@@ -11,12 +11,14 @@ public class HotToptenJSON extends ApiJSON
 {
     private static String API = "/hot/topten.json";
 
+    private static boolean CACHE = true;
+    private static String KEY = "sbbs_topten";
+
     /* --·µ»Ø-- */
-    private Vector topics;
+    private static Vector topics;
 
     public HotToptenJSON()
     {
-        this.topics = null;
     }
 
     public void load(Listener listener)
@@ -34,6 +36,26 @@ public class HotToptenJSON extends ApiJSON
                 this.success = false;
             }
         }
+    }
+
+    public boolean isParsed()
+    {
+        if (this.topics != null) {
+            this.success = true;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void setCache(String json)
+    {
+        Cache.set(KEY, json);
+    }
+
+    public String getCache()
+    {
+        return Cache.get(KEY);
     }
 
     public Vector getTopics()

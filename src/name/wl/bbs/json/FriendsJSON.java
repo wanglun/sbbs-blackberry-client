@@ -11,12 +11,14 @@ public class FriendsJSON extends ApiJSON
 {
     private static String API = "/friends.json";
 
+    private static boolean CACHE = true;
+    private static String KEY = "sbbs_topten";
+
     /* --·µ»Ø-- */
-    protected Vector friends;
+    protected static Vector friends;
 
     public FriendsJSON()
     {
-        this.friends = null;
     }
 
     public void load(Listener listener)
@@ -34,6 +36,21 @@ public class FriendsJSON extends ApiJSON
                 this.success = false;
             }
         }
+    }
+
+    public boolean isParsed()
+    {
+        if (this.friends != null) {
+            this.success = true;
+            return true;
+        }
+
+        return false;
+    }
+
+    public String getKey()
+    {
+        return KEY;
     }
 
     public Vector getFriends()
