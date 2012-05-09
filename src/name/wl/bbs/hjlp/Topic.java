@@ -83,46 +83,22 @@ public class Topic
         topic.setTime(data.getLong("time"));
         topic.setTitle(data.getString("title"));
 
-        try {
+        if (data.has("content"))
             topic.setContent(data.getString("content"));
-        } catch (JSONException e) {
-            topic.setContent("");
-        }
-        try {
+        if (data.has("gid"))
             topic.setGid(data.getInt("gid"));
-        } catch (JSONException e) {
-            topic.setGid(0);
-        }
-        try {
+        if (data.has("replies"))
             topic.setReplies(data.getInt("replies"));
-        } catch (JSONException e) {
-            topic.setReplies(-1);
-        }
-        try {
+        if (data.has("norep"))
             topic.setNorep(data.getBoolean("norep"));
-        } catch (JSONException e) {
-            topic.setNorep(false);
-        }
-        try {
+        if (data.has("quote"))
             topic.setQuote(data.getString("quote"));
-        } catch (JSONException e) {
-            topic.setQuote("");
-        }
-        try {
+        if (data.has("quoter"))
             topic.setQuoter(data.getString("quoter"));
-        } catch (JSONException e) {
-            topic.setQuoter("");
-        }
-        try {
+        if (data.has("last_author"))
             topic.setLastAuthor(data.getString("last_author"));
-        } catch (JSONException e) {
-            topic.setLastAuthor("");
-        }
-        try {
+        if (data.has("last_time"))
             topic.setLastTime(data.getLong("last_time"));
-        } catch (JSONException e) {
-            topic.setLastTime(0);
-        }
 
         return topic;
     }

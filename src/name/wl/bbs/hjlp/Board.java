@@ -46,23 +46,17 @@ public class Board
         board.setName(data.getString("name"));
         board.setDescription(data.getString("description"));
 
-        try {
+        if (data.has("leaf"))
             board.setLeaf(data.getBoolean("leaf"));
-        } catch (Exception e) {
-            board.setLeaf(false);
-        }
 
         if (!board.isLeaf()) {
-            try {
+            if (data.has("boards"))
                 board.setBoards(BoardsJSON(data.getString("boards")));
-            } catch (JSONException e) {
-            }
         } else {
-            try {
+            if (data.has("count"))
                 board.setCount(data.getInt("count"));
+            if (data.has("bm"))
                 board.setBm(data.getString("bm"));
-            } catch (JSONException e) {
-            }
         }
 
         return board;
@@ -85,8 +79,10 @@ public class Board
         Board board = new Board();
         JSONObject data = new JSONObject(json);
 
-        board.setName(data.getString("name"));
-        board.setDescription(data.getString("description"));
+        if (data.has("name"))
+            board.setName(data.getString("name"));
+        if (data.has("description"))
+            board.setDescription(data.getString("description"));
 
         return board;
     }

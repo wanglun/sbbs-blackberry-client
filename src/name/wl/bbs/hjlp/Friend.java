@@ -13,13 +13,13 @@ public class Friend extends User
         JSONObject data = new JSONObject(json);
 
         /* 暂只处理 id和name */
-        user.setId(data.getString("id"));
-        user.setName(data.getString("name"));
+        if (data.has("id"))
+            user.setId(data.getString("id"));
+        if (data.has("name"))
+            user.setName(data.getString("name"));
 
-        try {
+        if (data.has("noexist"))
             user.setNoexist(data.getBoolean("noexist"));
-        } catch (Exception e) {
-        }
 
         return user;
     }

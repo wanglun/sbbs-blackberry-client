@@ -70,11 +70,10 @@ public class User
         user.setLogins(data.getInt("logins"));
         user.setLife(data.getInt("life"));
 
-        try {
+        if (data.has("gender"))
             user.setGender(data.getString("gender"));
+        if (data.has("astro"))
             user.setAstro(data.getString("astro"));
-        } catch (Exception e) {
-        }
 
         return user;
     }
