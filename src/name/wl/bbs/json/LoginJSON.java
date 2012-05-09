@@ -9,7 +9,9 @@ import name.wl.bbs.hjlp.*;
 
 public class LoginJSON extends ApiJSON
 {
-    private static String API = "/token.json";
+    private static final String API = "/token.json";
+
+    private static boolean CACHE = true;
 
     /* --²ÎÊý-- */
     private String user = null;

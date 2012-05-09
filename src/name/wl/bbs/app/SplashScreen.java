@@ -15,32 +15,8 @@ public class SplashScreen extends BaseScreen
     {
         public void run()
         {
-            loadSections();
-            loadSections();
-            loadUserdata();
-
             destroy();
         }
-    }
-
-    private void loadSections()
-    {
-        try {
-            Thread.sleep(500);
-        } catch (Exception e) {
-        }
-    }
-
-    private void loadSettings()
-    {
-        try {
-            Thread.sleep(500);
-        } catch (Exception e) {
-        }
-    }
-
-    private void loadUserdata()
-    {
     }
 
     private void destroy()
@@ -48,7 +24,7 @@ public class SplashScreen extends BaseScreen
         bbs.popScreen(this);
 
         if (bbs.isLoggedIn()) {
-            //bbs.pushScreen(new LoginScreen());
+            bbs.pushScreen(new MenuScreen());
         } else {
             bbs.pushScreen(new LoginScreen());
         }

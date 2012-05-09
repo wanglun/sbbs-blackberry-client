@@ -15,8 +15,8 @@ public class Bbs extends UiApplication
     private boolean loggenIn = false;
 
     private Vector sections = null;
-    private Vector HotTopics = null;
-    private Vector HotBoards = null;
+    private Vector hotTopics = null;
+    private Vector hotBoards = null;
 
     private static Bbs bbs = null;
 
@@ -71,5 +71,35 @@ public class Bbs extends UiApplication
     public boolean isLoggedIn()
     {
         return this.loggenIn;
+    }
+
+    public void setSections(Vector sections)
+    {
+        this.sections = sections;
+    }
+
+    public Vector getSections()
+    {
+        return this.sections;
+    }
+
+    public void setHotTopics(Vector hotTopics)
+    {
+        this.hotTopics = hotTopics;
+    }
+
+    public Vector getHotTopics()
+    {
+        return this.hotTopics;
+    }
+
+    public void setHotBoards(Vector hotBoards)
+    {
+        this.hotBoards = hotBoards;
+    }
+
+    public Vector getHotBoards()
+    {
+        return this.hotBoards;
     }
 }

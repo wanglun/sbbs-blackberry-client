@@ -33,6 +33,15 @@ public class ApiJSON
         bbs = (Bbs)UiApplication.getUiApplication();
     }
 
+    public void setCache()
+    {
+    }
+
+    public String getCache()
+    {
+        return null;
+    }
+
     protected static String getURL(String method)
     {
         Hashtable params = null;
@@ -84,10 +93,7 @@ public class ApiJSON
 
     protected void load(String api, Hashtable gets, Listener listener, boolean auth)
     {
-        this.listener = listener;
-
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(api, gets, auth));
-        requestThread.start(this.requestListener);
+        load(api, gets, null, listener, auth);
     }
 
     protected void load(String api, Hashtable gets, Hashtable posts, Listener listener)
@@ -99,7 +105,18 @@ public class ApiJSON
     {
         this.listener = listener;
 
-        HTTPRequestThread requestThread = new HTTPRequestThread(getURL(api, gets, auth), posts);
+        String json = getCache();
+        if (json != null) {
+            loadContent(json);
+            return;
+        }
+
+        HTTPRequestThread requestThread;
+
+        if (posts != null)
+            requestThread = new HTTPRequestThread(getURL(api, gets, auth), posts);
+        else
+            requestThread = new HTTPRequestThread(getURL(api, gets, auth));
         requestThread.start(this.requestListener);
     }
 
@@ -146,6 +163,15 @@ public class ApiJSON
 
         parseContent(jsonString);
 
+        if (this.success) {
+            setCache();
+        }
+
+        callback();
+    }
+
+    void callback()
+    {
         if (this.listener != null)
             this.listener.callback(this);
     }
