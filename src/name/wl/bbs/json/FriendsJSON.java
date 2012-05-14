@@ -59,6 +59,12 @@ public class FriendsJSON extends ApiJSON
         return KEY;
     }
 
+    public static void delCache()
+    {
+        friends = null;
+        Cache.del(KEY);
+    }
+
     public Vector getFriends()
     {
         return this.friends;

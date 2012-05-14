@@ -63,6 +63,11 @@ public class ApiJSON
         return null;
     }
 
+    public void setNeedRefresh(boolean r)
+    {
+        needRefresh = r;
+    }
+
     protected static String getURL(String method)
     {
         Hashtable params = null;
@@ -92,7 +97,7 @@ public class ApiJSON
             s = "?";
             s += URLUTF8Encoder.encodeParams(params);
         }
-        if (auth) {
+        if (auth && bbs.getToken() != null) {
             if (s.equals(""))
                 s += "?token=" + bbs.getToken();
             else

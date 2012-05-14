@@ -54,14 +54,9 @@ public class HotBoardsJSON extends ApiJSON
         return false;
     }
 
-    public void setCache(String json)
+    public String getKey()
     {
-        Cache.set(KEY, json);
-    }
-
-    public String getCache()
-    {
-        return Cache.get(KEY);
+        return KEY;
     }
 
     public Vector getBoards()

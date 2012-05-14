@@ -62,14 +62,9 @@ public class HotSectionJSON extends ApiJSON
         return false;
     }
 
-    public void setCache(String json)
+    public String getKey()
     {
-        Cache.set(KEY + section, json);
-    }
-
-    public String getCache()
-    {
-        return Cache.get(KEY + section);
+        return KEY + section;
     }
 
     public Vector getTopics()

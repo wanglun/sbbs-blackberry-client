@@ -58,14 +58,15 @@ public class FavJSON extends ApiJSON
         return false;
     }
 
-    public void setCache(String json)
+    public String getKey()
     {
-        Cache.set(KEY, json);
+        return KEY;
     }
 
-    public String getCache()
+    public static void delCache()
     {
-        return Cache.get(KEY);
+        boards = null;
+        Cache.del(KEY);
     }
 
     public Vector getBoards()

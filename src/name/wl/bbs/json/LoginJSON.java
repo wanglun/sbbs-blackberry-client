@@ -56,14 +56,14 @@ public class LoginJSON extends ApiJSON
         }
     }
 
-    public void setCache(String json)
+    public String getKey()
     {
-        Cache.set(KEY, json);
+        return KEY;
     }
 
-    public String getCache()
+    public void delCache()
     {
-        return Cache.get(KEY);
+        Cache.del(getKey());
     }
 
     public String getToken()
