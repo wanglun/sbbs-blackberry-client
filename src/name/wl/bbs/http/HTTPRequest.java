@@ -11,6 +11,7 @@ import javax.microedition.io.HttpConnection;
 import javax.microedition.io.HttpsConnection;
 
 import java.util.Hashtable;
+import net.rim.device.api.compress.GZIPInputStream;
 
 import name.wl.bbs.util.*;
 
@@ -51,8 +52,11 @@ public class HTTPRequest
     public static long METHOD_FORM_MULTIPART = 7;
     public static long METHOD_HTTPS = 8;
 
+    public static boolean GZIP = true;
+
     protected HttpConnection connection = null;
     protected InputStream inputstream = null;
+    protected GZIPInputStream gzipinputstream = null;
     protected OutputStream outputstream = null;
 
     protected byte[] file;
@@ -119,6 +123,10 @@ public class HTTPRequest
             this.connection.setRequestProperty("User-Agent", this.userAgent);
             this.connection.setRequestProperty("Connection", "close");
 
+            if (GZIP) {
+                this.connection.setRequestProperty("Accept-Encoding", "gzip");
+            }
+
             // Set HTTP Request Method, GET or POST
             if (this.isPOST()) {
                 this.connection.setRequestMethod(HttpConnection.POST);
@@ -178,25 +186,38 @@ public class HTTPRequest
     protected boolean response() throws IOException
     {
         boolean success;
+        boolean isGzip = false;
         // Check response code for success
         if (this.connection.getResponseCode() == HttpConnection.HTTP_OK) {
             // Read response and set http response text
-            this.inputstream = connection.openInputStream();
+            if (this.connection.getEncoding() == "gzip") {
+                this.gzipinputstream = new GZIPInputStream(connection.openInputStream());
+                isGzip = true;
+            } else {
+                this.inputstream = connection.openInputStream();
+            }
 
             int length = (int) connection.getLength();
             if (length > 0) {
                 byte incomingData[] = new byte[length];
-                this.inputstream.read(incomingData);
+                if (isGzip) {
+                    this.gzipinputstream.read(incomingData);
+                } else {
+                    this.inputstream.read(incomingData);
+                }
                 this.HTTPResponseText = new String(incomingData);
             } else {
                 ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
                 int ch;
-                while ((ch = inputstream.read()) != -1) {
+                while ((ch = (isGzip ? gzipinputstream.read() : inputstream.read())) != -1) {
                     bytestream.write(ch);
                 }
                 this.HTTPResponseText = new String(bytestream.toByteArray());
                 bytestream.close();
             }
+
+            if (isGzip)
+                this.gzipinputstream.close();
 
             this.inputstream.close();
 
