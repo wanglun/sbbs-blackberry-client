@@ -12,6 +12,8 @@ public class BbsObjectListField extends ObjectListField
     {
         super();
         bbs = Bbs.getInstance();
+
+        setRowHeight(20);
     }
 
     public boolean setPrevious()

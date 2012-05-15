@@ -10,14 +10,12 @@ import net.rim.device.api.ui.component.ObjectListField;
 import name.wl.bbs.util.*;
 import name.wl.bbs.hjlp.*;
 import name.wl.bbs.app.PostScreen;
+import name.wl.bbs.app.ArticleScreen;
 
 public class ThreadListField extends BbsObjectListField
 {
     private Vector topics;
     private Vector current;
-
-    // 当前打开的话题序号
-    private int opened = -1;
 
     public ThreadListField(Vector topics)
     {
@@ -41,13 +39,15 @@ public class ThreadListField extends BbsObjectListField
     protected boolean keyChar(char key, int status, int time)
     {
         int idx = this.getSelectedIndex();
+        Topic t = (Topic)current.elementAt(idx);
         switch (key) {
             case Keypad.KEY_ENTER:
-                break;
+            case 'o':
+                bbs.pushScreen(new ArticleScreen(t));
+                return true;
             case 'r':
-                Topic t = (Topic)current.elementAt(idx);
                 bbs.pushScreen(new PostScreen(null, t));
-                break;
+                return true;
         }
 
         return super.keyChar(key, status, time);
@@ -57,12 +57,9 @@ public class ThreadListField extends BbsObjectListField
     {
         Topic t = (Topic)current.elementAt(index);
 
-        if (this.opened == index) {
+        if (t.isUnread())
             graphics.drawText("*", 0, y, DrawStyle.ELLIPSIS, 16);
-        } else {
-            graphics.drawText("+", 0, y, DrawStyle.ELLIPSIS, 16);
-        }
 
-        graphics.drawText(t.getTitle() + t.getContent(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+        graphics.drawText(t.getAuthor() + " " + t.getTitle(), 16, y, DrawStyle.ELLIPSIS, width - 16);
     }
 }

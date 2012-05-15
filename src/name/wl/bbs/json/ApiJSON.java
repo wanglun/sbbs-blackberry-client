@@ -167,8 +167,7 @@ public class ApiJSON
         try {
             data = new JSONObject(jsonString);
         } catch (Exception e) {
-            Logger.debug("EXCEPTION");
-            e.printStackTrace();
+            Logger.debug(e.toString());
 
             this.success = false;
 
