@@ -15,23 +15,21 @@ import name.wl.bbs.app.ArticleScreen;
 public class ThreadListField extends BbsObjectListField
 {
     private Vector topics;
-    private Vector current;
 
     public ThreadListField(Vector topics)
+    {
+        this(topics, null);
+    }
+
+    public ThreadListField(Vector topics, Listener moreListener)
     {
         if (topics == null)
             this.topics = new Vector();
         else
             this.topics = topics;
 
-        this.setCurrent(topics);
-    }
-
-    public void setCurrent(Vector current)
-    {
-        this.current = current;
-
-        this.setSize(this.current.size());
+        this.setSize(this.topics.size());
+        this.moreListener = moreListener;
     }
 
     public boolean setPrevious()
@@ -39,10 +37,21 @@ public class ThreadListField extends BbsObjectListField
         return false;
     }
 
+    public void appendTopics(Vector topics)
+    {
+        for (int i = 0; i < topics.size(); i++) {
+            this.topics.addElement(topics.elementAt(i));
+        }
+
+        int sel = this.getSelectedIndex();
+        this.setSize(this.topics.size());
+        this.setSelectedIndex(sel);
+    }
+
     protected boolean keyChar(char key, int status, int time)
     {
         int idx = this.getSelectedIndex();
-        Topic t = (Topic)current.elementAt(idx);
+        Topic t = (Topic)topics.elementAt(idx);
         switch (key) {
             case Keypad.KEY_ENTER:
             case 'o':
@@ -58,7 +67,7 @@ public class ThreadListField extends BbsObjectListField
 
     public void drawListRow(ListField listField, Graphics graphics, int index, int y, int width)
     {
-        Topic t = (Topic)current.elementAt(index);
+        Topic t = (Topic)topics.elementAt(index);
 
         if (t.isUnread())
             graphics.drawText("*", 0, y, DrawStyle.ELLIPSIS, 16);
