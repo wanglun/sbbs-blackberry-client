@@ -41,10 +41,6 @@ public class HTTPRequest
      * @member Post bytes.
      */
     protected byte[] post = null;
-    /**
-     * @member Set cookie response if any.
-     */
-    protected String setCookie = null;
 
     // Constants
     public static long METHOD_GET = 1;
@@ -96,13 +92,7 @@ public class HTTPRequest
         this.fileType = fileType;
     }
 
-    public String getSetCookie()
-    {
-        return (this.setCookie == null) ? "" : this.setCookie;
-    }
-
     /**
-     * @todo Add a cookie thing so that this isn't tied to the reddit session 
      * @todo Check for 404 codes
      * @return
      */
@@ -155,14 +145,6 @@ public class HTTPRequest
 
             success = this.response();
 
-            // Get Set-Cookie response parameter
-            String key;
-            for (int i = 0;(key = this.connection.getHeaderFieldKey(i)) != null; i++) {
-                if (key.equalsIgnoreCase("set-cookie")) {
-                    this.setCookie = this.connection.getHeaderField(key);
-                } 
-            }
-
             // Close output stream if opened.
             if (this.isPOST()) {
                 outputstream.close();
@@ -189,8 +171,8 @@ public class HTTPRequest
         boolean isGzip = false;
         // Check response code for success
         if (this.connection.getResponseCode() == HttpConnection.HTTP_OK) {
-            // Read response and set http response text
-            if (this.connection.getEncoding().equals("gzip")) {
+            String encoding = this.connection.getEncoding();
+            if (encoding != null && encoding.equals("gzip")) {
                 isGzip = true;
             }
 

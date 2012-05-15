@@ -54,9 +54,4 @@ public class HTTPRequestThread extends Thread
     {
         return this.request.getHTTPReponseText();
     }
-
-    public String getSetCookie()
-    {
-        return this.request.getSetCookie();
-    }
 }
