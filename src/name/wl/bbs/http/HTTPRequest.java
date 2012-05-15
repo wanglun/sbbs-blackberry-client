@@ -169,9 +169,9 @@ public class HTTPRequest
             }
 
             this.connection.close();
-        } catch (final Exception error) {
+        } catch (final Exception e) {
             // Error handler
-            Logger.debug("R1: " + error.toString());
+            Logger.debug("R1: " + e.toString());
         }
 
         return success;
@@ -190,36 +190,44 @@ public class HTTPRequest
         // Check response code for success
         if (this.connection.getResponseCode() == HttpConnection.HTTP_OK) {
             // Read response and set http response text
-            if (this.connection.getEncoding() == "gzip") {
-                this.gzipinputstream = new GZIPInputStream(connection.openInputStream());
+            if (this.connection.getEncoding().equals("gzip")) {
                 isGzip = true;
-            } else {
-                this.inputstream = connection.openInputStream();
             }
 
-            int length = (int) connection.getLength();
-            if (length > 0) {
-                byte incomingData[] = new byte[length];
-                if (isGzip) {
-                    this.gzipinputstream.read(incomingData);
-                } else {
-                    this.inputstream.read(incomingData);
-                }
-                this.HTTPResponseText = new String(incomingData);
-            } else {
+            if (isGzip) {
+                this.gzipinputstream = new GZIPInputStream(connection.openInputStream());
+
                 ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
-                int ch;
-                while ((ch = (isGzip ? gzipinputstream.read() : inputstream.read())) != -1) {
-                    bytestream.write(ch);
+                byte incomingData[] = new byte[1024];
+                int bytes_read = 0;
+                while ((bytes_read = gzipinputstream.read(incomingData)) != -1) {
+                    bytestream.write(incomingData, 0, bytes_read);
                 }
                 this.HTTPResponseText = new String(bytestream.toByteArray());
                 bytestream.close();
-            }
 
-            if (isGzip)
                 this.gzipinputstream.close();
+            } else {
+                this.inputstream = connection.openInputStream();
 
-            this.inputstream.close();
+                int length = (int) connection.getLength();
+                if (length > 0) {
+                    byte incomingData[] = new byte[length];
+                    this.inputstream.read(incomingData);
+                    this.HTTPResponseText = new String(incomingData);
+                } else {
+                    ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
+                    byte incomingData[] = new byte[1024];
+                    int bytes_read = 0;
+                    while ((bytes_read = inputstream.read(incomingData)) != -1) {
+                        bytestream.write(incomingData, 0, bytes_read);
+                    }
+                    this.HTTPResponseText = new String(bytestream.toByteArray());
+                    bytestream.close();
+                }
+
+                this.inputstream.close();
+            }
 
             success = true;
         } else {
