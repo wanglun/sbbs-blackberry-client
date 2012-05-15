@@ -48,6 +48,11 @@ public class ThreadListField extends BbsObjectListField
         this.setSelectedIndex(sel);
     }
 
+    public Vector getTopics()
+    {
+        return this.topics;
+    }
+
     protected boolean keyChar(char key, int status, int time)
     {
         int idx = this.getSelectedIndex();
@@ -55,7 +60,7 @@ public class ThreadListField extends BbsObjectListField
         switch (key) {
             case Keypad.KEY_ENTER:
             case 'o':
-                bbs.pushScreen(new ArticleScreen(t));
+                bbs.pushScreen(new ArticleScreen(this));
                 return true;
             case 'r':
                 bbs.pushScreen(new PostScreen(null, t));

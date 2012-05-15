@@ -24,6 +24,13 @@ public class BbsObjectListField extends ObjectListField
         return false;
     }
 
+    public void loadMore()
+    {
+        if (moreListener != null) {
+            moreListener.callback(null);
+        }
+    }
+
     protected boolean keyChar(char key, int status, int time)
     {
         int idx = this.getSelectedIndex();
@@ -32,9 +39,7 @@ public class BbsObjectListField extends ObjectListField
                 if (idx < this.getSize() - 1) {
                     this.setSelectedIndex(idx + 1);
                 } else if (idx == this.getSize() - 1) {
-                    if (moreListener != null) {
-                        moreListener.callback(null);
-                    }
+                    loadMore();
                 }
                 return true;
             case 'k':
@@ -52,9 +57,7 @@ public class BbsObjectListField extends ObjectListField
                 }
                 return true;
             case 'n':
-                if (moreListener != null) {
-                    moreListener.callback(null);
-                }
+                loadMore();
                 return true;
             case 't':
                 this.setSelectedIndex(0);
