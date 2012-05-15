@@ -37,8 +37,6 @@ public class BaseScreen extends MainScreen
         if (getFieldWithFocus() instanceof  BasicEditField) {
         } else {
             switch (key) {
-                case 'b':
-                    return true;
             }
         }
 

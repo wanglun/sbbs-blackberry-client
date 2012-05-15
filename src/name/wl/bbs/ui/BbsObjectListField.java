@@ -50,7 +50,18 @@ public class BbsObjectListField extends ObjectListField
                         bbs.popScreen(getScreen());
                     }
                 }
-                break;
+                return true;
+            case 'n':
+                if (moreListener != null) {
+                    moreListener.callback(null);
+                }
+                return true;
+            case 't':
+                this.setSelectedIndex(0);
+                return true;
+            case 'b':
+                this.setSelectedIndex(this.getSize() - 1);
+                return true;
         }
 
         return false;
