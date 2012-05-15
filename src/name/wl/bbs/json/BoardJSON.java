@@ -19,17 +19,17 @@ public class BoardJSON extends ApiJSON
     private Board board;
 
     /* 普通模式 */
-    private static final int NORMAL = 0;
+    public static final int NORMAL = 0;
     /* 主题模式 */
-    private static final int THREAD = 1;
+    public static final int THREAD = 1;
     /* 论坛模式 */
-    private static final int FORUM = 2;
+    public static final int FORUM = 2;
     /* 置顶 */
-    private static final int TOP = 3;
+    public static final int TOP = 3;
     /* 文摘 */
-    private static final int DIGEST = 4;
+    public static final int DIGEST = 4;
     /* 保留 */
-    private static final int MARK = 5;
+    public static final int MARK = 5;
 
     /* 可选 返回模式 */
     private int mode;

@@ -13,9 +13,14 @@ import name.wl.bbs.hjlp.*;
 public class TopicListField extends BbsObjectListField
 {
     private Vector topics;
-    private Listener listener;
+    private Listener topicListener = null;
 
-    public TopicListField(Vector topics, Listener listener)
+    public TopicListField(Vector topics, Listener topicListener)
+    {
+        this(topics, topicListener, null);
+    }
+
+    public TopicListField(Vector topics, Listener topicListener, Listener moreListener)
     {
         if (topics == null)
             this.topics = new Vector();
@@ -24,7 +29,8 @@ public class TopicListField extends BbsObjectListField
 
         this.setSize(this.topics.size());
 
-        this.listener = listener;
+        this.topicListener = topicListener;
+        this.moreListener = moreListener;
     }
 
     public void setTopics(Vector topics)
@@ -37,6 +43,17 @@ public class TopicListField extends BbsObjectListField
         this.setSize(this.topics.size());
     }
 
+    public void appendTopics(Vector topics)
+    {
+        for (int i = 0; i < topics.size(); i++) {
+            this.topics.addElement(topics.elementAt(i));
+        }
+
+        int sel = this.getSelectedIndex();
+        this.setSize(this.topics.size());
+        this.setSelectedIndex(sel);
+    }
+
     protected boolean keyChar(char key, int status, int time)
     {
         int idx = this.getSelectedIndex();
@@ -44,8 +61,8 @@ public class TopicListField extends BbsObjectListField
             case Keypad.KEY_ENTER:
             case 'o':
                 Topic t = (Topic)topics.elementAt(idx);
-                listener.callback(t);
-                break;
+                topicListener.callback(t);
+                return true;
         }
 
         return super.keyChar(key, status, time);

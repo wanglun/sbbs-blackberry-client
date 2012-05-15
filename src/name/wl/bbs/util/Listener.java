@@ -1,6 +1,21 @@
 package name.wl.bbs.util;
 
-public interface Listener 
+public abstract class Listener 
 {
-    public void callback(Object object);
+    private boolean loading = false;
+
+    public abstract void callback(Object object);
+
+    public void setLoading()
+    {
+        this.loading = true;
+    }
+    public void setLoaded()
+    {
+        this.loading = false;
+    }
+    public boolean isLoading()
+    {
+        return loading;
+    }
 }
