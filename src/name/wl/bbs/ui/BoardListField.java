@@ -20,7 +20,10 @@ public class BoardListField extends BbsObjectListField
 
     public BoardListField(Vector boards)
     {
-        this.boards = boards;
+        if (boards == null)
+            this.boards = new Vector();
+        else
+            this.boards = boards;
         this.preVector = new Stack();
         this.preIndex = new Stack();
 
@@ -48,7 +51,10 @@ public class BoardListField extends BbsObjectListField
 
     public void setBoards(Vector boards)
     {
-        this.boards = boards;
+        if (boards == null)
+            this.boards = new Vector();
+        else
+            this.boards = boards;
         this.preVector = new Stack();
         this.preIndex = new Stack();
 

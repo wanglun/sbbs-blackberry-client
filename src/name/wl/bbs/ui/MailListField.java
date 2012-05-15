@@ -16,8 +16,12 @@ public class MailListField extends BbsObjectListField
 
     public MailListField(Vector mails, Listener listener)
     {
-        this.mails = mails;
-        this.setSize(mails.size());
+        if (mails == null)
+            this.mails = new Vector();
+        else
+            this.mails = mails;
+
+        this.setSize(this.mails.size());
 
         this.listener = listener;
     }
@@ -40,7 +44,6 @@ public class MailListField extends BbsObjectListField
     {
         Mail t = (Mail)mails.elementAt(index);
 
-        graphics.drawText("*", 0, y, DrawStyle.ELLIPSIS, 16);
-        graphics.drawText(t.getTitle(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+        graphics.drawText(t.getAuthor() + " " + t.getTitle(), 16, y, DrawStyle.ELLIPSIS, width - 16);
     }
 }

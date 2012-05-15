@@ -34,6 +34,9 @@ public class MailSendScreen extends BaseScreen implements FieldChangeListener
         this.user = user;
 
         title = new BbsEditField("title");
+        if (mail != null) {
+            title.setText(mail.getTitle().indexOf("Re: ") == 0 ? mail.getTitle() : "Re: " + mail.getTitle());
+        }
         add(title);
 
         content = new BbsEditField("content");

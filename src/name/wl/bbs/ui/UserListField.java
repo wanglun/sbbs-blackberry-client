@@ -17,16 +17,24 @@ public class UserListField extends BbsObjectListField
 
     public UserListField(Vector users, Listener listener)
     {
-        this.users = users;
-        this.setSize(users.size());
+        if (users == null)
+            this.users = new Vector();
+        else
+            this.users = users;
+
+        this.setSize(this.users.size());
 
         this.listener = listener;
     }
 
     public void setUsers(Vector users)
     {
-        this.users = users;
-        this.setSize(users.size());
+        if (users == null)
+            this.users = new Vector();
+        else
+            this.users = users;
+
+        this.setSize(this.users.size());
     }
 
     protected boolean keyChar(char key, int status, int time)

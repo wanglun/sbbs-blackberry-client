@@ -19,7 +19,10 @@ public class ThreadListField extends BbsObjectListField
 
     public ThreadListField(Vector topics)
     {
-        this.topics = topics;
+        if (topics == null)
+            this.topics = new Vector();
+        else
+            this.topics = topics;
 
         this.setCurrent(topics);
     }
@@ -28,7 +31,7 @@ public class ThreadListField extends BbsObjectListField
     {
         this.current = current;
 
-        this.setSize(current.size());
+        this.setSize(this.current.size());
     }
 
     public boolean setPrevious()

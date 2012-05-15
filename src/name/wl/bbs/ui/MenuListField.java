@@ -16,7 +16,7 @@ public class MenuListField extends BbsObjectListField
     public MenuListField(Vector items)
     {
         this.items = items;
-        this.setSize(items.size());
+        this.setSize(this.items.size());
     }
 
     protected boolean keyChar(char key, int status, int time)

@@ -17,16 +17,24 @@ public class TopicListField extends BbsObjectListField
 
     public TopicListField(Vector topics, Listener listener)
     {
-        this.topics = topics;
-        this.setSize(topics.size());
+        if (topics == null)
+            this.topics = new Vector();
+        else
+            this.topics = topics;
+
+        this.setSize(this.topics.size());
 
         this.listener = listener;
     }
 
     public void setTopics(Vector topics)
     {
-        this.topics = topics;
-        this.setSize(topics.size());
+        if (topics == null)
+            this.topics = new Vector();
+        else
+            this.topics = topics;
+
+        this.setSize(this.topics.size());
     }
 
     protected boolean keyChar(char key, int status, int time)
@@ -47,7 +55,6 @@ public class TopicListField extends BbsObjectListField
     {
         Topic t = (Topic)topics.elementAt(index);
 
-        graphics.drawText("*", 0, y, DrawStyle.ELLIPSIS, 16);
-        graphics.drawText(t.getTitle(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+        graphics.drawText(t.getAuthor() + " " + t.getTitle(), 16, y, DrawStyle.ELLIPSIS, width - 16);
     }
 }

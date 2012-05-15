@@ -13,6 +13,9 @@ public class MailScreen extends BaseScreen
     private Mail mail;
     private MailJSON mailJSON;
 
+    private BbsLabelField author;
+    private BbsRichTextField content;
+
     public MailScreen(Mail mail)
     {
         this.mail = mail;
@@ -26,7 +29,16 @@ public class MailScreen extends BaseScreen
             MailJSON obj = (MailJSON)o;
             if (obj.getSuccess()) {
                 mail = obj.getMail();
-                alert(mail.getContent());
+
+                bbs.invokeLater(new Runnable() {
+                    public void run() {
+                        author = new BbsLabelField(mail.getAuthor());
+                        MailScreen.this.add(author);
+
+                        content = new BbsRichTextField(mail.getContent());
+                        MailScreen.this.add(content);
+                    }
+                });
             } else {
                 alert("load board failed!");
             }
@@ -36,6 +48,9 @@ public class MailScreen extends BaseScreen
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
+            case 'q':
+                bbs.popScreen(this);
+                return true;
             case 'r':
                 bbs.pushScreen(new MailSendScreen(mail));
                 break;
