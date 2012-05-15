@@ -10,17 +10,17 @@ import name.wl.bbs.json.*;
 
 public class MailBoxScreen extends BaseScreen
 {
-    private MailboxJSON mailboxJSON;
-    private Vector mails;
-    private MailListField list;
+    private static final int LIMIT = 10;
+
+    private MailListField list = null;
 
     private int type;
 
     public MailBoxScreen(int type)
     {
         this.type = type;
-        this.mailboxJSON = new MailboxJSON(type);
-        this.mailboxJSON.load(loadListener);
+
+        new MailboxJSON(type).load(loadListener);
     }
 
     public Listener loadListener = new Listener() {
@@ -28,15 +28,34 @@ public class MailBoxScreen extends BaseScreen
         {
             MailboxJSON obj = (MailboxJSON)o;
             if (obj.getSuccess()) {
-                mails = obj.getMails();
-                list = new MailListField(mails, mailListener);
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        MailBoxScreen.this.add(list);
-                    }
-                });
+                final Vector mails = obj.getMails();
+                if (list == null) {
+                    list = new MailListField(mails, mailListener, moreListener);
+                    bbs.invokeLater(new Runnable() {
+                        public void run() {
+                            MailBoxScreen.this.add(list);
+                        }
+                    });
+                } else {
+                    bbs.invokeLater(new Runnable() {
+                        public void run() {
+                            list.appendMails(mails);
+                            moreListener.setLoaded();
+                        }
+                    });
+                }
             } else {
                 alert("load mails failed!");
+            }
+        }
+    };
+
+    public Listener moreListener = new Listener() {
+        public void callback(Object obj)
+        {
+            if (!this.isLoading()) {
+                new MailboxJSON(type, list.getSize(), LIMIT).load(loadListener);
+                this.setLoading();
             }
         }
     };

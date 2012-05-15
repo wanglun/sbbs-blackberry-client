@@ -12,9 +12,14 @@ import name.wl.bbs.hjlp.*;
 public class MailListField extends BbsObjectListField
 {
     private Vector mails;
-    private Listener listener;
+    private Listener mailListener;
 
-    public MailListField(Vector mails, Listener listener)
+    public MailListField(Vector mails, Listener mailListener)
+    {
+        this(mails, mailListener, null);
+    }
+
+    public MailListField(Vector mails, Listener mailListener, Listener moreListener)
     {
         if (mails == null)
             this.mails = new Vector();
@@ -23,7 +28,19 @@ public class MailListField extends BbsObjectListField
 
         this.setSize(this.mails.size());
 
-        this.listener = listener;
+        this.mailListener = mailListener;
+        this.moreListener = moreListener;
+    }
+
+    public void appendMails(Vector mails)
+    {
+        for (int i = 0; i < mails.size(); i++) {
+            this.mails.addElement(mails.elementAt(i));
+        }
+
+        int sel = this.getSelectedIndex();
+        this.setSize(this.mails.size());
+        this.setSelectedIndex(sel);
     }
 
     protected boolean keyChar(char key, int status, int time)
@@ -33,7 +50,7 @@ public class MailListField extends BbsObjectListField
             case Keypad.KEY_ENTER:
             case 'o':
                 Mail t = (Mail)mails.elementAt(idx);
-                listener.callback(t);
+                mailListener.callback(t);
                 break;
         }
 
