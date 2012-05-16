@@ -30,6 +30,8 @@ public class MailListField extends BbsObjectListField
 
         this.mailListener = mailListener;
         this.moreListener = moreListener;
+
+        setRowHeight(2 * lineHeight);
     }
 
     public void appendMails(Vector mails)
@@ -61,6 +63,7 @@ public class MailListField extends BbsObjectListField
     {
         Mail t = (Mail)mails.elementAt(index);
 
-        graphics.drawText(t.getAuthor() + " " + t.getTitle(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+        graphics.drawText(t.getAuthor() + " " + t.getTimeStr(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+        graphics.drawText(t.getTitle(), 16, y + lineHeight, DrawStyle.ELLIPSIS, width - 16);
     }
 }

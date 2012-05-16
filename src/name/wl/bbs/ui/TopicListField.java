@@ -1,6 +1,7 @@
 package name.wl.bbs.ui;
 
 import java.util.*;
+import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.DrawStyle;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Keypad;
@@ -31,6 +32,8 @@ public class TopicListField extends BbsObjectListField
 
         this.topicListener = topicListener;
         this.moreListener = moreListener;
+
+        setRowHeight(2 * lineHeight);
     }
 
     public void setTopics(Vector topics)
@@ -72,6 +75,7 @@ public class TopicListField extends BbsObjectListField
     {
         Topic t = (Topic)topics.elementAt(index);
 
-        graphics.drawText(t.getAuthor() + " " + t.getTitle(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+        graphics.drawText(t.getAuthor() + " " + t.getTimeStr(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+        graphics.drawText(t.getTitle(), 16, y + lineHeight, DrawStyle.ELLIPSIS, width - 16);
     }
 }

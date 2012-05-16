@@ -4,10 +4,13 @@ import name.wl.bbs.app.Bbs;
 import name.wl.bbs.util.*;
 
 import net.rim.device.api.ui.component.*;
+import net.rim.device.api.ui.Font;
 
 public class BbsObjectListField extends ObjectListField
 {
     protected Bbs bbs;
+
+    protected int lineHeight;
 
     protected Listener moreListener = null;
     
@@ -16,7 +19,8 @@ public class BbsObjectListField extends ObjectListField
         super();
         bbs = Bbs.getInstance();
 
-        setRowHeight(20);
+        lineHeight = Font.getDefault().getHeight();
+        setRowHeight(lineHeight);
     }
 
     public boolean setPrevious()

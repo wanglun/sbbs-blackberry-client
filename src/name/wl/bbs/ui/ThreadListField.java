@@ -19,6 +19,8 @@ public class ThreadListField extends BbsObjectListField
     public ThreadListField(Vector topics)
     {
         this(topics, null);
+
+        setRowHeight(2 * lineHeight);
     }
 
     public ThreadListField(Vector topics, Listener moreListener)
@@ -77,6 +79,7 @@ public class ThreadListField extends BbsObjectListField
         if (t.isUnread())
             graphics.drawText("*", 0, y, DrawStyle.ELLIPSIS, 16);
 
-        graphics.drawText(t.getAuthor() + " " + t.getTitle(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+        graphics.drawText(t.getAuthor() + " " + t.getTimeStr(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+        graphics.drawText(t.getTitle(), 16, y + lineHeight, DrawStyle.ELLIPSIS, width - 16);
     }
 }
