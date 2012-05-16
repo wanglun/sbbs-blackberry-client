@@ -3,6 +3,8 @@ package name.wl.bbs.hjlp;
 import org.json.me.*;
 import java.util.*;
 
+import name.wl.bbs.util.GenTimeStr;
+
 public class Topic
 {
     /* Ìû×ÓID */
@@ -263,6 +265,16 @@ public class Topic
     public long getTime()
     {
         return time;
+    }
+
+    public String getTimeStr()
+    {
+        return GenTimeStr.standard(this.time);
+    }
+
+    public String getTimePretty()
+    {
+        return GenTimeStr.pretty(this.time);
     }
 
     public String getTitle()
