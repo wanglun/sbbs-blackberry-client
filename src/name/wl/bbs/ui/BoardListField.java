@@ -85,13 +85,11 @@ public class BoardListField extends BbsObjectListField
     {
         Board b = (Board)current.elementAt(index);
 
-        if (b.isLeaf()) {
-            graphics.drawText("*", 0, y, DrawStyle.ELLIPSIS, 16);
-        } else {
+        if (!b.isLeaf()) {
             graphics.drawText("+", 0, y, DrawStyle.ELLIPSIS, 16);
         }
 
-        graphics.drawText(b.getName(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+        graphics.drawText(b.getName() + " - " + b.getDescription(), 16, y, DrawStyle.ELLIPSIS, width - 16);
 
         super.drawListRow(listField, graphics, index, y, width);
     }

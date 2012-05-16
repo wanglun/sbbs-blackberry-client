@@ -46,6 +46,11 @@ public class TopicListField extends BbsObjectListField
         this.setSize(this.topics.size());
     }
 
+    public Vector getTopics()
+    {
+        return this.topics;
+    }
+
     public void appendTopics(Vector topics)
     {
         for (int i = 0; i < topics.size(); i++) {

@@ -1,5 +1,6 @@
 package name.wl.bbs.app;
 
+import java.util.Vector;
 import net.rim.device.api.ui.*;
 import name.wl.bbs.ui.*;
 import name.wl.bbs.util.*;
@@ -13,22 +14,31 @@ public class ArticleScreen extends BaseScreen
 
     private Topic topic = null;
     private ThreadListField thread = null;
+    private TopicListField topics = null;
 
     public ArticleScreen(ThreadListField thread)
     {
-        this(thread, null);
+        this(thread, null, null);
+    }
+    public ArticleScreen(TopicListField topics)
+    {
+        this(null, null, topics);
     }
     public ArticleScreen(Topic topic)
     {
-        this(null, topic);
+        this(null, topic, null);
     }
-    public ArticleScreen(ThreadListField thread, Topic topic)
+    public ArticleScreen(ThreadListField thread, Topic topic, TopicListField topics)
     {
         if (topic != null)
             this.topic = topic;
         else if (thread != null) {
             this.thread = thread;
             this.topic = (Topic)this.thread.getTopics().elementAt(this.thread.getSelectedIndex());
+        } else if (topics != null) {
+            this.topics = topics;
+            this.topic = (Topic)this.topics.getTopics().elementAt(this.topics.getSelectedIndex());
+            new TopicJSON(this.topic, false, 0, 1).load(loadListener);
         }
 
         author = new BbsLabelField(this.topic.getAuthor());
@@ -44,6 +54,29 @@ public class ArticleScreen extends BaseScreen
         content.setText(topic.getContent());
     }
 
+    public Listener loadListener = new Listener() {
+        public void callback(Object o)
+        {
+            TopicJSON obj = (TopicJSON)o;
+            if (obj.getSuccess()) {
+                final Vector topics = obj.getTopics();
+                if (topics.size() == 1) {
+                    Topic t = (Topic)topics.elementAt(0);
+                    if (t.getId() == topic.getId()) {
+                        topic = t;
+                        bbs.invokeLater(new Runnable() {
+                            public void run() {
+                                ArticleScreen.this.update();
+                            }
+                        });
+                    }
+                }
+            } else {
+                alert("load topic failed!");
+            }
+        }
+    };
+
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
@@ -58,6 +91,11 @@ public class ArticleScreen extends BaseScreen
                     this.thread.setSelectedIndex(0);
                     this.topic = (Topic)this.thread.getTopics().elementAt(0);
                     update();
+                } else if (this.topics != null) {
+                    this.topics.setSelectedIndex(0);
+                    this.topic = (Topic)this.topics.getTopics().elementAt(0);
+                    update();
+                    new TopicJSON(this.topic, false, 0, 1).load(loadListener);
                 }
                 return true;
             case 'b':
@@ -66,6 +104,12 @@ public class ArticleScreen extends BaseScreen
                     this.thread.setSelectedIndex(size - 1);
                     this.topic = (Topic)this.thread.getTopics().elementAt(size - 1);
                     update();
+                } else if (this.topics != null) {
+                    int size = this.topics.getSize();
+                    this.topics.setSelectedIndex(size - 1);
+                    this.topic = (Topic)this.topics.getTopics().elementAt(size - 1);
+                    update();
+                    new TopicJSON(this.topic, false, 0, 1).load(loadListener);
                 }
                 return true;
             case 'n':
@@ -79,6 +123,17 @@ public class ArticleScreen extends BaseScreen
                     } else if (idx == size - 1) {
                         this.thread.loadMore();
                     }
+                } else if (this.topics != null) {
+                    int idx = this.topics.getSelectedIndex();
+                    int size = this.topics.getSize();
+                    if (idx < size - 1) {
+                        this.topics.setSelectedIndex(idx + 1);
+                        this.topic = (Topic)this.topics.getTopics().elementAt(idx + 1);
+                        update();
+                        new TopicJSON(this.topic, false, 0, 1).load(loadListener);
+                    } else if (idx == size - 1) {
+                        this.topics.loadMore();
+                    }
                 }
                 return true;
             case 'p':
@@ -88,6 +143,14 @@ public class ArticleScreen extends BaseScreen
                         this.thread.setSelectedIndex(idx - 1);
                         this.topic = (Topic)this.thread.getTopics().elementAt(idx - 1);
                         update();
+                    }
+                } else if (this.topics != null) {
+                    int idx = this.topics.getSelectedIndex();
+                    if (idx > 0) {
+                        this.topics.setSelectedIndex(idx - 1);
+                        this.topic = (Topic)this.topics.getTopics().elementAt(idx - 1);
+                        update();
+                        new TopicJSON(this.topic, false, 0, 1).load(loadListener);
                     }
                 }
                 return true;
