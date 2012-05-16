@@ -24,6 +24,8 @@ public class HotSectionMenuScreen extends BaseScreen
 
         list = new MenuListField(items);
         add(list);
+
+        setStatusbarTitle("分区热点");
     }
 
     public Listener hotsectionListener = new Listener() {

@@ -45,7 +45,7 @@ public class UserListField extends BbsObjectListField
             case 'o':
                 User u = (User)users.elementAt(idx);
                 listener.callback(u);
-                break;
+                return true;
         }
 
         return super.keyChar(key, status, time);

@@ -21,6 +21,8 @@ public class HotMenuScreen extends BaseScreen
 
         list = new MenuListField(items);
         add(list);
+
+        setStatusbarTitle("热门信息");
     }
 
     public Listener toptenListener = new Listener() {

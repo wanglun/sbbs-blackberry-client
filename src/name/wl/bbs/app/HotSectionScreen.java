@@ -21,6 +21,8 @@ public class HotSectionScreen extends BaseScreen
         this.index = index;
         this.hotsectionJSON = new HotSectionJSON(index);
         this.hotsectionJSON.load(loadListener);
+
+        setStatusbarTitle("分区热点");
     }
 
     public Listener loadListener = new Listener() {

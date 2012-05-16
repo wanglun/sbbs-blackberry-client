@@ -48,6 +48,8 @@ public class MailSendScreen extends BaseScreen implements FieldChangeListener
         send = new BbsButtonField("send");
         send.setChangeListener(this);
         add(send);
+
+        setStatusbarTitle("Ð´ÓÊ¼þ");
     }
 
     public void fieldChanged(Field field, int context) {

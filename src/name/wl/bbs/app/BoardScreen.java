@@ -23,6 +23,8 @@ public class BoardScreen extends BaseScreen
         this.board = board;
 
         new BoardJSON(board, mode).load(loadListener);
+
+        setStatusbarTitle(board.getName());
     }
 
     public Listener loadListener = new Listener() {

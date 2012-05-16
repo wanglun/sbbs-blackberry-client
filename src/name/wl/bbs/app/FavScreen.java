@@ -18,6 +18,8 @@ public class FavScreen extends BaseScreen
         fav = new FavJSON();
 
         fav.load(loadListener);
+
+        setStatusbarTitle(" ’≤ÿº–");
     }
 
     public void close()

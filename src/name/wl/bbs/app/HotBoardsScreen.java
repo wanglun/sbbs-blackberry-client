@@ -18,6 +18,8 @@ public class HotBoardsScreen extends BaseScreen
         hotboardsJSON = new HotBoardsJSON();
 
         hotboardsJSON.load(loadListener);
+
+        setStatusbarTitle("»»√≈∞Ê√Ê");
     }
 
     public void close()

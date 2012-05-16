@@ -21,6 +21,8 @@ public class TalkMenuScreen extends BaseScreen
 
         list = new MenuListField(items);
         add(list);
+
+        setStatusbarTitle("谈天说地");
     }
 
     public Listener queryListener = new Listener() {

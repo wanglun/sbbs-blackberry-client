@@ -20,6 +20,8 @@ public class UserQueryScreen extends BaseScreen implements FieldChangeListener
         query = new BbsButtonField("query");
         query.setChangeListener(this);
         add(query);
+
+        setStatusbarTitle("≤È—Ø”√ªß");
     }
 
     public void fieldChanged(Field field, int context) {

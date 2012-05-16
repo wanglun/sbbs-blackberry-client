@@ -19,6 +19,8 @@ public class AccountMenuScreen extends BaseScreen
 
         list = new MenuListField(items);
         add(list);
+
+        setStatusbarTitle("’ ∫≈…Ë÷√");
     }
 
     public Listener logoutListener = new Listener() {

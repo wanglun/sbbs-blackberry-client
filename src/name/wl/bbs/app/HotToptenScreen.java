@@ -18,6 +18,8 @@ public class HotToptenScreen extends BaseScreen
     {
         this.hottopicsJSON = new HotToptenJSON();
         this.hottopicsJSON.load(loadListener);
+
+        setStatusbarTitle("十大话题");
     }
 
     public Listener loadListener = new Listener() {

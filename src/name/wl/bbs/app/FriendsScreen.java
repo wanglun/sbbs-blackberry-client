@@ -22,9 +22,11 @@ public class FriendsScreen extends BaseScreen
         if (all) {
             FriendsAllJSON friendsJSON = new FriendsAllJSON();
             friendsJSON.load(loadListener);
+            setStatusbarTitle("全部好友");
         } else {
             FriendsJSON friendsJSON = new FriendsJSON();
             friendsJSON.load(loadListener);
+            setStatusbarTitle("在线好友");
         }
     }
 

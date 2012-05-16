@@ -53,7 +53,7 @@ public class MailListField extends BbsObjectListField
             case 'o':
                 Mail t = (Mail)mails.elementAt(idx);
                 mailListener.callback(t);
-                break;
+                return true;
         }
 
         return super.keyChar(key, status, time);

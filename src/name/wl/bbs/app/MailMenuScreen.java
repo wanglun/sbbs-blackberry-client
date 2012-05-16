@@ -21,6 +21,8 @@ public class MailMenuScreen extends BaseScreen
 
         list = new MenuListField(items);
         add(list);
+
+        setStatusbarTitle("ĞÅÏä");
     }
 
     public Listener inboxListener = new Listener() {

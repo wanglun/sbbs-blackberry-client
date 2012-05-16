@@ -15,7 +15,7 @@ public class MenuScreen extends BaseScreen
     {
         items = new Vector();
         items.addElement(new MenuListItem("分类讨论区", sectionsListener));
-        items.addElement(new MenuListItem("热门话题", hotListener));
+        items.addElement(new MenuListItem("热门信息", hotListener));
         items.addElement(new MenuListItem("收藏夹", favListener));
         items.addElement(new MenuListItem("信箱", mailListener));
         items.addElement(new MenuListItem("谈天说地", talkListener));
@@ -24,6 +24,8 @@ public class MenuScreen extends BaseScreen
 
         list = new MenuListField(items);
         add(list);
+
+        setStatusbarTitle("主菜单");
     }
 
     public Listener sectionsListener = new Listener() {

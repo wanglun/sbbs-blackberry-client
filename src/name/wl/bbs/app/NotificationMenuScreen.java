@@ -21,6 +21,8 @@ public class NotificationMenuScreen extends BaseScreen
 
         list = new MenuListField(items);
         add(list);
+
+        setStatusbarTitle("Í¨ÖªÏä");
     }
 
     public Listener mailsListener = new Listener() {

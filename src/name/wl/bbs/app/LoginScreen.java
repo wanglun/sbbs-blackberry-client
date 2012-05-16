@@ -22,6 +22,8 @@ public class LoginScreen extends BaseScreen implements FieldChangeListener
         login = new BbsButtonField("login");
         login.setChangeListener(this);
         add(login);
+
+        setStatusbarTitle("µÇÂ¼");
     }
 
     public void fieldChanged(Field field, int context) {

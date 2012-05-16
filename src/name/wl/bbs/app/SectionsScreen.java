@@ -18,6 +18,8 @@ public class SectionsScreen extends BaseScreen
         sections = new SectionsJSON();
 
         sections.load(loadListener);
+
+        setStatusbarTitle("分类讨论区");
     }
 
     public void close()
