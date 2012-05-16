@@ -28,7 +28,7 @@ public class ThreadListField extends BbsObjectListField
         else
             this.topics = topics;
 
-        this.setSize(this.topics.size());
+        setObjects(this.topics);
         this.moreListener = moreListener;
 
         setRowHeight(2 * lineHeight);
@@ -46,7 +46,7 @@ public class ThreadListField extends BbsObjectListField
         }
 
         int sel = this.getSelectedIndex();
-        this.setSize(this.topics.size());
+        setObjects(this.topics);
         this.setSelectedIndex(sel);
     }
 

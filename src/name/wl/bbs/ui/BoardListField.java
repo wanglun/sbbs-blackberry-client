@@ -33,8 +33,7 @@ public class BoardListField extends BbsObjectListField
     public void setCurrent(Vector current)
     {
         this.current = current;
-
-        this.setSize(current.size());
+        setObjects(this.current);
     }
 
     public boolean setPrevious()

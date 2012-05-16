@@ -1,5 +1,7 @@
 package name.wl.bbs.ui;
 
+import java.util.Vector;
+
 import name.wl.bbs.app.Bbs;
 import name.wl.bbs.util.*;
 
@@ -28,6 +30,14 @@ public class BbsObjectListField extends ObjectListField
     public boolean setPrevious()
     {
         return false;
+    }
+
+    // OS5 needs this
+    public void setObjects(Vector items)
+    {
+        Object objs[] = new Object[items.size()];
+        items.copyInto(objs);
+        set(objs);
     }
 
     public void loadMore()

@@ -28,7 +28,7 @@ public class TopicListField extends BbsObjectListField
         else
             this.topics = topics;
 
-        this.setSize(this.topics.size());
+        setObjects(this.topics);
 
         this.topicListener = topicListener;
         this.moreListener = moreListener;
@@ -43,7 +43,7 @@ public class TopicListField extends BbsObjectListField
         else
             this.topics = topics;
 
-        this.setSize(this.topics.size());
+        setObjects(this.topics);
     }
 
     public Vector getTopics()
@@ -58,7 +58,7 @@ public class TopicListField extends BbsObjectListField
         }
 
         int sel = this.getSelectedIndex();
-        this.setSize(this.topics.size());
+        setObjects(this.topics);
         this.setSelectedIndex(sel);
     }
 

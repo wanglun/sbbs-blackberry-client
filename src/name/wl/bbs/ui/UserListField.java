@@ -22,7 +22,7 @@ public class UserListField extends BbsObjectListField
         else
             this.users = users;
 
-        this.setSize(this.users.size());
+        setObjects(this.users);
 
         this.listener = listener;
     }
@@ -34,7 +34,7 @@ public class UserListField extends BbsObjectListField
         else
             this.users = users;
 
-        this.setSize(this.users.size());
+        setObjects(this.users);
     }
 
     protected boolean keyChar(char key, int status, int time)

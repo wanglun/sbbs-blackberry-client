@@ -26,7 +26,7 @@ public class MailListField extends BbsObjectListField
         else
             this.mails = mails;
 
-        this.setSize(this.mails.size());
+        setObjects(this.mails);
 
         this.mailListener = mailListener;
         this.moreListener = moreListener;
@@ -41,7 +41,7 @@ public class MailListField extends BbsObjectListField
         }
 
         int sel = this.getSelectedIndex();
-        this.setSize(this.mails.size());
+        setObjects(this.mails);
         this.setSelectedIndex(sel);
     }
 
