@@ -15,9 +15,9 @@ public class NotificationMenuScreen extends BaseScreen
     public NotificationMenuScreen()
     {
         items = new Vector();
-        items.addElement(new MenuListItem("mails", mailsListener));
-        items.addElement(new MenuListItem("ats", atsListener));
-        items.addElement(new MenuListItem("replies", repliesListener));
+        items.addElement(new MenuListItem("新邮件", mailsListener));
+        items.addElement(new MenuListItem("爱特我的", atsListener));
+        items.addElement(new MenuListItem("回复我的", repliesListener));
 
         list = new MenuListField(items);
         add(list);

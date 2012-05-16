@@ -15,7 +15,7 @@ public class AccountMenuScreen extends BaseScreen
     public AccountMenuScreen()
     {
         items = new Vector();
-        items.addElement(new MenuListItem("Logout", logoutListener));
+        items.addElement(new MenuListItem("ÍË³öµÇÂ¼", logoutListener));
 
         list = new MenuListField(items);
         add(list);

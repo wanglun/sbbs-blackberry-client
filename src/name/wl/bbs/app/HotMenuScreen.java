@@ -15,9 +15,9 @@ public class HotMenuScreen extends BaseScreen
     public HotMenuScreen()
     {
         items = new Vector();
-        items.addElement(new MenuListItem("Topten", toptenListener));
-        items.addElement(new MenuListItem("Boards", boardsListener));
-        items.addElement(new MenuListItem("Sections", sectionsListener));
+        items.addElement(new MenuListItem("十大话题", toptenListener));
+        items.addElement(new MenuListItem("热门版面", boardsListener));
+        items.addElement(new MenuListItem("分区热点", sectionsListener));
 
         list = new MenuListField(items);
         add(list);

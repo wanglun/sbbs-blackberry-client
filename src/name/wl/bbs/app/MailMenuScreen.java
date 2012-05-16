@@ -15,9 +15,9 @@ public class MailMenuScreen extends BaseScreen
     public MailMenuScreen()
     {
         items = new Vector();
-        items.addElement(new MenuListItem("Inbox", inboxListener));
-        items.addElement(new MenuListItem("Sent", sentListener));
-        items.addElement(new MenuListItem("Deleted", deletedListener));
+        items.addElement(new MenuListItem("收件箱", inboxListener));
+        items.addElement(new MenuListItem("发件箱", sentListener));
+        items.addElement(new MenuListItem("垃圾箱", deletedListener));
 
         list = new MenuListField(items);
         add(list);

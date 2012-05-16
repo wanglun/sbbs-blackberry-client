@@ -15,9 +15,9 @@ public class TalkMenuScreen extends BaseScreen
     public TalkMenuScreen()
     {
         items = new Vector();
-        items.addElement(new MenuListItem("Query", queryListener));
-        items.addElement(new MenuListItem("Online", onlineListener));
-        items.addElement(new MenuListItem("All", allListener));
+        items.addElement(new MenuListItem("查询用户", queryListener));
+        items.addElement(new MenuListItem("在线好友", onlineListener));
+        items.addElement(new MenuListItem("所有好友", allListener));
 
         list = new MenuListField(items);
         add(list);

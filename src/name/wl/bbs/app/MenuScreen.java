@@ -14,13 +14,13 @@ public class MenuScreen extends BaseScreen
     public MenuScreen()
     {
         items = new Vector();
-        items.addElement(new MenuListItem("Sections", sectionsListener));
-        items.addElement(new MenuListItem("Hot", hotListener));
-        items.addElement(new MenuListItem("Fav", favListener));
-        items.addElement(new MenuListItem("Mail", mailListener));
-        items.addElement(new MenuListItem("Talk", talkListener));
-        items.addElement(new MenuListItem("Notification", notificationListener));
-        items.addElement(new MenuListItem("Account", accountListener));
+        items.addElement(new MenuListItem("分类讨论区", sectionsListener));
+        items.addElement(new MenuListItem("热门话题", hotListener));
+        items.addElement(new MenuListItem("收藏夹", favListener));
+        items.addElement(new MenuListItem("信箱", mailListener));
+        items.addElement(new MenuListItem("谈天说地", talkListener));
+        items.addElement(new MenuListItem("通知箱", notificationListener));
+        items.addElement(new MenuListItem(bbs.getId() + "的帐号", accountListener));
 
         list = new MenuListField(items);
         add(list);
