@@ -5,6 +5,8 @@ import name.wl.bbs.util.*;
 
 import net.rim.device.api.ui.component.*;
 import net.rim.device.api.ui.Font;
+import net.rim.device.api.ui.Color;
+import net.rim.device.api.ui.Graphics;
 
 public class BbsObjectListField extends ObjectListField
 {
@@ -19,7 +21,7 @@ public class BbsObjectListField extends ObjectListField
         super();
         bbs = Bbs.getInstance();
 
-        lineHeight = Font.getDefault().getHeight();
+        lineHeight = Font.getDefault().getHeight() + 2;
         setRowHeight(lineHeight);
     }
 
@@ -72,5 +74,11 @@ public class BbsObjectListField extends ObjectListField
         }
 
         return false;
+    }
+
+    public void drawListRow(ListField listField, Graphics graphics, int index, int y, int width)
+    {
+        graphics.setColor(Color.GRAY);
+        graphics.drawLine(0, y + getRowHeight() - 1, width, y + getRowHeight() - 1);
     }
 }

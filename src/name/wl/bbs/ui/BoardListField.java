@@ -92,5 +92,7 @@ public class BoardListField extends BbsObjectListField
         }
 
         graphics.drawText(b.getName(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+
+        super.drawListRow(listField, graphics, index, y, width);
     }
 }

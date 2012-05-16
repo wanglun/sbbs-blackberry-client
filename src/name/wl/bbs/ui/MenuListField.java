@@ -38,5 +38,7 @@ public class MenuListField extends BbsObjectListField
         MenuListItem i = (MenuListItem)items.elementAt(index);
 
         graphics.drawText(i.getLabel(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+
+        super.drawListRow(listField, graphics, index, y, width);
     }
 }

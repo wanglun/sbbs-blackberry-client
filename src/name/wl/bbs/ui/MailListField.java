@@ -65,5 +65,7 @@ public class MailListField extends BbsObjectListField
 
         graphics.drawText(t.getAuthor() + " " + t.getTimeStr(), 16, y, DrawStyle.ELLIPSIS, width - 16);
         graphics.drawText(t.getTitle(), 16, y + lineHeight, DrawStyle.ELLIPSIS, width - 16);
+
+        super.drawListRow(listField, graphics, index, y, width);
     }
 }
