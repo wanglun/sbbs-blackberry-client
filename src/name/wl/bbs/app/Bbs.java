@@ -19,6 +19,8 @@ public class Bbs extends UiApplication
     private Vector hotTopics = null;
     private Vector hotBoards = null;
 
+    private Timer tasksTimer = null;
+
     private static Bbs bbs = null;
 
     public static void main(String[] args)
@@ -30,6 +32,8 @@ public class Bbs extends UiApplication
     public Bbs() 
     {
         bbs = this;
+
+        tasksTimer = new Timer();
 
         pushScreen(new SplashScreen());
 
@@ -112,5 +116,10 @@ public class Bbs extends UiApplication
     public Vector getHotBoards()
     {
         return this.hotBoards;
+    }
+    
+    public Timer getTasksTimer()
+    {
+        return this.tasksTimer;
     }
 }

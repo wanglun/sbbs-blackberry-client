@@ -26,6 +26,10 @@ public class MenuScreen extends BaseScreen
         add(list);
 
         setStatusbarTitle("Ö÷²Ëµ¥");
+
+        // start the tasks timer
+        // FIXME add period setting
+        bbs.getTasksTimer().schedule(new NotificationsTask(), new Date(), 300000);
     }
 
     public Listener sectionsListener = new Listener() {

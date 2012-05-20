@@ -24,37 +24,20 @@ public class NotificationScreen extends BaseScreen
     {
         this.type = type;
 
-        this.notificationsJSON = new NotificationsJSON();
-        this.notificationsJSON.load(loadListener);
-    }
-
-    public Listener loadListener = new Listener() {
-        public void callback(Object o)
-        {
-            NotificationsJSON obj = (NotificationsJSON)o;
-            if (obj.getSuccess()) {
-                switch (type) {
-                    case MAILS:
-                        topics = obj.getMails();
-                        break;
-                    case ATS:
-                        topics = obj.getAts();
-                        break;
-                    case REPLIES:
-                        topics = obj.getReplies();
-                        break;
-                }
-                list = new TopicListField(topics, topicListener);
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        NotificationScreen.this.add(list);
-                    }
-                });
-            } else {
-                alert("load notifications failed!");
-            }
+        switch (type) {
+            case MAILS:
+                topics = NotificationsTask.getMails();
+                break;
+            case ATS:
+                topics = NotificationsTask.getAts();
+                break;
+            case REPLIES:
+                topics = NotificationsTask.getReplies();
+                break;
         }
-    };
+        list = new TopicListField(topics, topicListener);
+        NotificationScreen.this.add(list);
+    }
 
     public Listener topicListener = new Listener() {
         public void callback(Object o)
