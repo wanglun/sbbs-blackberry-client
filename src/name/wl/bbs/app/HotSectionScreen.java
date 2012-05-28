@@ -38,7 +38,7 @@ public class HotSectionScreen extends BaseScreen
                     }
                 });
             } else {
-                alert("load hot section failed!");
+                alert("加载分区热点失败");
             }
         }
     };
@@ -55,7 +55,7 @@ public class HotSectionScreen extends BaseScreen
                     }
                 });
             } else {
-                alert("load hot section failed!");
+                alert("刷新分区热点失败");
             }
         }
     };

@@ -13,6 +13,7 @@ public class MailScreen extends BaseScreen
     private Mail mail;
     private MailJSON mailJSON;
 
+    private BbsLabelField title;
     private BbsLabelField author;
     private BbsRichTextField content;
 
@@ -21,6 +22,26 @@ public class MailScreen extends BaseScreen
         this.mail = mail;
         this.mailJSON = new MailJSON(mail);
         this.mailJSON.load(loadListener);
+
+        title = new BbsLabelField(this.mail.getTitle());
+        add(title);
+
+        author = new BbsLabelField(this.mail.getAuthor());
+        add(author);
+
+        switch (this.mail.getType()) {
+            case MailboxJSON.INBOX:
+                setStatusbarTitle("收件箱");
+                break;
+            case MailboxJSON.SENT:
+                setStatusbarTitle("发件箱");
+                break;
+            case MailboxJSON.DELETED:
+                setStatusbarTitle("垃圾箱");
+                break;
+        }
+
+        alert("加载信件内容");
     }
 
     public Listener loadListener = new Listener() {
@@ -32,15 +53,13 @@ public class MailScreen extends BaseScreen
 
                 bbs.invokeLater(new Runnable() {
                     public void run() {
-                        author = new BbsLabelField(mail.getAuthor());
-                        MailScreen.this.add(author);
 
                         content = new BbsRichTextField(mail.getContent());
                         MailScreen.this.add(content);
                     }
                 });
             } else {
-                alert("load board failed!");
+                alert("加载邮件内容失败");
             }
         }
     };

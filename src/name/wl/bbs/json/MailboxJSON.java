@@ -12,9 +12,9 @@ public class MailboxJSON extends ApiJSON
     private static String API = "/mailbox/get.json";
 
     /* --参数-- */
-    public static int INBOX = 0;
-    public static int SENT = 1;
-    public static int DELETED = 2;
+    public static final int INBOX = 0;
+    public static final int SENT = 1;
+    public static final int DELETED = 2;
     /* 类型 */
     private int type;
 

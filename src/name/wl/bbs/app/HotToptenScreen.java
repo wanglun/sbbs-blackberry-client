@@ -35,7 +35,7 @@ public class HotToptenScreen extends BaseScreen
                     }
                 });
             } else {
-                alert("load board failed!");
+                alert("加载十大失败");
             }
         }
     };
@@ -52,7 +52,7 @@ public class HotToptenScreen extends BaseScreen
                     }
                 });
             } else {
-                alert("load board failed!");
+                alert("刷新十大失败");
             }
         }
     };

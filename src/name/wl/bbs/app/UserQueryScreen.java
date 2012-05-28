@@ -28,7 +28,7 @@ public class UserQueryScreen extends BaseScreen implements FieldChangeListener
         if (field == query) {
             String userStr = user.getText();
             if (userStr.length() == 0) {
-                alert("user is empty");
+                alert("用户名不能为空");
             } else {
                 bbs.popScreen(this);
                 bbs.pushScreen(new UserScreen(new User(userStr)));

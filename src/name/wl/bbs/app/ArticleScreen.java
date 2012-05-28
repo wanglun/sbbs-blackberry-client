@@ -51,12 +51,19 @@ public class ArticleScreen extends BaseScreen
 
         content = new BbsRichTextField(this.topic.getContent());
         add(content);
+
+        setStatusbarTitle(this.topic.getBoard());
     }
 
     public void update()
     {
         author.setText(topic.getAuthor());
         content.setText(topic.getContent());
+        // FIXME
+        try {
+            scroll(Manager.TOPMOST);
+        } catch (Exception e) {
+        }
     }
 
     private void loadingAlert()
@@ -118,6 +125,7 @@ public class ArticleScreen extends BaseScreen
                         this.topic = (Topic)this.thread.getTopics().elementAt(idx + 1);
                         update();
                     } else if (idx == size - 1) {
+                        alert("加载更多文章");
                         this.thread.loadMore();
                     }
                 } else if (this.topics != null) {
@@ -130,6 +138,7 @@ public class ArticleScreen extends BaseScreen
                         loadingAlert();
                         new TopicJSON(this.topic, false, 0, 1).load(loadListener);
                     } else if (idx == size - 1) {
+                        alert("加载更多文章");
                         this.topics.loadMore();
                     }
                 }

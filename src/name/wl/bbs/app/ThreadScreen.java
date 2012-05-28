@@ -20,6 +20,8 @@ public class ThreadScreen extends BaseScreen
         this.topic = topic;
 
         new TopicJSON(topic).load(loadListener);
+
+        setStatusbarTitle(this.topic.getBoard());
     }
 
     public Listener loadListener = new Listener() {
@@ -44,7 +46,7 @@ public class ThreadScreen extends BaseScreen
                     });
                 }
             } else {
-                alert("load board failed!");
+                alert("º”‘ÿ÷˜Ã‚ ß∞‹");
             }
         }
     };

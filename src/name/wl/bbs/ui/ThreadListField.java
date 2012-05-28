@@ -12,6 +12,7 @@ import name.wl.bbs.util.*;
 import name.wl.bbs.hjlp.*;
 import name.wl.bbs.app.PostScreen;
 import name.wl.bbs.app.ArticleScreen;
+import name.wl.bbs.app.UserScreen;
 
 public class ThreadListField extends BbsObjectListField
 {
@@ -59,6 +60,9 @@ public class ThreadListField extends BbsObjectListField
     protected boolean keyChar(char key, int status, int time)
     {
         int idx = this.getSelectedIndex();
+        if (idx >= topics.size())
+            return true;
+
         Topic t = (Topic)topics.elementAt(idx);
         switch (key) {
             case Keypad.KEY_ENTER:
@@ -67,6 +71,9 @@ public class ThreadListField extends BbsObjectListField
                 return true;
             case 'r':
                 bbs.pushScreen(new PostScreen(null, t));
+                return true;
+            case 'a':
+                bbs.pushScreen(new UserScreen(new User(t.getAuthor())));
                 return true;
         }
 

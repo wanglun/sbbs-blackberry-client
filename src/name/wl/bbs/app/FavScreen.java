@@ -43,7 +43,7 @@ public class FavScreen extends BaseScreen
                     }
                 });
             } else {
-                alert("load fav failed!");
+                alert("加载收藏夹失败");
             }
         }
     };
@@ -57,10 +57,11 @@ public class FavScreen extends BaseScreen
                 bbs.invokeLater(new Runnable() {
                     public void run() {
                         list.setBoards(boards);
+                        alert("刷新成功");
                     }
                 });
             } else {
-                alert("refresh fav failed!");
+                alert("刷新收藏夹失败");
             }
         }
     };
@@ -71,6 +72,7 @@ public class FavScreen extends BaseScreen
             case 'r':
                 if (this.list != null) {
                     fav.refresh(refreshListener);
+                    alert("正在刷新");
                 }
                 return true;
         }

@@ -65,9 +65,11 @@ public class MailSendScreen extends BaseScreen implements FieldChangeListener
                 if (mail != null) {
                     json = new MailSendJSON(new User(mail.getAuthor()), titleStr, contentStr, mail.getId(), noquoteBool);
                     json.load(this.sendListener);
+                    alert("正在发送");
                 } else if (user != null) {
                     json = new MailSendJSON(user, titleStr, contentStr, 0, noquoteBool);
                     json.load(this.sendListener);
+                    alert("正在发送");
                 } else {
                     alert("参数错误");
                 }
@@ -80,9 +82,9 @@ public class MailSendScreen extends BaseScreen implements FieldChangeListener
         {
             final MailSendJSON obj = (MailSendJSON) r;
             if (obj.getSuccess()) {
-                if (obj.getResult() == 0)
-                    alert("已发送");
-                else
+                if (obj.getResult() == 0) {
+                    alert("已发送", true);
+                } else
                     alert("发送失败: " + obj.getResult());
             } else {
                 alert("网络错误");

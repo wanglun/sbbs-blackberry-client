@@ -37,10 +37,20 @@ public class BaseScreen extends MainScreen
 
     public void alert(final String info)
     {
-        alert(info, ALERT_INFO);
+        alert(info, ALERT_INFO, false);
+    }
+
+    public void alert(final String info, boolean close)
+    {
+        alert(info, ALERT_INFO, close);
     }
 
     public void alert(final String info, int level)
+    {
+        alert(info, level, false);
+    }
+
+    public void alert(final String info, int level, boolean close)
     {
         switch (level) {
             case ALERT_INFO:
@@ -71,6 +81,14 @@ public class BaseScreen extends MainScreen
                     }
                 });
                 break;
+        }
+
+        if (close) {
+            bbs.invokeLater(new Runnable() {
+                public void run() {
+                    BaseScreen.this.close();
+                }
+            }, 1000, false);
         }
     }
 

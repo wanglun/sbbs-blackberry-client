@@ -43,7 +43,7 @@ public class SectionsScreen extends BaseScreen
                     }
                 });
             } else {
-                alert("load sections failed!");
+                alert("加载分类讨论区失败");
             }
         }
     };
@@ -60,7 +60,7 @@ public class SectionsScreen extends BaseScreen
                     }
                 });
             } else {
-                alert("load sections failed!");
+                alert("刷新分类讨论区失败");
             }
         }
     };

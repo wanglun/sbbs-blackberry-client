@@ -1,29 +1,45 @@
 package name.wl.bbs.ui;
 
-import net.rim.device.api.ui.component.*;
-import net.rim.device.api.ui.container.*;
+import net.rim.device.api.ui.Field;
+import net.rim.device.api.ui.Graphics;
+import net.rim.device.api.ui.DrawStyle;
+import net.rim.device.api.ui.Color;
+import net.rim.device.api.ui.Font;
+import net.rim.device.api.system.Display;
 
-public class statusbarManager extends HorizontalFieldManager
+public class statusbarManager extends Field
 {
-    private BbsLabelField title = null;
-    private BbsLabelField info = null;
+    private String title = "";
+    private String info = "";
 
     public statusbarManager()
     {
-        title = new BbsLabelField("");
-        add(title);
-
-        info = new BbsLabelField("");
-        add(info);
     }
 
     public void setTitle(String str)
     {
-        title.setText(str);
+        title = str;
+        invalidate();
     }
 
     public void setInfo(String str)
     {
-        info.setText(str);
+        info = str;
+        invalidate();
+    }
+
+    protected void paint(Graphics graphics)
+    {
+        int width = Display.getWidth();
+
+        graphics.drawText(title, 2, 2);
+
+        graphics.setColor(Color.GREEN);
+        graphics.drawText(info, (int)(width*0.7), 2, DrawStyle.RIGHT, (int)(width*0.3));
+    }
+    
+    protected void layout(int width, int height)
+    {
+        setExtent(Display.getWidth(), getFont().getHeight() + 4);
     }
 }

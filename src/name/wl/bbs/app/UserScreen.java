@@ -13,11 +13,30 @@ public class UserScreen extends BaseScreen
     private User user;
     private UserJSON userJSON;
 
+    private BbsLabelField id;
+    private BbsLabelField username;
+
     public UserScreen(User user)
     {
         this.user = user;
         this.userJSON = new UserJSON(user);
         this.userJSON.load(loadListener);
+
+        id = new BbsLabelField(user.getId());
+        add(id);
+
+        username = new BbsLabelField(user.getName());
+        add(username);
+
+        alert("加载中");
+
+        setStatusbarTitle("查看用户");
+    }
+
+    public void update()
+    {
+        this.username.setText(this.user.getName());
+        alert("加载完成");
     }
 
     public Listener loadListener = new Listener() {
@@ -25,10 +44,14 @@ public class UserScreen extends BaseScreen
         {
             UserJSON obj = (UserJSON)o;
             if (obj.getSuccess()) {
-                user = obj.getUser();
-                alert(user.getId());
+                UserScreen.this.user = obj.getUser();
+                bbs.invokeLater(new Runnable() {
+                    public void run() {
+                        UserScreen.this.update();
+                    }
+                });
             } else {
-                alert("load user info failed!");
+                alert("加载失败");
             }
         }
     };
@@ -36,9 +59,12 @@ public class UserScreen extends BaseScreen
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
+            case 'q':
+                bbs.popScreen(this);
+                return true;
             case 'm':
                 bbs.pushScreen(new MailSendScreen(user));
-                break;
+                return true;
         }
 
         return super.keyChar(key, status, time);

@@ -43,7 +43,7 @@ public class HotBoardsScreen extends BaseScreen
                     }
                 });
             } else {
-                alert("load hotboardsJSON failed!");
+                alert("加载热门版面失败");
             }
         }
     };
@@ -60,7 +60,7 @@ public class HotBoardsScreen extends BaseScreen
                     }
                 });
             } else {
-                alert("load hotboardsJSON failed!");
+                alert("刷新热门版面失败");
             }
         }
     };

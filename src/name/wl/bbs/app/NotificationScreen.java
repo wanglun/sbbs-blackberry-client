@@ -47,10 +47,10 @@ public class NotificationScreen extends BaseScreen
                     bbs.pushScreen(new MailScreen((Mail)o));
                     break;
                 case ATS:
-                    bbs.pushScreen(new ThreadScreen((Topic)o));
+                    bbs.pushScreen(new ArticleScreen((Topic)o));
                     break;
                 case REPLIES:
-                    bbs.pushScreen(new ThreadScreen((Topic)o));
+                    bbs.pushScreen(new ArticleScreen((Topic)o));
                     break;
             }
         }

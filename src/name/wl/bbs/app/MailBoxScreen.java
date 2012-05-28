@@ -21,6 +21,18 @@ public class MailBoxScreen extends BaseScreen
         this.type = type;
 
         new MailboxJSON(type).load(loadListener);
+
+        switch (this.type) {
+            case MailboxJSON.INBOX:
+                setStatusbarTitle("收件箱");
+                break;
+            case MailboxJSON.SENT:
+                setStatusbarTitle("发件箱");
+                break;
+            case MailboxJSON.DELETED:
+                setStatusbarTitle("垃圾箱");
+                break;
+        }
     }
 
     public Listener loadListener = new Listener() {
@@ -45,7 +57,7 @@ public class MailBoxScreen extends BaseScreen
                     });
                 }
             } else {
-                alert("load mails failed!");
+                alert("加载信件失败");
             }
         }
     };

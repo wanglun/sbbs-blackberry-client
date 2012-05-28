@@ -67,7 +67,7 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
             boolean anonyBool = anony.getChecked();
             if (titleStr.length() == 0 ||
                     contentStr.length() == 0) {
-                alert("title OR content is empty", ALERT_CONFIRM);
+                alert("标题/内容不能为空", ALERT_CONFIRM);
             } else {
                 TopicPostJSON json;
                 if (board != null) {
@@ -91,9 +91,9 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
         {
             TopicPostJSON obj = (TopicPostJSON) r;
             if (obj.getSuccess()) {
-                alert("post success");
+                alert("发表成功", true);
             } else {
-                alert("post failed");
+                alert("发表失败");
             }
         }
     };

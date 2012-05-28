@@ -11,6 +11,7 @@ import net.rim.device.api.ui.component.ObjectListField;
 
 import name.wl.bbs.util.*;
 import name.wl.bbs.hjlp.*;
+import name.wl.bbs.app.UserScreen;
 
 public class TopicListField extends BbsObjectListField
 {
@@ -66,11 +67,17 @@ public class TopicListField extends BbsObjectListField
     protected boolean keyChar(char key, int status, int time)
     {
         int idx = this.getSelectedIndex();
+        if (idx >= topics.size())
+            return true;
+
+        Topic t = (Topic)topics.elementAt(idx);
         switch (key) {
             case Keypad.KEY_ENTER:
             case 'o':
-                Topic t = (Topic)topics.elementAt(idx);
                 topicListener.callback(t);
+                return true;
+            case 'a':
+                bbs.pushScreen(new UserScreen(new User(t.getAuthor())));
                 return true;
         }
 

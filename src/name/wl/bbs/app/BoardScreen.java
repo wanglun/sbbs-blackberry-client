@@ -56,7 +56,7 @@ public class BoardScreen extends BaseScreen
                     });
                 }
             } else {
-                alert("load board failed!");
+                alert("º”‘ÿ∞Ê√Ê ß∞‹");
             }
         }
     };

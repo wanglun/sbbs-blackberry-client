@@ -33,7 +33,7 @@ public class FriendsAllScreen extends BaseScreen
                     }
                 });
             } else {
-                alert("load friends failed!");
+                alert("º”‘ÿ∫√”— ß∞‹");
             }
         }
     };
@@ -50,7 +50,7 @@ public class FriendsAllScreen extends BaseScreen
                     }
                 });
             } else {
-                alert("load friends failed!");
+                alert("À¢–¬∫√”— ß∞‹");
             }
         }
     };
