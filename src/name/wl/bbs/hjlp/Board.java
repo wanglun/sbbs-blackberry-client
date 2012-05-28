@@ -27,6 +27,9 @@ public class Board
     /* 是否为叶子节点 */
     private boolean leaf;
 
+    /* 是否有未读帖子 */
+    private boolean unread = false;
+
     public Board()
     {
         this.bm = new Vector();
@@ -45,6 +48,9 @@ public class Board
 
         board.setName(data.getString("name"));
         board.setDescription(data.getString("description"));
+
+        if (data.has("unread"))
+            board.setUnread(data.getBoolean("unread"));
 
         if (data.has("leaf"))
             board.setLeaf(data.getBoolean("leaf"));
@@ -134,6 +140,11 @@ public class Board
         return leaf;
     }
 
+    public boolean isUnread()
+    {
+        return unread;
+    }
+
     protected void setName(String name)
     {
         this.name = name;
@@ -171,5 +182,10 @@ public class Board
     protected void setLeaf(boolean leaf)
     {
         this.leaf = leaf;
+    }
+
+    protected void setUnread(boolean unread)
+    {
+        this.unread = unread;
     }
 }

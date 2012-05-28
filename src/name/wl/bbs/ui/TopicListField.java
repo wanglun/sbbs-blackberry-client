@@ -3,6 +3,7 @@ package name.wl.bbs.ui;
 import java.util.*;
 import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.DrawStyle;
+import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Keypad;
 import net.rim.device.api.ui.component.ListField;
@@ -79,6 +80,22 @@ public class TopicListField extends BbsObjectListField
     public void drawListRow(ListField listField, Graphics graphics, int index, int y, int width)
     {
         Topic t = (Topic)topics.elementAt(index);
+
+        if (t.isUnread()) {
+            graphics.setColor(Color.GREEN);
+        }
+
+        if (t.isMark()) {
+            graphics.setColor(Color.ORANGE);
+        }
+
+        if (t.isTop()) {
+            graphics.setColor(Color.RED);
+        }
+
+        if (t.isNorep()) {
+            graphics.setColor(Color.GRAY);
+        }
 
         graphics.drawText(t.getAuthor() + " " + t.getTimeStr(), 16, y, DrawStyle.ELLIPSIS, width - 16);
         graphics.drawText(t.getTitle(), 16, y + lineHeight, DrawStyle.ELLIPSIS, width - 16);

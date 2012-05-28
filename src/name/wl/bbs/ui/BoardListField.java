@@ -2,6 +2,7 @@ package name.wl.bbs.ui;
 
 import java.util.*;
 import net.rim.device.api.ui.DrawStyle;
+import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Keypad;
 import net.rim.device.api.ui.component.ListField;
@@ -83,6 +84,10 @@ public class BoardListField extends BbsObjectListField
     public void drawListRow(ListField listField, Graphics graphics, int index, int y, int width)
     {
         Board b = (Board)current.elementAt(index);
+
+        if (b.isUnread()) {
+            graphics.setColor(Color.GREEN);
+        }
 
         if (!b.isLeaf()) {
             graphics.drawText("+", 0, y, DrawStyle.ELLIPSIS, 16);
