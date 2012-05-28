@@ -66,9 +66,11 @@ public class TopicListField extends BbsObjectListField
 
     protected boolean keyChar(char key, int status, int time)
     {
+        if (topics.isEmpty()) {
+            return super.keyChar(key, status, time);
+        }
+
         int idx = this.getSelectedIndex();
-        if (idx >= topics.size())
-            return true;
 
         Topic t = (Topic)topics.elementAt(idx);
         switch (key) {

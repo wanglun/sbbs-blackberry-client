@@ -38,7 +38,7 @@ public class NotificationsTask extends TimerTask
                 replies = obj.getReplies();
 
                 if (getCount() > 0) {
-                    Alert.startVibrate(300);
+                    Alert.startVibrate(400);
 
                     LED.setConfiguration(LED.LED_TYPE_STATUS, 500, 500, LED.BRIGHTNESS_50);
                     LED.setState(LED.STATE_BLINKING);

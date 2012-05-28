@@ -12,8 +12,6 @@ public class SplashScreen extends BaseScreen
 {
     public SplashScreen()
     {
-        setStatusbarTitle("»¢¾áÁúó´BBS¿Í»§¶Ë");
-
         bbs.invokeLater(new load());
     }
 

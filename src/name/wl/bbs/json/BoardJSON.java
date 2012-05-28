@@ -115,4 +115,23 @@ public class BoardJSON extends ApiJSON
     {
         return this.total;
     }
+
+    static public String getModeString(int mode)
+    {
+        switch (mode) {
+            case NORMAL:
+                return "普通模式";
+            case THREAD:
+                return "主题模式";
+            case FORUM:
+                return "论坛模式";
+            case TOP:
+                return "置顶区";
+            case DIGEST:
+                return "文摘区";
+            case MARK:
+                return "保留区";
+        }
+        return "";
+    }
 }

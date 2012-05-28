@@ -24,7 +24,7 @@ public class BoardScreen extends BaseScreen
 
         new BoardJSON(board, mode).load(loadListener);
 
-        setStatusbarTitle(board.getName());
+        setStatusbarTitle(board.getName() + " - " + BoardJSON.getModeString(mode));
     }
 
     public Listener loadListener = new Listener() {
@@ -45,6 +45,7 @@ public class BoardScreen extends BaseScreen
                     bbs.invokeLater(new Runnable() {
                         public void run() {
                             list.setTopics(topics);
+                            setStatusbarTitle(board.getName() + " - " + BoardJSON.getModeString(mode));
                         }
                     });
                 } else {

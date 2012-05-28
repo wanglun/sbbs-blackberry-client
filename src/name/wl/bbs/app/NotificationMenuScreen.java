@@ -18,7 +18,7 @@ public class NotificationMenuScreen extends BaseScreen
     public NotificationMenuScreen()
     {
         items = new Vector();
-        mails = new MenuListItem("新邮件 - " + NotificationsTask.getMailsCount(), mailsListener);
+        mails = new MenuListItem("新信件 - " + NotificationsTask.getMailsCount(), mailsListener);
         ats = new MenuListItem("爱特我的 - " + NotificationsTask.getAtsCount(), atsListener);
         replies = new MenuListItem("回复我的 - " + NotificationsTask.getRepliesCount(), repliesListener);
 

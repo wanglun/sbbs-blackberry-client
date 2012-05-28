@@ -36,6 +36,8 @@ public class statusbarManager extends Field
 
         graphics.setColor(Color.GREEN);
         graphics.drawText(info, (int)(width*0.7), 2, DrawStyle.RIGHT, (int)(width*0.3));
+
+        //FIXME status icon
     }
     
     protected void layout(int width, int height)

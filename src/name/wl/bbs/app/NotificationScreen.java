@@ -27,12 +27,15 @@ public class NotificationScreen extends BaseScreen
         switch (type) {
             case MAILS:
                 topics = NotificationsTask.getMails();
+                setStatusbarTitle("新信件");
                 break;
             case ATS:
                 topics = NotificationsTask.getAts();
+                setStatusbarTitle("爱特我的");
                 break;
             case REPLIES:
                 topics = NotificationsTask.getReplies();
+                setStatusbarTitle("回复我的");
                 break;
         }
         list = new TopicListField(topics, topicListener);

@@ -48,6 +48,9 @@ public class MailListField extends BbsObjectListField
     protected boolean keyChar(char key, int status, int time)
     {
         int idx = this.getSelectedIndex();
+        if (mails.isEmpty()) {
+            return super.keyChar(key, status, time);
+        }
         switch (key) {
             case Keypad.KEY_ENTER:
             case 'o':
