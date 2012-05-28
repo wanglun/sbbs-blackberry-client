@@ -35,14 +35,14 @@ public class TalkMenuScreen extends BaseScreen
     public Listener onlineListener = new Listener() {
         public void callback(Object o)
         {
-            bbs.pushScreen(new FriendsScreen(false));
+            bbs.pushScreen(new FriendsScreen());
         }
     };
 
     public Listener allListener = new Listener() {
         public void callback(Object o)
         {
-            bbs.pushScreen(new FriendsScreen(true));
+            bbs.pushScreen(new FriendsAllScreen());
         }
     };
 }

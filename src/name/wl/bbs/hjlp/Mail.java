@@ -49,6 +49,7 @@ public class Mail extends Topic
         mail.setId(data.getInt("id"));
         mail.setAuthor(data.getString("sender"));
         mail.setTitle(data.getString("title"));
+        mail.setTime(data.getLong("time"));
         mail.setType(type);
 
         return mail;

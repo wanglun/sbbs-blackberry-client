@@ -9,6 +9,7 @@ import name.wl.bbs.hjlp.*;
 
 public class ArticleScreen extends BaseScreen
 {
+    private BbsLabelField title;
     private BbsLabelField author;
     private BbsRichTextField content;
 
@@ -41,6 +42,9 @@ public class ArticleScreen extends BaseScreen
             loadingAlert();
             new TopicJSON(this.topic, false, 0, 1).load(loadListener);
         }
+
+        title = new BbsLabelField(this.topic.getTitle());
+        add(title);
 
         author = new BbsLabelField(this.topic.getAuthor());
         add(author);

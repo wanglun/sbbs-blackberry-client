@@ -30,8 +30,6 @@ public class NotificationMenuScreen extends BaseScreen
         add(list);
 
         setStatusbarTitle("Í¨ÖªÏä");
-
-        new NotificationsTask(loadListener).run();
     }
 
     public Listener loadListener = new Listener() {
@@ -65,4 +63,15 @@ public class NotificationMenuScreen extends BaseScreen
             bbs.pushScreen(new NotificationScreen(NotificationScreen.REPLIES));
         }
     };
+
+    protected boolean keyChar(char key, int status, int time)
+    {
+        switch (key) {
+            case 'r':
+                new NotificationsTask(loadListener).run();
+                return true;
+        }
+
+        return super.keyChar(key, status, time);
+    }
 }

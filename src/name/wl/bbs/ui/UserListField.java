@@ -55,8 +55,7 @@ public class UserListField extends BbsObjectListField
     {
         User u = (User)users.elementAt(index);
 
-        graphics.drawText("*", 0, y, DrawStyle.ELLIPSIS, 16);
-        graphics.drawText(u.getName(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+        graphics.drawText(u.getId() + " " + u.getName(), 16, y, DrawStyle.ELLIPSIS, width - 16);
 
         super.drawListRow(listField, graphics, index, y, width);
     }

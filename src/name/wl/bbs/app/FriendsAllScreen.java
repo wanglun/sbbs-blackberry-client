@@ -8,28 +8,28 @@ import name.wl.bbs.ui.*;
 import name.wl.bbs.util.*;
 import name.wl.bbs.json.*;
 
-public class FriendsScreen extends BaseScreen
+public class FriendsAllScreen extends BaseScreen
 {
     private Vector friends;
     private FriendListField list;
 
-    public FriendsScreen()
+    public FriendsAllScreen()
     {
-        FriendsJSON friendsJSON = new FriendsJSON();
+        FriendsAllJSON friendsJSON = new FriendsAllJSON();
         friendsJSON.load(loadListener);
-        setStatusbarTitle("在线好友");
+        setStatusbarTitle("全部好友");
     }
 
     public Listener loadListener = new Listener() {
         public void callback(Object o)
         {
-            FriendsJSON obj = (FriendsJSON)o;
+            FriendsAllJSON obj = (FriendsAllJSON)o;
             if (obj.getSuccess()) {
                 friends = obj.getFriends();
                 list = new FriendListField(friends, friendListener);
                 bbs.invokeLater(new Runnable() {
                     public void run() {
-                        FriendsScreen.this.add(list);
+                        FriendsAllScreen.this.add(list);
                     }
                 });
             } else {
@@ -41,7 +41,7 @@ public class FriendsScreen extends BaseScreen
     public Listener refreshListener = new Listener() {
         public void callback(Object o)
         {
-            FriendsJSON obj = (FriendsJSON)o;
+            FriendsAllJSON obj = (FriendsAllJSON)o;
             if (obj.getSuccess()) {
                 friends = obj.getFriends();
                 bbs.invokeLater(new Runnable() {
@@ -69,7 +69,7 @@ public class FriendsScreen extends BaseScreen
                 break;
             case 'r':
                 if (list != null) {
-                    FriendsJSON friendsJSON = new FriendsJSON();
+                    FriendsAllJSON friendsJSON = new FriendsAllJSON();
                     friendsJSON.refresh(refreshListener);
                 }
                 return true;
