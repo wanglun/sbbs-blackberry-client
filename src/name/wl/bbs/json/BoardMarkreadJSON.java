@@ -33,10 +33,11 @@ public class BoardMarkreadJSON extends ApiJSON
     public void parseContent(final String json)
     {
         if (this.success) {
-            try {
-                this.result = this.data.getInt("result");
-            } catch (Exception e) {
-                this.success = false;
+            if (this.data.has("result")) {
+                try {
+                    this.result = this.data.getInt("result");
+                } catch (JSONException e) {
+                }
             }
         }
     }

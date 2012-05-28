@@ -59,7 +59,7 @@ public class MailSendScreen extends BaseScreen implements FieldChangeListener
             boolean noquoteBool = noquote.getChecked();
             if (title.getText().length() == 0 ||
                     content.getText().length() == 0) {
-                alert("title OR content is empty");
+                alert("标题/内容不能为空");
             } else {
                 MailSendJSON json;
                 if (mail != null) {
@@ -69,7 +69,7 @@ public class MailSendScreen extends BaseScreen implements FieldChangeListener
                     json = new MailSendJSON(user, titleStr, contentStr, 0, noquoteBool);
                     json.load(this.sendListener);
                 } else {
-                    alert("user and mail are null");
+                    alert("参数错误");
                 }
             }
         }
@@ -80,9 +80,12 @@ public class MailSendScreen extends BaseScreen implements FieldChangeListener
         {
             final MailSendJSON obj = (MailSendJSON) r;
             if (obj.getSuccess()) {
-                alert("send success: result code " + obj.getResult());
+                if (obj.getResult() == 0)
+                    alert("已发送");
+                else
+                    alert("发送失败: " + obj.getResult());
             } else {
-                alert("send failed");
+                alert("网络错误");
             }
         }
     };

@@ -11,6 +11,9 @@ public class ClearNotificationsJSON extends ApiJSON
 {
     private static String API = "/clear_notifications.json";
 
+    /* --·µ»Ø-- */
+    private int result;
+
     public ClearNotificationsJSON()
     {
     }
@@ -22,5 +25,17 @@ public class ClearNotificationsJSON extends ApiJSON
 
     public void parseContent(final String json)
     {
+        if (this.success) {
+            if (this.data.has("result")) {
+                try {
+                    this.result = this.data.getInt("result");
+                } catch (JSONException e) {
+                }
+            }
+        }
+    }
+
+    public int getResult() {
+        return this.result;
     }
 }

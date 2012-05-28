@@ -43,6 +43,23 @@ public class NotificationMenuScreen extends BaseScreen
         }
     };
 
+    public Listener clearListener = new Listener() {
+        public void callback(Object o)
+        {
+            ClearNotificationsJSON obj = (ClearNotificationsJSON)o;
+            if (obj.getSuccess()) {
+                if (obj.getResult() == 0) {
+                    alert("通知已清除");
+                    new NotificationsTask(loadListener).run();
+                } else {
+                    alert("发生错误: " + obj.getResult());
+                }
+            } else {
+                alert("清除通知失败");
+            }
+        }
+    };
+
     public Listener mailsListener = new Listener() {
         public void callback(Object o)
         {
@@ -69,6 +86,9 @@ public class NotificationMenuScreen extends BaseScreen
         switch (key) {
             case 'r':
                 new NotificationsTask(loadListener).run();
+                return true;
+            case 'c':
+                new ClearNotificationsJSON().load(clearListener);
                 return true;
         }
 

@@ -97,33 +97,17 @@ public class ArticleScreen extends BaseScreen
             case 'r':
                 bbs.pushScreen(new PostScreen(topic));
                 return true;
+            case 'j':
+                scroll(Manager.DOWNWARD);
+                return true;
+            case 'k':
+                scroll(Manager.UPWARD);
+                return true;
             case 't':
-                if (this.thread != null) {
-                    this.thread.setSelectedIndex(0);
-                    this.topic = (Topic)this.thread.getTopics().elementAt(0);
-                    update();
-                } else if (this.topics != null) {
-                    this.topics.setSelectedIndex(0);
-                    this.topic = (Topic)this.topics.getTopics().elementAt(0);
-                    update();
-                    loadingAlert();
-                    new TopicJSON(this.topic, false, 0, 1).load(loadListener);
-                }
+                scroll(Manager.TOPMOST);
                 return true;
             case 'b':
-                if (this.thread != null) {
-                    int size = this.thread.getSize();
-                    this.thread.setSelectedIndex(size - 1);
-                    this.topic = (Topic)this.thread.getTopics().elementAt(size - 1);
-                    update();
-                } else if (this.topics != null) {
-                    int size = this.topics.getSize();
-                    this.topics.setSelectedIndex(size - 1);
-                    this.topic = (Topic)this.topics.getTopics().elementAt(size - 1);
-                    update();
-                    loadingAlert();
-                    new TopicJSON(this.topic, false, 0, 1).load(loadListener);
-                }
+                scroll(Manager.BOTTOMMOST);
                 return true;
             case 'n':
                 if (this.thread != null) {
