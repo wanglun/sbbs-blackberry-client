@@ -5,9 +5,12 @@ import name.wl.bbs.json.*;
 
 public class SplashScreen extends BaseScreen
 {
+    private BbsProgressField progress = null;
+
     public SplashScreen()
     {
-        add(new BbsProgressField("test", 0, 100, 30));
+        progress = new BbsProgressField("启动中..", 0, 100, 20);
+        add(progress);
 
         bbs.invokeLater(new load());
     }
@@ -25,6 +28,9 @@ public class SplashScreen extends BaseScreen
                 bbs.setToken(login.getToken());
                 bbs.setLoggedIn(true);
             }
+
+            progress.setValue(50);
+            progress.setLabel("加载分区数据");
 
             // get the cached sections
             SectionsJSON sections = new SectionsJSON();

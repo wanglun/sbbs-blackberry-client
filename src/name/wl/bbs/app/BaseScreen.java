@@ -9,6 +9,11 @@ import name.wl.bbs.ui.*;
 
 public class BaseScreen extends MainScreen
 {
+    protected static final int ALERT_INFO = 0; 
+    protected static final int ALERT_WARNING = 1;
+    protected static final int ALERT_ERROR = 2;
+    protected static final int ALERT_CONFIRM = 3;
+
     protected Bbs bbs;
     protected static statusbarManager statusbar = null;
 
@@ -17,7 +22,7 @@ public class BaseScreen extends MainScreen
         bbs = Bbs.getInstance();
 
         statusbar = new statusbarManager();
-        add(statusbar);
+        setTitle(statusbar);
     }
 
     public void setStatusbarTitle(String title)
@@ -32,11 +37,41 @@ public class BaseScreen extends MainScreen
 
     public void alert(final String info)
     {
-        bbs.invokeLater(new Runnable() {
-            public void run() {
-                Dialog.alert(info);
-            }
-        });
+        alert(info, ALERT_INFO);
+    }
+
+    public void alert(final String info, int level)
+    {
+        switch (level) {
+            case ALERT_INFO:
+                bbs.invokeLater(new Runnable() {
+                    public void run() {
+                        setStatusbarInfo(info);
+                    }
+                });
+                break;
+            case ALERT_WARNING:
+                bbs.invokeLater(new Runnable() {
+                    public void run() {
+                        setStatusbarInfo(info);
+                    }
+                });
+                break;
+            case ALERT_ERROR:
+                bbs.invokeLater(new Runnable() {
+                    public void run() {
+                        setStatusbarInfo(info);
+                    }
+                });
+                break;
+            case ALERT_CONFIRM:
+                bbs.invokeLater(new Runnable() {
+                    public void run() {
+                        Dialog.alert(info);
+                    }
+                });
+                break;
+        }
     }
 
     protected boolean keyChar(char key, int status, int time)

@@ -67,7 +67,7 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
             boolean anonyBool = anony.getChecked();
             if (titleStr.length() == 0 ||
                     contentStr.length() == 0) {
-                alert("title OR content is empty");
+                alert("title OR content is empty", ALERT_CONFIRM);
             } else {
                 TopicPostJSON json;
                 if (board != null) {

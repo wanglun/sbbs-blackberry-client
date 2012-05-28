@@ -38,6 +38,7 @@ public class ArticleScreen extends BaseScreen
         } else if (topics != null) {
             this.topics = topics;
             this.topic = (Topic)this.topics.getTopics().elementAt(this.topics.getSelectedIndex());
+            loadingAlert();
             new TopicJSON(this.topic, false, 0, 1).load(loadListener);
         }
 
@@ -54,11 +55,17 @@ public class ArticleScreen extends BaseScreen
         content.setText(topic.getContent());
     }
 
+    private void loadingAlert()
+    {
+        alert("加载文章内容");
+    }
+
     public Listener loadListener = new Listener() {
         public void callback(Object o)
         {
             TopicJSON obj = (TopicJSON)o;
             if (obj.getSuccess()) {
+                alert("加载完成");
                 final Vector topics = obj.getTopics();
                 if (topics.size() == 1) {
                     Topic t = (Topic)topics.elementAt(0);
@@ -72,7 +79,7 @@ public class ArticleScreen extends BaseScreen
                     }
                 }
             } else {
-                alert("load topic failed!");
+                alert("加载文章失败");
             }
         }
     };
@@ -95,6 +102,7 @@ public class ArticleScreen extends BaseScreen
                     this.topics.setSelectedIndex(0);
                     this.topic = (Topic)this.topics.getTopics().elementAt(0);
                     update();
+                    loadingAlert();
                     new TopicJSON(this.topic, false, 0, 1).load(loadListener);
                 }
                 return true;
@@ -109,6 +117,7 @@ public class ArticleScreen extends BaseScreen
                     this.topics.setSelectedIndex(size - 1);
                     this.topic = (Topic)this.topics.getTopics().elementAt(size - 1);
                     update();
+                    loadingAlert();
                     new TopicJSON(this.topic, false, 0, 1).load(loadListener);
                 }
                 return true;
@@ -130,6 +139,7 @@ public class ArticleScreen extends BaseScreen
                         this.topics.setSelectedIndex(idx + 1);
                         this.topic = (Topic)this.topics.getTopics().elementAt(idx + 1);
                         update();
+                        loadingAlert();
                         new TopicJSON(this.topic, false, 0, 1).load(loadListener);
                     } else if (idx == size - 1) {
                         this.topics.loadMore();
@@ -150,6 +160,7 @@ public class ArticleScreen extends BaseScreen
                         this.topics.setSelectedIndex(idx - 1);
                         this.topic = (Topic)this.topics.getTopics().elementAt(idx - 1);
                         update();
+                        loadingAlert();
                         new TopicJSON(this.topic, false, 0, 1).load(loadListener);
                     }
                 }

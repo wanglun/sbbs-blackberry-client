@@ -8,4 +8,8 @@ public class BbsLabelField extends LabelField
     {
         super(label);
     }
+    public BbsLabelField(String label, long style)
+    {
+        super(label, style);
+    }
 }
