@@ -6,6 +6,7 @@ import net.rim.device.api.ui.component.Dialog;
 
 import name.wl.bbs.util.*;
 import name.wl.bbs.ui.*;
+import name.wl.bbs.json.*;
 
 public class BaseScreen extends MainScreen
 {
@@ -16,6 +17,8 @@ public class BaseScreen extends MainScreen
 
     protected Bbs bbs;
     protected statusbarManager statusbar = null;
+
+    protected boolean editable = false;
 
     public BaseScreen()
     {
@@ -99,6 +102,27 @@ public class BaseScreen extends MainScreen
 
     protected boolean keyChar(char key, int status, int time)
     {
+        if (!editable) {
+            switch (key) {
+                case 'v':
+                    bbs.pushScreen(new MailBoxScreen(MailboxJSON.INBOX));
+                    return true;
+                case 'x':
+                    bbs.pushScreen(new NotificationMenuScreen());
+                    return true;
+                case 'w':
+                    bbs.pushScreen(new FriendsScreen());
+                    return true;
+                case 'H':
+                    bbs.pushScreen(new HotToptenScreen());
+                    return true;
+                    /* alt + 'h' */
+                case ':':
+                    bbs.pushScreen(new HotSectionMenuScreen());
+                    return true;
+            }
+        }
+
         return super.keyChar(key, status, time);
     }
 }

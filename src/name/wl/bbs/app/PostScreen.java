@@ -32,6 +32,8 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
 
     public PostScreen(Board board, Topic topic)
     {
+        editable = true;
+
         this.board = board;
         this.topic = topic;
 

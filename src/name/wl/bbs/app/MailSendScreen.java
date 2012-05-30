@@ -30,6 +30,8 @@ public class MailSendScreen extends BaseScreen implements FieldChangeListener
 
     public MailSendScreen(Mail mail, User user)
     {
+        editable = true;
+
         this.mail = mail;
         this.user = user;
 

@@ -14,6 +14,8 @@ public class UserQueryScreen extends BaseScreen implements FieldChangeListener
 
     public UserQueryScreen()
     {
+        editable = true;
+
         user = new BbsEditField("user");
         add(user);
 

@@ -13,6 +13,8 @@ public class LoginScreen extends BaseScreen implements FieldChangeListener
 
     public LoginScreen()
     {
+        editable = true;
+
         user = new BbsEditField("user");
         add(user);
 
