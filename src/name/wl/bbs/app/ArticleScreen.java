@@ -31,9 +31,11 @@ public class ArticleScreen extends BaseScreen
     }
     public ArticleScreen(ThreadListField thread, Topic topic, TopicListField topics)
     {
-        if (topic != null)
+        if (topic != null) {
             this.topic = topic;
-        else if (thread != null) {
+            loadingAlert();
+            new TopicJSON(this.topic, false, 0, 1).load(loadListener);
+        } else if (thread != null) {
             this.thread = thread;
             this.topic = (Topic)this.thread.getTopics().elementAt(this.thread.getSelectedIndex());
         } else if (topics != null) {
@@ -58,6 +60,7 @@ public class ArticleScreen extends BaseScreen
     public void update()
     {
         author.setText(topic.getAuthor());
+        title.setText(topic.getTitle());
         content.setText(topic.getContent());
         // FIXME
         try {
