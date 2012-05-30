@@ -59,6 +59,10 @@ public class MailSendJSON extends ApiJSON
             if (this.data.has("result")) {
                 try {
                     this.result = this.data.getInt("result");
+                    if (this.result != 0) {
+                        this.success = false;
+                        this.error = "ret" + this.result;
+                    }
                 } catch (JSONException e) {
                 }
             }

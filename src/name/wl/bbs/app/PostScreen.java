@@ -67,7 +67,7 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
             boolean anonyBool = anony.getChecked();
             if (titleStr.length() == 0 ||
                     contentStr.length() == 0) {
-                alert("标题/内容不能为空", ALERT_CONFIRM);
+                alert("标题/内容不能为空", ALERT_ERROR);
             } else {
                 TopicPostJSON json;
                 if (board != null) {
@@ -82,6 +82,7 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
                             notoptenBool, noquoteBool, anonyBool);
                 }
                 json.load(this.postListener);
+                alert("发表中", ALERT_WARNING);
             }
         }
     }
@@ -91,9 +92,9 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
         {
             TopicPostJSON obj = (TopicPostJSON) r;
             if (obj.getSuccess()) {
-                alert("发表成功", true);
+                alert("已发表", true);
             } else {
-                alert("发表失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };

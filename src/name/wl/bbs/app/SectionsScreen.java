@@ -17,6 +17,7 @@ public class SectionsScreen extends BaseScreen
     {
         sections = new SectionsJSON();
 
+        alert("加载中", ALERT_WARNING);
         sections.load(loadListener);
 
         setStatusbarTitle("分类讨论区");
@@ -42,8 +43,9 @@ public class SectionsScreen extends BaseScreen
                         SectionsScreen.this.add(list);
                     }
                 });
+                alert("加载完成");
             } else {
-                alert("加载分类讨论区失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -59,8 +61,9 @@ public class SectionsScreen extends BaseScreen
                         list.setBoards(boards);
                     }
                 });
+                alert("刷新完成");
             } else {
-                alert("刷新分类讨论区失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -70,6 +73,7 @@ public class SectionsScreen extends BaseScreen
         switch (key) {
             case 'r':
                 if (this.list != null) {
+                    alert("刷新中", ALERT_WARNING);
                     sections.refresh(refreshListener);
                 }
                 return true;

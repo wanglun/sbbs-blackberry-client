@@ -17,6 +17,7 @@ public class FavScreen extends BaseScreen
     {
         fav = new FavJSON();
 
+        alert("加载中", ALERT_WARNING);
         fav.load(loadListener);
 
         setStatusbarTitle("收藏夹");
@@ -42,8 +43,9 @@ public class FavScreen extends BaseScreen
                         FavScreen.this.add(list);
                     }
                 });
+                alert("加载完成");
             } else {
-                alert("加载收藏夹失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -61,7 +63,7 @@ public class FavScreen extends BaseScreen
                     }
                 });
             } else {
-                alert("刷新收藏夹失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -72,7 +74,7 @@ public class FavScreen extends BaseScreen
             case 'r':
                 if (this.list != null) {
                     fav.refresh(refreshListener);
-                    alert("正在刷新");
+                    alert("正在刷新", ALERT_WARNING);
                 }
                 return true;
         }

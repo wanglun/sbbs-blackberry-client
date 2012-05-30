@@ -20,6 +20,7 @@ public class MailBoxScreen extends BaseScreen
     {
         this.type = type;
 
+        alert("加载中", ALERT_WARNING);
         new MailboxJSON(type).load(loadListener);
 
         switch (this.type) {
@@ -48,16 +49,22 @@ public class MailBoxScreen extends BaseScreen
                             MailBoxScreen.this.add(list);
                         }
                     });
+                    alert("加载完成");
                 } else {
                     bbs.invokeLater(new Runnable() {
                         public void run() {
-                            list.appendMails(mails);
+                            if (mails.size() == 0) {
+                                alert("到底了:)");
+                            } else {
+                                list.appendMails(mails);
+                                alert("加载完成");
+                            }
                             moreListener.setLoaded();
                         }
                     });
                 }
             } else {
-                alert("加载信件失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -66,6 +73,7 @@ public class MailBoxScreen extends BaseScreen
         public void callback(Object obj)
         {
             if (!this.isLoading()) {
+                alert("加载更多", ALERT_WARNING);
                 new MailboxJSON(type, list.getSize(), LIMIT).load(loadListener);
                 this.setLoading();
             }

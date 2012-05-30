@@ -17,6 +17,7 @@ public class HotBoardsScreen extends BaseScreen
     {
         hotboardsJSON = new HotBoardsJSON();
 
+        alert("加载中", ALERT_WARNING);
         hotboardsJSON.load(loadListener);
 
         setStatusbarTitle("热门版面");
@@ -42,8 +43,9 @@ public class HotBoardsScreen extends BaseScreen
                         HotBoardsScreen.this.add(list);
                     }
                 });
+                alert("加载完成");
             } else {
-                alert("加载热门版面失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -59,8 +61,9 @@ public class HotBoardsScreen extends BaseScreen
                         list.setBoards(boards);
                     }
                 });
+                alert("刷新完成");
             } else {
-                alert("刷新热门版面失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -70,6 +73,7 @@ public class HotBoardsScreen extends BaseScreen
         switch (key) {
             case 'r':
                 if (list != null) {
+                    alert("刷新中", ALERT_WARNING);
                     hotboardsJSON.refresh(refreshListener);
                 }
                 return true;

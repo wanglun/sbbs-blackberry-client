@@ -41,7 +41,7 @@ public class MailScreen extends BaseScreen
                 break;
         }
 
-        alert("加载信件内容");
+        alert("加载内容", ALERT_WARNING);
     }
 
     public Listener loadListener = new Listener() {
@@ -58,8 +58,9 @@ public class MailScreen extends BaseScreen
                         MailScreen.this.add(content);
                     }
                 });
+                alert("加载完成");
             } else {
-                alert("加载邮件内容失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };

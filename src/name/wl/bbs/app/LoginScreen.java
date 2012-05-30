@@ -30,9 +30,10 @@ public class LoginScreen extends BaseScreen implements FieldChangeListener
         if (field == login) {
             if (user.getText().length() == 0 ||
                     passwd.getText().length() == 0) {
-                alert("用户名/密码不能为空");
+                alert("用户名/密码不能为空", ALERT_ERROR);
             } else {
                 LoginJSON login = new LoginJSON(user.getText(), passwd.getText());
+                alert("登录中", ALERT_WARNING);
                 login.load(this.loginListener);
             }
         }
@@ -55,7 +56,7 @@ public class LoginScreen extends BaseScreen implements FieldChangeListener
                     }
                 });
             } else {
-                alert("用户名/密码错误");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };

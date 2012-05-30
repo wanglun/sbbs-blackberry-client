@@ -48,14 +48,9 @@ public class NotificationMenuScreen extends BaseScreen
         {
             ClearNotificationsJSON obj = (ClearNotificationsJSON)o;
             if (obj.getSuccess()) {
-                if (obj.getResult() == 0) {
-                    alert("通知已清除");
-                    new NotificationsTask(loadListener).run();
-                } else {
-                    alert("发生错误: " + obj.getResult());
-                }
+                alert("已清除未读");
             } else {
-                alert("清除通知失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -85,6 +80,7 @@ public class NotificationMenuScreen extends BaseScreen
     {
         switch (key) {
             case 'r':
+                alert("刷新中", ALERT_WARNING);
                 new NotificationsTask(loadListener).run();
                 return true;
             case 'c':

@@ -28,7 +28,7 @@ public class ApiJSON
     protected int time;
     protected int cost;
     protected boolean success;
-    protected String error;
+    protected String error = "δ֪";
 
     public ApiJSON()
     {
@@ -233,5 +233,10 @@ public class ApiJSON
     public boolean getSuccess()
     {
         return this.success;
+    }
+
+    public String getError()
+    {
+        return this.error;
     }
 }

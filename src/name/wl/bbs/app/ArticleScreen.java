@@ -71,7 +71,7 @@ public class ArticleScreen extends BaseScreen
 
     private void loadingAlert()
     {
-        alert("加载文章内容");
+        alert("加载内容", ALERT_WARNING);
     }
 
     public Listener loadListener = new Listener() {
@@ -93,7 +93,7 @@ public class ArticleScreen extends BaseScreen
                     }
                 }
             } else {
-                alert("加载文章失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -128,7 +128,6 @@ public class ArticleScreen extends BaseScreen
                         this.topic = (Topic)this.thread.getTopics().elementAt(idx + 1);
                         update();
                     } else if (idx == size - 1) {
-                        alert("加载更多文章");
                         this.thread.loadMore();
                     }
                 } else if (this.topics != null) {
@@ -141,7 +140,6 @@ public class ArticleScreen extends BaseScreen
                         loadingAlert();
                         new TopicJSON(this.topic, false, 0, 1).load(loadListener);
                     } else if (idx == size - 1) {
-                        alert("加载更多文章");
                         this.topics.loadMore();
                     }
                 }

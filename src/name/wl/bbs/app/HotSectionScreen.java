@@ -20,6 +20,7 @@ public class HotSectionScreen extends BaseScreen
     {
         this.index = index;
         this.hotsectionJSON = new HotSectionJSON(index);
+        alert("加载中", ALERT_WARNING);
         this.hotsectionJSON.load(loadListener);
 
         setStatusbarTitle("分区热点");
@@ -37,8 +38,9 @@ public class HotSectionScreen extends BaseScreen
                         HotSectionScreen.this.add(list);
                     }
                 });
+                alert("刷新完成");
             } else {
-                alert("加载分区热点失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -54,8 +56,9 @@ public class HotSectionScreen extends BaseScreen
                         list.setTopics(topics);
                     }
                 });
+                alert("刷新完成");
             } else {
-                alert("刷新分区热点失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -72,6 +75,7 @@ public class HotSectionScreen extends BaseScreen
         switch (key) {
             case 'r':
                 if (list != null) {
+                    alert("刷新中", ALERT_WARNING);
                     hotsectionJSON.refresh(refreshListener);
                 }
                 return true;

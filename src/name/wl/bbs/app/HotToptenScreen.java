@@ -17,6 +17,7 @@ public class HotToptenScreen extends BaseScreen
     public HotToptenScreen()
     {
         this.hottopicsJSON = new HotToptenJSON();
+        alert("加载中", ALERT_WARNING);
         this.hottopicsJSON.load(loadListener);
 
         setStatusbarTitle("十大话题");
@@ -34,8 +35,9 @@ public class HotToptenScreen extends BaseScreen
                         HotToptenScreen.this.add(list);
                     }
                 });
+                alert("加载完成");
             } else {
-                alert("加载十大失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -51,8 +53,9 @@ public class HotToptenScreen extends BaseScreen
                         list.setTopics(topics);
                     }
                 });
+                alert("刷新完成");
             } else {
-                alert("刷新十大失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -69,6 +72,7 @@ public class HotToptenScreen extends BaseScreen
         switch (key) {
             case 'r':
                 if (list != null) {
+                    alert("刷新中", ALERT_WARNING);
                     hottopicsJSON.refresh(refreshListener);
                 }
                 return true;

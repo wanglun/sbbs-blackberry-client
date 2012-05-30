@@ -19,6 +19,7 @@ public class ThreadScreen extends BaseScreen
     {
         this.topic = topic;
 
+        alert("加载中", ALERT_WARNING);
         new TopicJSON(topic).load(loadListener);
 
         setStatusbarTitle(this.topic.getBoard());
@@ -37,16 +38,22 @@ public class ThreadScreen extends BaseScreen
                             ThreadScreen.this.add(list);
                         }
                     });
+                    alert("加载完成");
                 } else {
                     bbs.invokeLater(new Runnable() {
                         public void run() {
-                            list.appendTopics(topics);
+                            if (topics.size() == 0) {
+                                alert("到底了:)");
+                            } else {
+                                list.appendTopics(topics);
+                                alert("加载完成");
+                            }
                             moreListener.setLoaded();
                         }
                     });
                 }
             } else {
-                alert("加载主题失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -55,6 +62,7 @@ public class ThreadScreen extends BaseScreen
         public void callback(Object obj)
         {
             if (!this.isLoading()) {
+                alert("加载更多", ALERT_WARNING);
                 new TopicJSON(topic, false, list.getSize(), LIMIT).load(loadListener);
                 this.setLoading();
             }

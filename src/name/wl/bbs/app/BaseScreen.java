@@ -15,7 +15,7 @@ public class BaseScreen extends MainScreen
     protected static final int ALERT_CONFIRM = 3;
 
     protected Bbs bbs;
-    protected static statusbarManager statusbar = null;
+    protected statusbarManager statusbar = null;
 
     public BaseScreen()
     {
@@ -50,38 +50,43 @@ public class BaseScreen extends MainScreen
         alert(info, level, false);
     }
 
+    private class showAlert implements Runnable {
+        private String info;
+        private int level;
+
+        public showAlert(String info, int level)
+        {
+            this.info = info;
+            this.level = level;
+        }
+        public void run()
+        {
+            final BaseScreen active = (BaseScreen)bbs.getActiveScreen();
+            switch (level) {
+                case ALERT_INFO:
+                    active.setStatusbarInfo(info);
+                    bbs.invokeLater(new Runnable() {
+                        public void run() {
+                            active.setStatusbarInfo("");
+                        }
+                    }, 800, false);
+                    break;
+                case ALERT_WARNING:
+                    active.setStatusbarInfo(info);
+                    break;
+                case ALERT_ERROR:
+                    active.setStatusbarInfo(info);
+                    break;
+                case ALERT_CONFIRM:
+                    Dialog.alert(info);
+                    break;
+            }
+        }
+    }
     public void alert(final String info, int level, boolean close)
     {
-        switch (level) {
-            case ALERT_INFO:
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        setStatusbarInfo(info);
-                    }
-                });
-                break;
-            case ALERT_WARNING:
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        setStatusbarInfo(info);
-                    }
-                });
-                break;
-            case ALERT_ERROR:
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        setStatusbarInfo(info);
-                    }
-                });
-                break;
-            case ALERT_CONFIRM:
-                bbs.invokeLater(new Runnable() {
-                    public void run() {
-                        Dialog.alert(info);
-                    }
-                });
-                break;
-        }
+        showAlert show = new showAlert(info, level);
+        bbs.invokeLater(show);
 
         if (close) {
             bbs.invokeLater(new Runnable() {

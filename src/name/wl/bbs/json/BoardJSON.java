@@ -120,17 +120,17 @@ public class BoardJSON extends ApiJSON
     {
         switch (mode) {
             case NORMAL:
-                return "普通模式";
+                return "普通";
             case THREAD:
-                return "主题模式";
+                return "主题";
             case FORUM:
-                return "论坛模式";
+                return "论坛";
             case TOP:
-                return "置顶区";
+                return "置顶";
             case DIGEST:
-                return "文摘区";
+                return "文摘";
             case MARK:
-                return "保留区";
+                return "保留";
         }
         return "";
     }

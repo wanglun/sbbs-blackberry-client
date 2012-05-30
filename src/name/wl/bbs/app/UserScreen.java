@@ -20,6 +20,8 @@ public class UserScreen extends BaseScreen
     {
         this.user = user;
         this.userJSON = new UserJSON(user);
+
+        alert("查询中", ALERT_WARNING);
         this.userJSON.load(loadListener);
 
         id = new BbsLabelField(user.getId());
@@ -28,7 +30,6 @@ public class UserScreen extends BaseScreen
         username = new BbsLabelField(user.getName());
         add(username);
 
-        alert("加载中");
 
         setStatusbarTitle("查看用户");
     }
@@ -50,8 +51,9 @@ public class UserScreen extends BaseScreen
                         UserScreen.this.update();
                     }
                 });
+                alert("加载完成");
             } else {
-                alert("加载失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };

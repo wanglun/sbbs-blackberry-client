@@ -22,6 +22,7 @@ public class BoardScreen extends BaseScreen
     {
         this.board = board;
 
+        alert("加载中", ALERT_WARNING);
         new BoardJSON(board, mode).load(loadListener);
 
         setStatusbarTitle(board.getName() + " - " + BoardJSON.getModeString(mode));
@@ -40,24 +41,32 @@ public class BoardScreen extends BaseScreen
                             BoardScreen.this.add(list);
                         }
                     });
+                    alert("加载完成");
                 } else if (needRefresh) {
                     needRefresh = false;
                     bbs.invokeLater(new Runnable() {
                         public void run() {
                             list.setTopics(topics);
+                            Logger.debug("mode: " + mode);
                             setStatusbarTitle(board.getName() + " - " + BoardJSON.getModeString(mode));
                         }
                     });
+                    alert("加载完成");
                 } else {
                     bbs.invokeLater(new Runnable() {
                         public void run() {
-                            list.appendTopics(topics);
+                            if (topics.size() == 0) {
+                                alert("到底了:)");
+                            } else {
+                                list.appendTopics(topics);
+                                alert("加载完成");
+                            }
                             moreListener.setLoaded();
                         }
                     });
                 }
             } else {
-                alert("加载版面失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -66,6 +75,7 @@ public class BoardScreen extends BaseScreen
         public void callback(Object obj)
         {
             if (!this.isLoading()) {
+                alert("加载更多", ALERT_WARNING);
                 new BoardJSON(board, mode, list.getSize(), LIMIT).load(loadListener);
                 this.setLoading();
             }
@@ -94,13 +104,9 @@ public class BoardScreen extends BaseScreen
         {
             BoardMarkreadJSON obj = (BoardMarkreadJSON)o;
             if (obj.getSuccess()) {
-                if (obj.getResult() == 0) {
-                    alert("已清除全部未读");
-                } else {
-                    alert("发生错误: " + obj.getResult());
-                }
+                alert("已清除未读");
             } else {
-                alert("清除未读失败");
+                alert("错误:" + obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -111,18 +117,20 @@ public class BoardScreen extends BaseScreen
             case 'p':
                 bbs.pushScreen(new PostScreen(board));
                 return true;
-                /* normal mode */
             case 'c':
                 new BoardMarkreadJSON(board).load(markreadListener);
                 return true;
             case 'r':
                 needRefresh = true;
+                alert("刷新中", ALERT_WARNING);
                 new BoardJSON(board, mode).load(loadListener);
                 return true;
+                /* normal mode */
             case 'N':
                 if (mode != BoardJSON.NORMAL) {
                     mode = BoardJSON.NORMAL;
                     needRefresh = true;
+                    alert("加载中", ALERT_WARNING);
                     new BoardJSON(board, mode).load(loadListener);
                 }
                 return true;
@@ -131,6 +139,7 @@ public class BoardScreen extends BaseScreen
                 if (mode != BoardJSON.THREAD) {
                     mode = BoardJSON.THREAD;
                     needRefresh = true;
+                    alert("加载中", ALERT_WARNING);
                     new BoardJSON(board, mode).load(loadListener);
                 }
                 return true;
@@ -139,6 +148,7 @@ public class BoardScreen extends BaseScreen
                 if (mode != BoardJSON.FORUM) {
                     mode = BoardJSON.FORUM;
                     needRefresh = true;
+                    alert("加载中", ALERT_WARNING);
                     new BoardJSON(board, mode).load(loadListener);
                 }
                 return true;
@@ -147,6 +157,7 @@ public class BoardScreen extends BaseScreen
                 if (mode != BoardJSON.DIGEST) {
                     mode = BoardJSON.DIGEST;
                     needRefresh = true;
+                    alert("加载中", ALERT_WARNING);
                     new BoardJSON(board, mode).load(loadListener);
                 }
                 return true;
@@ -155,6 +166,7 @@ public class BoardScreen extends BaseScreen
                 if (mode != BoardJSON.MARK) {
                     mode = BoardJSON.MARK;
                     needRefresh = true;
+                    alert("加载中", ALERT_WARNING);
                     new BoardJSON(board, mode).load(loadListener);
                 }
                 return true;
