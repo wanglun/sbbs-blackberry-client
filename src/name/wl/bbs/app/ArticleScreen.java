@@ -123,12 +123,6 @@ public class ArticleScreen extends BaseScreen
             case 'r':
                 bbs.pushScreen(new PostScreen(topic));
                 return true;
-            case 'j':
-                scroll(Manager.DOWNWARD);
-                return true;
-            case 'k':
-                scroll(Manager.UPWARD);
-                return true;
             case 't':
                 scroll(Manager.TOPMOST);
                 return true;

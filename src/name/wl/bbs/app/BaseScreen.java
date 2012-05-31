@@ -140,4 +140,9 @@ public class BaseScreen extends MainScreen
     {
         return true;
     }
+
+    public boolean trackwheelRoll(int amount, int status, int time)
+    {
+        return super.trackwheelRoll(amount, status, time);
+    }
 }
