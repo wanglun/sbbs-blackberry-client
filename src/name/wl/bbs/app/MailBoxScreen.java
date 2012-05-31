@@ -13,6 +13,7 @@ public class MailBoxScreen extends BaseScreen
     private static final int LIMIT = 10;
 
     private MailListField list = null;
+    private boolean needRefresh = false;
 
     private int type;
 
@@ -50,6 +51,14 @@ public class MailBoxScreen extends BaseScreen
                         }
                     });
                     alert("加载完成");
+                } else if (needRefresh) {
+                    needRefresh = false;
+                    bbs.invokeLater(new Runnable() {
+                        public void run() {
+                            list.setMails(mails);
+                        }
+                    });
+                    alert("加载完成");
                 } else {
                     bbs.invokeLater(new Runnable() {
                         public void run() {
@@ -83,7 +92,7 @@ public class MailBoxScreen extends BaseScreen
     public Listener mailListener = new Listener() {
         public void callback(Object o)
         {
-            bbs.pushScreen(new MailScreen((Mail)o));
+            bbs.pushScreen(new MailScreen(list));
         }
     };
 
@@ -92,6 +101,11 @@ public class MailBoxScreen extends BaseScreen
         switch (key) {
             case 'p':
                 break;
+            case 'r':
+                needRefresh = true;
+                alert("刷新中", ALERT_WARNING);
+                new MailboxJSON(type).refresh(loadListener);
+                return true;
         }
 
         return super.keyChar(key, status, time);

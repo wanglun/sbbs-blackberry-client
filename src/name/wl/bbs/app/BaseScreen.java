@@ -10,13 +10,14 @@ import name.wl.bbs.json.*;
 
 public class BaseScreen extends MainScreen
 {
-    protected static final int ALERT_INFO = 0; 
-    protected static final int ALERT_WARNING = 1;
-    protected static final int ALERT_ERROR = 2;
-    protected static final int ALERT_CONFIRM = 3;
+    public static final int ALERT_INFO = 0; 
+    public static final int ALERT_WARNING = 1;
+    public static final int ALERT_ERROR = 2;
+    public static final int ALERT_CONFIRM = 3;
 
     protected Bbs bbs;
     protected statusbarManager statusbar = null;
+    protected int statusbarInfoCleanId = -1;
 
     protected boolean editable = false;
 
@@ -33,9 +34,17 @@ public class BaseScreen extends MainScreen
         statusbar.setTitle(title);
     }
 
-    public void setStatusbarInfo(String info)
+    public void setStatusbarInfo(String info, int level)
     {
-        statusbar.setInfo(info);
+        statusbar.setInfo(info, level);
+        if (statusbarInfoCleanId != -1) {
+            bbs.cancelInvokeLater(statusbarInfoCleanId);
+        }
+    }
+
+    public void setStatusbarInfoCleanId(int id)
+    {
+        statusbarInfoCleanId = id;
     }
 
     public void alert(final String info)
@@ -67,18 +76,19 @@ public class BaseScreen extends MainScreen
             final BaseScreen active = (BaseScreen)bbs.getActiveScreen();
             switch (level) {
                 case ALERT_INFO:
-                    active.setStatusbarInfo(info);
-                    bbs.invokeLater(new Runnable() {
+                    active.setStatusbarInfo(info, level);
+                    int id = bbs.invokeLater(new Runnable() {
                         public void run() {
-                            active.setStatusbarInfo("");
+                            active.setStatusbarInfo("", level);
                         }
                     }, 800, false);
+                    active.setStatusbarInfoCleanId(id);
                     break;
                 case ALERT_WARNING:
-                    active.setStatusbarInfo(info);
+                    active.setStatusbarInfo(info, level);
                     break;
                 case ALERT_ERROR:
-                    active.setStatusbarInfo(info);
+                    active.setStatusbarInfo(info, level);
                     break;
                 case ALERT_CONFIRM:
                     Dialog.alert(info);
@@ -124,5 +134,10 @@ public class BaseScreen extends MainScreen
         }
 
         return super.keyChar(key, status, time);
+    }
+
+    protected boolean onSavePrompt()
+    {
+        return true;
     }
 }

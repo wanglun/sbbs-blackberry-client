@@ -38,7 +38,7 @@ public class HotSectionScreen extends BaseScreen
                         HotSectionScreen.this.add(list);
                     }
                 });
-                alert("刷新完成");
+                alert("加载完成");
             } else {
                 alert("错误:" + obj.getError(), ALERT_ERROR);
             }

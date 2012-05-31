@@ -11,6 +11,8 @@ public class MailboxJSON extends ApiJSON
 {
     private static String API = "/mailbox/get.json";
 
+    private static String KEY = "sbbs_mailbox";
+
     /* --²ÎÊý-- */
     public static final int INBOX = 0;
     public static final int SENT = 1;
@@ -56,6 +58,12 @@ public class MailboxJSON extends ApiJSON
         super.load(API, gets, listener);
     }
 
+    public void refresh(Listener listener)
+    {
+        this.needRefresh = true;
+        load(listener);
+    }
+
     public void parseContent(final String json)
     {
         if (this.success) {
@@ -65,6 +73,15 @@ public class MailboxJSON extends ApiJSON
                 Logger.debug("sections parse error");
                 this.success = false;
             }
+        }
+    }
+
+    public String getKey()
+    {
+        if (start == 0) {
+            return KEY + this.type;
+        } else {
+            return null;
         }
     }
 

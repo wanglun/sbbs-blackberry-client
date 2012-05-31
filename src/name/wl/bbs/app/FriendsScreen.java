@@ -15,9 +15,8 @@ public class FriendsScreen extends BaseScreen
 
     public FriendsScreen()
     {
-        FriendsJSON friendsJSON = new FriendsJSON();
-        friendsJSON.load(loadListener);
         alert("加载中", ALERT_WARNING);
+        new FriendsJSON().load(loadListener);
 
         setStatusbarTitle("在线好友");
     }
@@ -34,6 +33,7 @@ public class FriendsScreen extends BaseScreen
                         FriendsScreen.this.add(list);
                     }
                 });
+                Logger.debug("refresh");
                 alert("加载完成");
             } else {
                 alert("错误:" + obj.getError(), ALERT_ERROR);
@@ -73,9 +73,8 @@ public class FriendsScreen extends BaseScreen
                 break;
             case 'r':
                 if (list != null) {
-                    FriendsJSON friendsJSON = new FriendsJSON();
                     alert("刷新中", ALERT_WARNING);
-                    friendsJSON.refresh(refreshListener);
+                    new FriendsJSON().refresh(refreshListener);
                 }
                 return true;
         }

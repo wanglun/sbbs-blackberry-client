@@ -2,6 +2,7 @@ package name.wl.bbs.app;
 
 import java.util.Vector;
 import net.rim.device.api.ui.*;
+import net.rim.device.api.ui.Graphics;
 import name.wl.bbs.ui.*;
 import name.wl.bbs.util.*;
 import name.wl.bbs.json.*;
@@ -9,8 +10,7 @@ import name.wl.bbs.hjlp.*;
 
 public class ArticleScreen extends BaseScreen
 {
-    private BbsLabelField title;
-    private BbsLabelField author;
+    private BbsNullField header;
     private BbsRichTextField content;
 
     private Topic topic = null;
@@ -45,11 +45,8 @@ public class ArticleScreen extends BaseScreen
             new TopicJSON(this.topic, false, 0, 1).load(loadListener);
         }
 
-        title = new BbsLabelField(this.topic.getTitle());
-        add(title);
-
-        author = new BbsLabelField(this.topic.getAuthor());
-        add(author);
+        header = new BbsNullField(2, headerPaintListener);
+        add(header);
 
         content = new BbsRichTextField(this.topic.getContent());
         add(content);
@@ -59,8 +56,7 @@ public class ArticleScreen extends BaseScreen
 
     public void update()
     {
-        author.setText(topic.getAuthor());
-        title.setText(topic.getTitle());
+        header.invalidate();
         content.setText(topic.getContent());
         // FIXME
         try {
@@ -74,12 +70,31 @@ public class ArticleScreen extends BaseScreen
         alert("加载内容", ALERT_WARNING);
     }
 
+    public Listener headerPaintListener = new Listener() {
+        public void callback(Object o)
+        {
+            BbsNullField obj = (BbsNullField)o;
+            int marginTD = obj.getRowMarginTD();
+            int width = obj.getWidth();
+            int height = obj.getHeight();
+            Graphics graphics = obj.getGraphics();
+
+            obj.paintBg();
+
+            graphics.drawText(topic.getAuthor(), 10, marginTD,
+                    DrawStyle.ELLIPSIS, (int)(width*0.3));
+            graphics.drawText(GenTimeStr.standard(topic.getTime()), (int)(width*0.3), marginTD,
+                    DrawStyle.RIGHT, (int)(width*0.7) - 10);
+            graphics.drawText(topic.getTitle(), 10, obj.getRowHeight() + marginTD,
+                    DrawStyle.ELLIPSIS, width - 10);
+        }
+    };
+
     public Listener loadListener = new Listener() {
         public void callback(Object o)
         {
             TopicJSON obj = (TopicJSON)o;
             if (obj.getSuccess()) {
-                alert("加载完成");
                 final Vector topics = obj.getTopics();
                 if (topics.size() == 1) {
                     Topic t = (Topic)topics.elementAt(0);
@@ -90,6 +105,7 @@ public class ArticleScreen extends BaseScreen
                                 ArticleScreen.this.update();
                             }
                         });
+                        alert("加载完成");
                     }
                 }
             } else {

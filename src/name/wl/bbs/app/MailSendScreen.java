@@ -35,30 +35,37 @@ public class MailSendScreen extends BaseScreen implements FieldChangeListener
         this.mail = mail;
         this.user = user;
 
-        title = new BbsEditField("title");
+        title = new BbsEditField("标题");
         if (mail != null) {
             title.setText(mail.getTitle().indexOf("Re: ") == 0 ? mail.getTitle() : "Re: " + mail.getTitle());
         }
         add(title);
 
-        content = new BbsEditField("content");
+        content = new BbsEditField("内容", 3);
         add(content);
 
-        noquote = new BbsCheckboxField("noquote", false);
-        add(noquote);
+        if (mail != null) {
+            noquote = new BbsCheckboxField("不引原文", false);
+            add(noquote);
 
-        send = new BbsButtonField("send");
+            content.setFocus();
+        }
+
+        send = new BbsButtonField("发送");
         send.setChangeListener(this);
         add(send);
 
-        setStatusbarTitle("写邮件");
+        setStatusbarTitle(mail == null ? "写邮件" : "回复邮件");
     }
 
     public void fieldChanged(Field field, int context) {
         if (field == send) {
             String titleStr = title.getText();
             String contentStr = content.getText();
-            boolean noquoteBool = noquote.getChecked();
+            boolean noquoteBool = false;
+            if (mail != null) {
+                noquoteBool = noquote.getChecked();
+            }
             if (title.getText().length() == 0 ||
                     content.getText().length() == 0) {
                 alert("标题/内容不能为空", ALERT_ERROR);

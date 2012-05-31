@@ -90,6 +90,8 @@ public class TopicListField extends BbsObjectListField
     {
         Topic t = (Topic)topics.elementAt(index);
 
+        super.drawListRow(listField, graphics, index, y, width);
+
         if (t.isUnread()) {
             graphics.setColor(Color.GREEN);
         }
@@ -106,9 +108,8 @@ public class TopicListField extends BbsObjectListField
             graphics.setColor(Color.GRAY);
         }
 
-        graphics.drawText(t.getAuthor() + " " + t.getTimeStr(), 16, y, DrawStyle.ELLIPSIS, width - 16);
-        graphics.drawText(t.getTitle(), 16, y + lineHeight, DrawStyle.ELLIPSIS, width - 16);
-
-        super.drawListRow(listField, graphics, index, y, width);
+        graphics.drawText(t.getAuthor(), 16, y, DrawStyle.ELLIPSIS, (int)(width*0.3));
+        graphics.drawText(GenTimeStr.pretty(t.getTime()), (int)(width*0.3), y, DrawStyle.RIGHT, (int)(width*0.7) - 10);
+        graphics.drawText(t.getTitle(), 16, y + lineHeight, DrawStyle.ELLIPSIS, width - 10);
     }
 }

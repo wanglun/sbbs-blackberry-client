@@ -89,6 +89,8 @@ public class BoardListField extends BbsObjectListField
     {
         Board b = (Board)current.elementAt(index);
 
+        super.drawListRow(listField, graphics, index, y, width);
+
         if (b.isUnread()) {
             graphics.setColor(Color.GREEN);
         }
@@ -98,7 +100,5 @@ public class BoardListField extends BbsObjectListField
         }
 
         graphics.drawText(b.getName() + " - " + b.getDescription(), 16, y, DrawStyle.ELLIPSIS, width - 16);
-
-        super.drawListRow(listField, graphics, index, y, width);
     }
 }

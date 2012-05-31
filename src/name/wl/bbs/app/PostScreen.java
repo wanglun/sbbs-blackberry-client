@@ -37,35 +37,49 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
         this.board = board;
         this.topic = topic;
 
-        title = new BbsEditField("title");
+        title = new BbsEditField("标题:");
         if (topic != null) {
             title.setText(topic.getTitle().indexOf("Re: ") == 0 ? topic.getTitle() : "Re: " + topic.getTitle());
         }
         add(title);
 
-        content = new BbsEditField("content");
+        content = new BbsEditField("内容:", 3);
         add(content);
 
-        notopten = new BbsCheckboxField("notopten", false);
-        add(notopten);
+        if (topic == null) {
+            notopten = new BbsCheckboxField("不上十大", false);
+            add(notopten);
+        }
 
-        noquote = new BbsCheckboxField("noquote", false);
-        add(noquote);
+        if (topic != null) {
+            noquote = new BbsCheckboxField("不引原文", false);
+            add(noquote);
 
-        anony = new BbsCheckboxField("anony", false);
+            content.setFocus();
+        }
+
+        anony = new BbsCheckboxField("匿名发文", false);
         add(anony);
 
-        post = new BbsButtonField("post");
+        post = new BbsButtonField("发表");
         post.setChangeListener(this);
         add(post);
+
+        setStatusbarTitle(topic == null ? "发表话题" : "回复话题");
     }
 
     public void fieldChanged(Field field, int context) {
         if (field == post) {
             String titleStr = title.getText();
             String contentStr = content.getText();
-            boolean notoptenBool = notopten.getChecked();
-            boolean noquoteBool = noquote.getChecked();
+            boolean notoptenBool = false;
+            if (topic == null) {
+                notoptenBool = notopten.getChecked();
+            }
+            boolean noquoteBool = false;
+            if (topic != null) {
+                noquoteBool = noquote.getChecked();
+            }
             boolean anonyBool = anony.getChecked();
             if (titleStr.length() == 0 ||
                     contentStr.length() == 0) {
@@ -83,8 +97,8 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
                     json = new TopicPostJSON(new Board(topic.getBoard()), titleStr, contentStr, topic.getId(),
                             notoptenBool, noquoteBool, anonyBool);
                 }
-                json.load(this.postListener);
                 alert("发表中", ALERT_WARNING);
+                json.load(this.postListener);
             }
         }
     }

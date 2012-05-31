@@ -16,10 +16,10 @@ public class UserQueryScreen extends BaseScreen implements FieldChangeListener
     {
         editable = true;
 
-        user = new BbsEditField("user");
+        user = new BbsEditField("用户名:");
         add(user);
 
-        query = new BbsButtonField("query");
+        query = new BbsButtonField("查询");
         query.setChangeListener(this);
         add(query);
 

@@ -15,9 +15,8 @@ public class FriendsAllScreen extends BaseScreen
 
     public FriendsAllScreen()
     {
-        FriendsAllJSON friendsJSON = new FriendsAllJSON();
         alert("加载中", ALERT_WARNING);
-        friendsJSON.load(loadListener);
+        new FriendsAllJSON().load(loadListener);
 
         setStatusbarTitle("全部好友");
     }
@@ -73,9 +72,8 @@ public class FriendsAllScreen extends BaseScreen
                 break;
             case 'r':
                 if (list != null) {
-                    FriendsAllJSON friendsJSON = new FriendsAllJSON();
                     alert("刷新中", ALERT_WARNING);
-                    friendsJSON.refresh(refreshListener);
+                    new FriendsAllJSON().refresh(refreshListener);
                 }
                 return true;
         }

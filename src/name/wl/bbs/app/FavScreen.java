@@ -73,8 +73,8 @@ public class FavScreen extends BaseScreen
         switch (key) {
             case 'r':
                 if (this.list != null) {
-                    fav.refresh(refreshListener);
                     alert("ÕıÔÚË¢ĞÂ", ALERT_WARNING);
+                    fav.refresh(refreshListener);
                 }
                 return true;
         }

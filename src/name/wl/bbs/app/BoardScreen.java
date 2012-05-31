@@ -47,7 +47,6 @@ public class BoardScreen extends BaseScreen
                     bbs.invokeLater(new Runnable() {
                         public void run() {
                             list.setTopics(topics);
-                            Logger.debug("mode: " + mode);
                             setStatusbarTitle(board.getName() + " - " + BoardJSON.getModeString(mode));
                         }
                     });

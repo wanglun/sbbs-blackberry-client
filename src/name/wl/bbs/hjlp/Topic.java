@@ -267,16 +267,6 @@ public class Topic
         return time;
     }
 
-    public String getTimeStr()
-    {
-        return GenTimeStr.standard(this.time);
-    }
-
-    public String getTimePretty()
-    {
-        return GenTimeStr.pretty(this.time);
-    }
-
     public String getTitle()
     {
         return title;

@@ -34,6 +34,21 @@ public class MailListField extends BbsObjectListField
         setRowHeight(2 * lineHeight);
     }
 
+    public void setMails(Vector mails)
+    {
+        if (mails == null)
+            this.mails = new Vector();
+        else
+            this.mails = mails;
+
+        setObjects(this.mails);
+    }
+
+    public Vector getMails()
+    {
+        return this.mails;
+    }
+
     public void appendMails(Vector mails)
     {
         for (int i = 0; i < mails.size(); i++) {
@@ -66,9 +81,10 @@ public class MailListField extends BbsObjectListField
     {
         Mail t = (Mail)mails.elementAt(index);
 
-        graphics.drawText(t.getAuthor() + " " + t.getTimeStr(), 16, y, DrawStyle.ELLIPSIS, width - 16);
-        graphics.drawText(t.getTitle(), 16, y + lineHeight, DrawStyle.ELLIPSIS, width - 16);
-
         super.drawListRow(listField, graphics, index, y, width);
+
+        graphics.drawText(t.getAuthor(), 16, y, DrawStyle.ELLIPSIS, (int)(width*0.3));
+        graphics.drawText(GenTimeStr.pretty(t.getTime()), (int)(width*0.3), y, DrawStyle.RIGHT, (int)(width*0.7) - 10);
+        graphics.drawText(t.getTitle(), 16, y + lineHeight, DrawStyle.ELLIPSIS, width - 10);
     }
 }

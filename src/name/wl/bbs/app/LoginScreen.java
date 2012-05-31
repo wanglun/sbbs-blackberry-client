@@ -15,13 +15,13 @@ public class LoginScreen extends BaseScreen implements FieldChangeListener
     {
         editable = true;
 
-        user = new BbsEditField("user");
+        user = new BbsEditField("用户名:");
         add(user);
 
-        passwd = new BbsPasswordEditField("pass");
+        passwd = new BbsPasswordEditField("密码:");
         add(passwd);
 
-        login = new BbsButtonField("login");
+        login = new BbsButtonField("登录");
         login.setChangeListener(this);
         add(login);
 
@@ -34,9 +34,8 @@ public class LoginScreen extends BaseScreen implements FieldChangeListener
                     passwd.getText().length() == 0) {
                 alert("用户名/密码不能为空", ALERT_ERROR);
             } else {
-                LoginJSON login = new LoginJSON(user.getText(), passwd.getText());
                 alert("登录中", ALERT_WARNING);
-                login.load(this.loginListener);
+                new LoginJSON(user.getText(), passwd.getText()).load(this.loginListener);
             }
         }
     }
