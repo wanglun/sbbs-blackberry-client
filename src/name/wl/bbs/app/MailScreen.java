@@ -105,7 +105,7 @@ public class MailScreen extends BaseScreen
                     alert("º”‘ÿÕÍ≥…");
                 }
             } else {
-                alert("¥ÌŒÛ:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };

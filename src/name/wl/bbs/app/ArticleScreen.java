@@ -109,7 +109,7 @@ public class ArticleScreen extends BaseScreen
                     }
                 }
             } else {
-                alert("´íÎó:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };

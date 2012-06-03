@@ -57,7 +57,7 @@ public class LoginScreen extends BaseScreen implements FieldChangeListener
                     }
                 });
             } else {
-                alert("´íÎó:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };

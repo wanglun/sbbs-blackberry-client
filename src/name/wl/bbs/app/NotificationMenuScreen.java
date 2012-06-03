@@ -39,6 +39,8 @@ public class NotificationMenuScreen extends BaseScreen
             ats.setLabel("爱特我的 - " + NotificationsTask.getAtsCount());
             replies.setLabel("回复我的 - " + NotificationsTask.getRepliesCount());
 
+            alert("已刷新");
+
             list.invalidate();
         }
     };
@@ -50,7 +52,7 @@ public class NotificationMenuScreen extends BaseScreen
             if (obj.getSuccess()) {
                 alert("已清除未读");
             } else {
-                alert("错误:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };

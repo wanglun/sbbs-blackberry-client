@@ -110,7 +110,7 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
             if (obj.getSuccess()) {
                 alert("ÒÑ·¢±í", true);
             } else {
-                alert("´íÎó:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };

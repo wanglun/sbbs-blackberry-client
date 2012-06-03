@@ -2,6 +2,7 @@ package name.wl.bbs.app;
 
 import java.util.*;
 import net.rim.device.api.ui.*;
+import net.rim.device.api.ui.component.Dialog;
 import name.wl.bbs.ui.*;
 import name.wl.bbs.util.*;
 import name.wl.bbs.hjlp.*;
@@ -80,4 +81,15 @@ public class MenuScreen extends BaseScreen
             bbs.pushScreen(new AccountMenuScreen());
         }
     };
+
+    public boolean onClose()
+    {
+        int ret = Dialog.ask(Dialog.D_OK_CANCEL, "确定要退出吧？");
+        if (ret == Dialog.D_OK) {
+            close();
+            return true;
+        }
+
+        return false;
+    }
 }

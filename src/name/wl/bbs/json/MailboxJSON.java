@@ -48,6 +48,19 @@ public class MailboxJSON extends ApiJSON
         this.mails = null;
     }
 
+    static public String getTypeString(int type)
+    {
+        switch (type) {
+            case INBOX:
+                return "收件箱";
+            case SENT:
+                return "发件箱";
+            case DELETED:
+                return "垃圾箱";
+        }
+        return "";
+    }
+
     public void load(Listener listener)
     {
         Hashtable gets = new Hashtable();

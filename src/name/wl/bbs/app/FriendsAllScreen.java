@@ -35,7 +35,7 @@ public class FriendsAllScreen extends BaseScreen
                 });
                 alert("加载完成");
             } else {
-                alert("错误:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -53,7 +53,7 @@ public class FriendsAllScreen extends BaseScreen
                 });
                 alert("刷新完成");
             } else {
-                alert("错误:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -68,13 +68,15 @@ public class FriendsAllScreen extends BaseScreen
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
-            case 'm':
-                break;
             case 'r':
                 if (list != null) {
                     alert("刷新中", ALERT_WARNING);
                     new FriendsAllJSON().refresh(refreshListener);
                 }
+                return true;
+            case 'O':
+                bbs.popScreen(this);
+                bbs.pushScreen(new FriendsScreen());
                 return true;
         }
 

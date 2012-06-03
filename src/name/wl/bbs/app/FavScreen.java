@@ -45,7 +45,7 @@ public class FavScreen extends BaseScreen
                 });
                 alert("º”‘ÿÕÍ≥…");
             } else {
-                alert("¥ÌŒÛ:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -63,7 +63,7 @@ public class FavScreen extends BaseScreen
                     }
                 });
             } else {
-                alert("¥ÌŒÛ:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };

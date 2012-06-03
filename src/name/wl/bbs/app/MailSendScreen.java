@@ -35,13 +35,13 @@ public class MailSendScreen extends BaseScreen implements FieldChangeListener
         this.mail = mail;
         this.user = user;
 
-        title = new BbsEditField("标题");
+        title = new BbsEditField("标题:");
         if (mail != null) {
             title.setText(mail.getTitle().indexOf("Re: ") == 0 ? mail.getTitle() : "Re: " + mail.getTitle());
         }
         add(title);
 
-        content = new BbsEditField("内容", 3);
+        content = new BbsEditField("内容:", 3);
         add(content);
 
         if (mail != null) {
@@ -55,7 +55,7 @@ public class MailSendScreen extends BaseScreen implements FieldChangeListener
         send.setChangeListener(this);
         add(send);
 
-        setStatusbarTitle(mail == null ? "写邮件" : "回复邮件");
+        setStatusbarTitle(mail == null ? "给" + user.getId() + "写信" : "回复" + mail.getAuthor() + "的信");
     }
 
     public void fieldChanged(Field field, int context) {
@@ -93,7 +93,7 @@ public class MailSendScreen extends BaseScreen implements FieldChangeListener
             if (obj.getSuccess()) {
                 alert("已发送", true);
             } else {
-                alert("错误:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };

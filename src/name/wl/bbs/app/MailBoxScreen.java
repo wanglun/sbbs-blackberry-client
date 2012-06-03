@@ -24,17 +24,7 @@ public class MailBoxScreen extends BaseScreen
         alert("加载中", ALERT_WARNING);
         new MailboxJSON(type).load(loadListener);
 
-        switch (this.type) {
-            case MailboxJSON.INBOX:
-                setStatusbarTitle("收件箱");
-                break;
-            case MailboxJSON.SENT:
-                setStatusbarTitle("发件箱");
-                break;
-            case MailboxJSON.DELETED:
-                setStatusbarTitle("垃圾箱");
-                break;
-        }
+        setStatusbarTitle(MailboxJSON.getTypeString(this.type));
     }
 
     public Listener loadListener = new Listener() {
@@ -73,7 +63,7 @@ public class MailBoxScreen extends BaseScreen
                     });
                 }
             } else {
-                alert("错误:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -96,15 +86,33 @@ public class MailBoxScreen extends BaseScreen
         }
     };
 
+    private void changeBox(int type)
+    {
+        if (this.type != type) {
+            this.type = type;
+            needRefresh = true;
+            alert("刷新中", ALERT_WARNING);
+            setStatusbarTitle(MailboxJSON.getTypeString(this.type));
+            new MailboxJSON(this.type).refresh(loadListener);
+        }
+    }
+
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
-            case 'p':
-                break;
             case 'r':
                 needRefresh = true;
                 alert("刷新中", ALERT_WARNING);
                 new MailboxJSON(type).refresh(loadListener);
+                return true;
+            case 'I':
+                changeBox(MailboxJSON.INBOX);
+                return true;
+            case 'S':
+                changeBox(MailboxJSON.SENT);
+                return true;
+            case 'D':
+                changeBox(MailboxJSON.DELETED);
                 return true;
         }
 

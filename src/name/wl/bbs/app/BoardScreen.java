@@ -65,7 +65,7 @@ public class BoardScreen extends BaseScreen
                     });
                 }
             } else {
-                alert("´íÎó:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -105,7 +105,7 @@ public class BoardScreen extends BaseScreen
             if (obj.getSuccess()) {
                 alert("ÒÑÇå³ýÎ´¶Á");
             } else {
-                alert("´íÎó:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };

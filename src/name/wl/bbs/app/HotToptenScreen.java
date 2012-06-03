@@ -37,7 +37,7 @@ public class HotToptenScreen extends BaseScreen
                 });
                 alert("加载完成");
             } else {
-                alert("错误:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };
@@ -55,7 +55,7 @@ public class HotToptenScreen extends BaseScreen
                 });
                 alert("刷新完成");
             } else {
-                alert("错误:" + obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_ERROR);
             }
         }
     };
