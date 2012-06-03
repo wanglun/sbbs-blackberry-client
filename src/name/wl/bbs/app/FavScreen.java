@@ -71,6 +71,9 @@ public class FavScreen extends BaseScreen
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
+            case '?':
+                bbs.pushScreen(new HelpScreen(HelpScreen.TYPE_FAV));
+                return true;
             case 'r':
                 if (this.list != null) {
                     alert("ÕýÔÚË¢ÐÂ", ALERT_WARNING);

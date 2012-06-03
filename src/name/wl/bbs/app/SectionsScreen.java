@@ -71,6 +71,9 @@ public class SectionsScreen extends BaseScreen
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
+            case '?':
+                bbs.pushScreen(new HelpScreen(HelpScreen.TYPE_SECTIONS));
+                return true;
             case 'r':
                 if (this.list != null) {
                     alert("Ë¢ÐÂÖÐ", ALERT_WARNING);

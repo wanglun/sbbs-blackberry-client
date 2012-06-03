@@ -113,6 +113,9 @@ public class BoardScreen extends BaseScreen
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
+            case '?':
+                bbs.pushScreen(new HelpScreen(HelpScreen.TYPE_BOARD));
+                return true;
             case 'p':
                 bbs.pushScreen(new PostScreen(board));
                 return true;
@@ -164,6 +167,14 @@ public class BoardScreen extends BaseScreen
             case 'M':
                 if (mode != BoardJSON.MARK) {
                     mode = BoardJSON.MARK;
+                    needRefresh = true;
+                    alert("加载中", ALERT_WARNING);
+                    new BoardJSON(board, mode).load(loadListener);
+                }
+                return true;
+            case 'Z':
+                if (mode != BoardJSON.TOP) {
+                    mode = BoardJSON.TOP;
                     needRefresh = true;
                     alert("加载中", ALERT_WARNING);
                     new BoardJSON(board, mode).load(loadListener);

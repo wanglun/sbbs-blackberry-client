@@ -50,7 +50,13 @@ public class NotificationMenuScreen extends BaseScreen
         {
             ClearNotificationsJSON obj = (ClearNotificationsJSON)o;
             if (obj.getSuccess()) {
+                mails.setLabel("新邮件 - 0");
+                ats.setLabel("爱特我的 - 0");
+                replies.setLabel("回复我的 - 0");
+
                 alert("已清除未读");
+
+                list.invalidate();
             } else {
                 alert(obj.getError(), ALERT_ERROR);
             }
@@ -81,6 +87,9 @@ public class NotificationMenuScreen extends BaseScreen
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
+            case '?':
+                bbs.pushScreen(new HelpScreen(HelpScreen.TYPE_NOTIFICATIONMENU));
+                return true;
             case 'r':
                 alert("刷新中", ALERT_WARNING);
                 new NotificationsTask(loadListener).run();

@@ -70,6 +70,9 @@ public class HotToptenScreen extends BaseScreen
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
+            case '?':
+                bbs.pushScreen(new HelpScreen(HelpScreen.TYPE_HOT));
+                return true;
             case 'r':
                 if (list != null) {
                     alert("Ë¢ÐÂÖÐ", ALERT_WARNING);

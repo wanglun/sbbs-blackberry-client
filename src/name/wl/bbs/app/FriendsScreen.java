@@ -69,8 +69,9 @@ public class FriendsScreen extends BaseScreen
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
-            case 'm':
-                break;
+            case '?':
+                bbs.pushScreen(new HelpScreen(HelpScreen.TYPE_FRIENDS));
+                return true;
             case 'r':
                 if (list != null) {
                     alert("Ë¢ÐÂÖÐ", ALERT_WARNING);

@@ -28,7 +28,7 @@ public class ApiJSON
     protected int time;
     protected int cost;
     protected boolean success;
-    protected String error = "Î´Öª";
+    protected String error = "ÍøÂç´íÎó";
 
     public ApiJSON()
     {

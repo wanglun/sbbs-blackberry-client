@@ -62,10 +62,10 @@ public class NotificationScreen extends BaseScreen
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
-            case 'p':
-                break;
+            case '?':
+                bbs.pushScreen(new HelpScreen(HelpScreen.TYPE_BASE));
+                return true;
         }
-
         return super.keyChar(key, status, time);
     }
 }

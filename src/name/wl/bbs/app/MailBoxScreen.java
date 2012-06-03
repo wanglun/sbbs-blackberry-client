@@ -100,6 +100,9 @@ public class MailBoxScreen extends BaseScreen
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
+            case '?':
+                bbs.pushScreen(new HelpScreen(HelpScreen.TYPE_MAILBOX));
+                return true;
             case 'r':
                 needRefresh = true;
                 alert("Ë¢ÐÂÖÐ", ALERT_WARNING);

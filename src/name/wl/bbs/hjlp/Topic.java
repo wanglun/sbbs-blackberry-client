@@ -23,7 +23,7 @@ public class Topic
     private int read;
 
     /* 回复数 */
-    private int replies;
+    private int replies = 0;
 
     /* 回复帖子的id */
     private int reid;

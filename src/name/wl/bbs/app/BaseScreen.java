@@ -114,6 +114,9 @@ public class BaseScreen extends MainScreen
     {
         if (!editable) {
             switch (key) {
+                case '?':
+                    bbs.pushScreen(new HelpScreen(HelpScreen.TYPE_BASE));
+                    return true;
                 case 'v':
                     bbs.pushScreen(new MailBoxScreen(MailboxJSON.INBOX));
                     return true;

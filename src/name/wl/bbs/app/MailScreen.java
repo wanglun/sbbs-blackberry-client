@@ -113,6 +113,9 @@ public class MailScreen extends BaseScreen
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
+            case '?':
+                bbs.pushScreen(new HelpScreen(HelpScreen.TYPE_MAIL));
+                return true;
             case 'q':
                 bbs.popScreen(this);
                 return true;

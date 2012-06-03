@@ -72,6 +72,9 @@ public class ThreadScreen extends BaseScreen
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
+            case '?':
+                bbs.pushScreen(new HelpScreen(HelpScreen.TYPE_THREAD));
+                return true;
             case 'p':
                 bbs.pushScreen(new PostScreen(new Board(topic.getBoard())));
                 break;
