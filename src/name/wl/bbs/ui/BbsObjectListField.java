@@ -121,12 +121,6 @@ public class BbsObjectListField extends ObjectListField
     {
         int old_color = graphics.getColor();
 
-        if (index % 2 == 1 && getSelectedIndex() != index) {
-            graphics.setColor(0xF3F3F3);
-            graphics.fillRect(0, y, width, getRowHeight());
-            graphics.setColor(old_color);
-        }
-
         graphics.setColor(Color.GRAY);
         graphics.drawLine(0, y + getRowHeight() - 1, width, y + getRowHeight() - 1);
         graphics.setColor(old_color);
