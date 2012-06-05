@@ -3,6 +3,8 @@ package name.wl.bbs.app;
 import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.component.Dialog;
+import net.rim.device.api.ui.MenuItem;
+import net.rim.device.api.ui.Keypad;
 
 import name.wl.bbs.util.*;
 import name.wl.bbs.ui.*;
@@ -27,6 +29,9 @@ public class BaseScreen extends MainScreen
 
         statusbar = new statusbarManager();
         setTitle(statusbar);
+
+        addMenuItem(helpMenuItem);
+        addMenuItem(exitMenuItem);
     }
 
     public void setStatusbarTitle(String title)
@@ -148,4 +153,20 @@ public class BaseScreen extends MainScreen
     {
         return super.trackwheelRoll(amount, status, time);
     }
+
+    final MenuItem helpMenuItem = new MenuItem("Help", 0, 0)
+    {       
+        public void run()
+        { 
+            bbs.pushScreen(new HelpScreen(HelpScreen.TYPE_BASE));
+        }
+    }; 
+
+    final MenuItem exitMenuItem = new MenuItem("Exit", 0, 0)
+    {       
+        public void run()
+        { 
+            System.exit(0);
+        }
+    }; 
 }

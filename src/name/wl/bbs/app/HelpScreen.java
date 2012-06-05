@@ -119,7 +119,6 @@ public class HelpScreen extends BaseScreen
         items.addElement(new HelpListItem("M", "切换到保留模式"));
         items.addElement(new HelpListItem("D", "切换到文摘模式"));
         items.addElement(new HelpListItem("Z", "切换到置顶模式"));
-        items.addElement(new HelpListItem("p", "上一篇文章"));
     }
 
     private void fav(Vector items) {

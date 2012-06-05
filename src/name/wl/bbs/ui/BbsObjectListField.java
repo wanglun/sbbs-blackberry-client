@@ -4,9 +4,12 @@ import java.util.Vector;
 
 import name.wl.bbs.app.Bbs;
 import name.wl.bbs.util.*;
+import name.wl.bbs.app.BaseScreen;
 
 import net.rim.device.api.ui.component.*;
 import net.rim.device.api.ui.Font;
+import net.rim.device.api.ui.Keypad;
+import net.rim.device.api.ui.KeypadUtil;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Graphics;
 
@@ -49,19 +52,13 @@ public class BbsObjectListField extends ObjectListField
 
     protected boolean keyChar(char key, int status, int time)
     {
-        int idx = this.getSelectedIndex();
+        BaseScreen screen = (BaseScreen)getScreen();
         switch (key) {
             case 'j':
-                if (idx < this.getSize() - 1) {
-                    this.setSelectedIndex(idx + 1);
-                } else if (idx == this.getSize() - 1) {
-                    loadMore();
-                }
+                screen.trackwheelRoll(1, 0, 0);
                 return true;
             case 'k':
-                if (idx > 0) {
-                    this.setSelectedIndex(idx - 1);
-                }
+                screen.trackwheelRoll(-1, 0, 0);
                 return true;
             case 'q':
                 if (this.setPrevious()) {
@@ -86,11 +83,45 @@ public class BbsObjectListField extends ObjectListField
         return false;
     }
 
+    protected boolean keyRepeat(int keycode, int time)
+    {
+        BaseScreen screen = (BaseScreen)getScreen();
+        int j = KeypadUtil.getKeyCode('j', 0, KeypadUtil.MODE_UI_CURRENT_LOCALE);
+        int k = KeypadUtil.getKeyCode('k', 0, KeypadUtil.MODE_UI_CURRENT_LOCALE);
+        if (keycode == j) {
+            screen.trackwheelRoll(1, 0, 0);
+            return true;
+        } else if (keycode == k) {
+            screen.trackwheelRoll(-1, 0, 0);
+            return true;
+        }
+
+        return super.keyRepeat(keycode, time);
+    }
+
+    public int moveFocus(int amount, int status, int time)
+    {
+        int idx = this.getSelectedIndex();
+        if (amount > 0 && idx == this.getSize() - 1) {
+            loadMore();
+        }
+
+        return super.moveFocus(amount, status, time);
+    }
+
+    public boolean trackwheelClick(int status, int time)
+    {
+        // fake 'enter'
+        keyChar((char)Keypad.KEY_ENTER, status, time);
+
+        return true;
+    }
+
     public void drawListRow(ListField listField, Graphics graphics, int index, int y, int width)
     {
         int old_color = graphics.getColor();
 
-        if (index % 2 == 0 && getSelectedIndex() != index) {
+        if (index % 2 == 1 && getSelectedIndex() != index) {
             graphics.setColor(0xF3F3F3);
             graphics.fillRect(0, y, width, getRowHeight());
             graphics.setColor(old_color);
