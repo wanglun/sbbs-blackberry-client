@@ -1,16 +1,21 @@
 package name.wl.bbs.ui;
 
-public class HelpListItem
+public class InfoListItem
 {
     private String key = null;
     private String label;
 
-    public HelpListItem(String label)
+    public InfoListItem(String label)
     {
         this(null, label);
     }
 
-    public HelpListItem(String key, String label)
+    public InfoListItem(String key, int i)
+    {
+        this(key, Integer.toString(i));
+    }
+
+    public InfoListItem(String key, String label)
     {
         this.key = key;
         this.label = label;

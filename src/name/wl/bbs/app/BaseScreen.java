@@ -146,6 +146,9 @@ public class BaseScreen extends MainScreen
                         }
                     }));
                     return true;
+                case 'u':
+                    bbs.pushScreen(new UserQueryScreen());
+                    return true;
             }
         }
 

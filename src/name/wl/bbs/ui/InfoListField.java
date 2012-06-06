@@ -10,19 +10,25 @@ import net.rim.device.api.ui.component.ObjectListField;
 
 import name.wl.bbs.util.*;
 
-public class HelpListField extends BbsObjectListField
+public class InfoListField extends BbsObjectListField
 {
     private Vector items;
 
-    public HelpListField(Vector items)
+    public InfoListField(Vector items)
     {
         this.items = items;
         setObjects(items);
     }
 
+    public void setItems(Vector items)
+    {
+        this.items = items;
+        setObjects(this.items);
+    }
+
     public void drawListRow(ListField listField, Graphics graphics, int index, int y, int width)
     {
-        HelpListItem i = (HelpListItem)items.elementAt(index);
+        InfoListItem i = (InfoListItem)items.elementAt(index);
 
         super.drawListRow(listField, graphics, index, y, width);
 
