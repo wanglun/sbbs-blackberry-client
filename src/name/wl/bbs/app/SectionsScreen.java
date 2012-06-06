@@ -5,20 +5,21 @@ import net.rim.device.api.ui.*;
 import name.wl.bbs.ui.*;
 import name.wl.bbs.util.*;
 import name.wl.bbs.hjlp.*;
-import name.wl.bbs.json.SectionsJSON;
+import name.wl.bbs.json.*;
 
 public class SectionsScreen extends BaseScreen
 {
-    private SectionsJSON sections;
     private Vector boards;
     private SectionListField list;
 
     public SectionsScreen()
     {
-        sections = new SectionsJSON();
-
         alert("加载中", ALERT_WARNING);
-        sections.load(loadListener);
+        new SectionsJSON().load(loadListener);
+
+        if (bbs.getBoards() == null) {
+            new BoardListJSON().load(loadBoardsListener);
+        }
 
         setStatusbarTitle("分类讨论区");
     }
@@ -50,6 +51,18 @@ public class SectionsScreen extends BaseScreen
         }
     };
 
+    public Listener loadBoardsListener = new Listener() {
+        public void callback(Object o)
+        {
+            BoardListJSON obj = (BoardListJSON)o;
+            if (obj.getSuccess()) {
+                bbs.setBoards(new SelectList(obj.getBoards()));
+            } else {
+                alert(obj.getError(), ALERT_ERROR);
+            }
+        }
+    };
+
     public Listener refreshListener = new Listener() {
         public void callback(Object o)
         {
@@ -68,6 +81,18 @@ public class SectionsScreen extends BaseScreen
         }
     };
 
+    public Listener refreshBoardsListener = new Listener() {
+        public void callback(Object o)
+        {
+            BoardListJSON obj = (BoardListJSON)o;
+            if (obj.getSuccess()) {
+                bbs.setBoards(new SelectList(obj.getBoards()));
+            } else {
+                alert(obj.getError(), ALERT_ERROR);
+            }
+        }
+    };
+
     protected boolean keyChar(char key, int status, int time)
     {
         switch (key) {
@@ -77,7 +102,8 @@ public class SectionsScreen extends BaseScreen
             case 'r':
                 if (this.list != null) {
                     alert("刷新中", ALERT_WARNING);
-                    sections.refresh(refreshListener);
+                    new SectionsJSON().refresh(refreshListener);
+                    new BoardListJSON().load(loadBoardsListener);
                 }
                 return true;
         }

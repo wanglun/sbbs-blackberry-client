@@ -19,6 +19,9 @@ public class Bbs extends UiApplication
     private Vector hotTopics = null;
     private Vector hotBoards = null;
 
+    // auto-complete
+    private SelectList boards = null;
+
     private Timer tasksTimer = null;
 
     private static Bbs bbs = null;
@@ -116,6 +119,16 @@ public class Bbs extends UiApplication
     public Vector getHotBoards()
     {
         return this.hotBoards;
+    }
+
+    public void setBoards(SelectList boards)
+    {
+        this.boards = boards;
+    }
+
+    public SelectList getBoards()
+    {
+        return this.boards;
     }
     
     public Timer getTasksTimer()

@@ -36,6 +36,13 @@ public class SplashScreen extends BaseScreen
                 bbs.setSections(sections.getBoards());
             }
 
+            // get the cached boards
+            BoardListJSON boards = new BoardListJSON();
+            boards.loadCached();
+            if (boards.getSuccess()) {
+                bbs.setBoards(new SelectList(boards.getBoards()));
+            }
+
             destroy();
         }
     }

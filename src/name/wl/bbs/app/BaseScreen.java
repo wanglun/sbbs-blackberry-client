@@ -9,6 +9,7 @@ import net.rim.device.api.ui.Keypad;
 import name.wl.bbs.util.*;
 import name.wl.bbs.ui.*;
 import name.wl.bbs.json.*;
+import name.wl.bbs.hjlp.*;
 
 public class BaseScreen extends MainScreen
 {
@@ -137,6 +138,13 @@ public class BaseScreen extends MainScreen
                     /* alt + 'h' */
                 case ':':
                     bbs.pushScreen(new HotSectionMenuScreen());
+                    return true;
+                case 's':
+                    bbs.pushModalScreen(new SelectBoardScreen(new Listener() {
+                        public void callback(Object o) {
+                            bbs.pushScreen(new BoardScreen(new Board((String)o)));
+                        }
+                    }));
                     return true;
             }
         }

@@ -39,6 +39,7 @@ public class Board
     public Board(String name)
     {
         this.name = name;
+        this.leaf = true;
     }
 
     public static Board BoardJSON(String json) throws JSONException
