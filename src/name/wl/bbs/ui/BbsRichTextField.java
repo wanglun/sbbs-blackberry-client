@@ -7,7 +7,7 @@ import net.rim.device.api.system.Clipboard;
 
 import name.wl.bbs.app.BaseScreen;
 
-public class BbsRichTextField extends RichTextField
+public class BbsRichTextField extends ActiveRichTextField
 {
     private boolean visualMode = false;
 

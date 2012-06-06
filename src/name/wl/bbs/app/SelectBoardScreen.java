@@ -20,13 +20,40 @@ public class SelectBoardScreen extends BaseScreen
         this.listener = listener;
 
         boardFilter = new KeywordFilterField();
+
+        if (bbs.getBoards() == null) {
+            alert("加载中", ALERT_WARNING);
+            new BoardListJSON().load(loadBoardsListener);
+        } else {
+            addBoardFilter();
+        }
+
+    }
+
+    private void addBoardFilter()
+    {
         boardFilter.setSourceList(bbs.getBoards(), bbs.getBoards());
         boardFilter.setKeywordField(new SelectEditField("选择版面: "));
-
         add(boardFilter);
-
         setTitle(boardFilter.getKeywordField());
     }
+
+    public Listener loadBoardsListener = new Listener() {
+        public void callback(Object o)
+        {
+            BoardListJSON obj = (BoardListJSON)o;
+            if (obj.getSuccess()) {
+                bbs.setBoards(new SelectList(obj.getBoards()));
+                bbs.invokeLater(new Runnable() {
+                    public void run() {
+                        addBoardFilter();
+                    }
+                });
+            } else {
+                alert(obj.getError(), ALERT_ERROR);
+            }
+        }
+    };
 
     protected boolean keyChar(char key, int status, int time)
     {

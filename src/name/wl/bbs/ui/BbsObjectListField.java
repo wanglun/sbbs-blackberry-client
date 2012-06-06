@@ -111,10 +111,7 @@ public class BbsObjectListField extends ObjectListField
 
     public boolean trackwheelClick(int status, int time)
     {
-        // fake 'enter'
-        keyChar((char)Keypad.KEY_ENTER, status, time);
-
-        return true;
+        return super.trackwheelClick(status, time);
     }
 
     public void drawListRow(ListField listField, Graphics graphics, int index, int y, int width)
