@@ -9,17 +9,17 @@ public class Cache
         return (long)key.hashCode();
     }
 
-    public static void set(String key, String json)
+    public static void set(String key, Object obj)
     {
         PersistentObject persist = PersistentStore.getPersistentObject(hashKey(key));
-        persist.setContents(json);
+        persist.setContents(obj);
         persist.commit();
     }
 
-    public static String get(String key)
+    public static Object get(String key)
     {
         PersistentObject persist = PersistentStore.getPersistentObject(hashKey(key));
-        return (String)persist.getContents();
+        return persist.getContents();
     }
 
     public static void del(String key)

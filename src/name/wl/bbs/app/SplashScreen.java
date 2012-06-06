@@ -19,6 +19,9 @@ public class SplashScreen extends BaseScreen
     {
         public void run()
         {
+            //load settings
+            bbs.setSettings(new Settings());
+
             // get the cached token
             LoginJSON login = new LoginJSON();
             login.loadCached();

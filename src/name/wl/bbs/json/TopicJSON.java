@@ -23,7 +23,6 @@ public class TopicJSON extends ApiJSON
     /* 可选 起始下标 */
     private int start;
 
-    private static int LIMIT = 10;
     /* 可选 最多话题个数 */
     private int limit;
 
@@ -32,22 +31,26 @@ public class TopicJSON extends ApiJSON
 
     public TopicJSON(Topic topic)
     {
-        this(topic, false, 0, LIMIT);
+        this(topic, false, 0, 0);
     }
     public TopicJSON(Topic topic, boolean raw)
     {
-        this(topic, raw, 0, LIMIT);
+        this(topic, raw, 0, 0);
     }
     public TopicJSON(Topic topic, boolean raw, int start)
     {
-        this(topic, raw, start, LIMIT);
+        this(topic, raw, start, 0);
     }
     public TopicJSON(Topic topic, boolean raw, int start, int limit)
     {
         this.topic = topic;
         this.raw = raw;
         this.start = start;
-        this.limit = limit;
+
+        if (limit > 0)
+            this.limit = limit;
+        else
+            this.limit = bbs.getSettings().getLoadTopics();
 
         this.topics = null;
     }

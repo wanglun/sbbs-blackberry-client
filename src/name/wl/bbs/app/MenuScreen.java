@@ -21,6 +21,7 @@ public class MenuScreen extends BaseScreen
         items.addElement(new MenuListItem("信箱", mailListener));
         items.addElement(new MenuListItem("谈天说地", talkListener));
         items.addElement(new MenuListItem("通知箱", notificationListener));
+        items.addElement(new MenuListItem("设置", settingListener));
         items.addElement(new MenuListItem(bbs.getId() + "的帐号", accountListener));
 
         list = new MenuListField(items);
@@ -29,8 +30,7 @@ public class MenuScreen extends BaseScreen
         setStatusbarTitle("主菜单");
 
         // start the tasks timer
-        // FIXME add period setting
-        bbs.getTasksTimer().schedule(new NotificationsTask(), new Date(), 300000);
+        bbs.scheduleNotificationsTask();
     }
 
     public Listener sectionsListener = new Listener() {
@@ -72,6 +72,13 @@ public class MenuScreen extends BaseScreen
         public void callback(Object o)
         {
             bbs.pushScreen(new NotificationMenuScreen());
+        }
+    };
+
+    public Listener settingListener = new Listener() {
+        public void callback(Object o)
+        {
+            bbs.pushScreen(new SettingScreen());
         }
     };
 

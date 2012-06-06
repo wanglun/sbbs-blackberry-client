@@ -37,7 +37,6 @@ public class BoardJSON extends ApiJSON
     /* 可选 起始下标 */
     private int start;
 
-    private static int LIMIT = 10;
     /* 可选 最多话题个数 */
     private int limit;
 
@@ -54,22 +53,26 @@ public class BoardJSON extends ApiJSON
 
     public BoardJSON(Board board)
     {
-        this(board, NORMAL, 0, LIMIT);
+        this(board, NORMAL, 0, 0);
     }
     public BoardJSON(Board board, int mode)
     {
-        this(board, mode, 0, LIMIT);
+        this(board, mode, 0, 0);
     }
     public BoardJSON(Board board, int mode, int start)
     {
-        this(board, mode, start, LIMIT);
+        this(board, mode, start, 0);
     }
     public BoardJSON(Board board, int mode, int start, int limit)
     {
         this.board = board;
         this.mode = mode;
         this.start = start;
-        this.limit = limit;
+
+        if (limit > 0)
+            this.limit = limit;
+        else
+            this.limit = bbs.getSettings().getLoadTopics();
 
         this.total = 0;
         this.topics = null;

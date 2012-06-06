@@ -47,7 +47,7 @@ public class ApiJSON
     {
         String key = getKey();
         if (key != null) {
-            return Cache.get(key);
+            return (String)Cache.get(key);
         }
 
         return null;

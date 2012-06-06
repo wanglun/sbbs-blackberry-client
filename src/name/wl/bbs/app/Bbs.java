@@ -10,6 +10,8 @@ public class Bbs extends UiApplication
     public static final long APP_GUID = 0xe757c870033b1010L;
     public static final String APP_NAME = "SBBS Client";
 
+    private Settings settings = null;
+
     private String id = null;
     private String name = null;
     private String token = null;
@@ -101,6 +103,16 @@ public class Bbs extends UiApplication
         return this.sections;
     }
 
+    public void setSettings(Settings i)
+    {
+        this.settings = i;
+    }
+
+    public Settings getSettings()
+    {
+        return this.settings;
+    }
+
     public void setHotTopics(Vector hotTopics)
     {
         this.hotTopics = hotTopics;
@@ -134,5 +146,10 @@ public class Bbs extends UiApplication
     public Timer getTasksTimer()
     {
         return this.tasksTimer;
+    }
+
+    public void scheduleNotificationsTask()
+    {
+        this.tasksTimer.schedule(new NotificationsTask(), new Date(), this.settings.getUpdateDelay() * 60 * 1000);
     }
 }
