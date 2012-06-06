@@ -10,9 +10,7 @@ import net.rim.device.api.ui.component.ObjectListField;
 
 import name.wl.bbs.util.*;
 import name.wl.bbs.hjlp.*;
-import name.wl.bbs.app.PostScreen;
-import name.wl.bbs.app.ArticleScreen;
-import name.wl.bbs.app.UserScreen;
+import name.wl.bbs.app.*;
 
 public class ThreadListField extends BbsObjectListField
 {
@@ -76,6 +74,9 @@ public class ThreadListField extends BbsObjectListField
                 return true;
             case 'a':
                 bbs.pushScreen(new UserScreen(new User(t.getAuthor())));
+                return true;
+            case 'i':
+                bbs.pushScreen(new InfoScreen(t));
                 return true;
         }
 

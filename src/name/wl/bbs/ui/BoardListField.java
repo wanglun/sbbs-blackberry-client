@@ -10,7 +10,7 @@ import net.rim.device.api.ui.component.ObjectListField;
 
 import name.wl.bbs.util.*;
 import name.wl.bbs.hjlp.*;
-import name.wl.bbs.app.BoardScreen;
+import name.wl.bbs.app.*;
 
 public class BoardListField extends BbsObjectListField
 {
@@ -68,10 +68,10 @@ public class BoardListField extends BbsObjectListField
             return super.keyChar(key, status, time);
         }
 
+        Board b = (Board)current.elementAt(idx);
         switch (key) {
             case Keypad.KEY_ENTER:
             case 'o':
-                Board b = (Board)current.elementAt(idx);
                 if (b.isLeaf() == false) {
                     this.preVector.push(this.current);
                     this.preIndex.push(new Integer(idx));
@@ -79,6 +79,9 @@ public class BoardListField extends BbsObjectListField
                 } else {
                     bbs.pushScreen(new BoardScreen(b));
                 }
+                return true;
+            case 'i':
+                bbs.pushScreen(new InfoScreen(b));
                 return true;
         }
 

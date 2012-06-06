@@ -13,9 +13,6 @@ public class UserScreen extends BaseScreen
     private User user;
     private UserJSON userJSON;
 
-    private BbsLabelField id;
-    private BbsLabelField username;
-
     private Vector items;
     private InfoListField list;
 

@@ -95,6 +95,7 @@ public class HelpScreen extends BaseScreen
         items.addElement(new InfoListItem("H", "查看十大话题"));
         items.addElement(new InfoListItem(":", "查看分区十大"));
         items.addElement(new InfoListItem("s", "选择版面"));
+        items.addElement(new InfoListItem("i", "查看帖子或版面信息"));
     }
 
     private void article(Vector items) {

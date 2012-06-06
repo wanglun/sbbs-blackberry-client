@@ -15,6 +15,11 @@ public class InfoListItem
         this(key, Integer.toString(i));
     }
 
+    public InfoListItem(String key, boolean i)
+    {
+        this(key, i ? "ÊÇ" : "·ñ");
+    }
+
     public InfoListItem(String key, String label)
     {
         this.key = key;
