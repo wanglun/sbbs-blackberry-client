@@ -150,6 +150,7 @@ public class Bbs extends UiApplication
 
     public void scheduleNotificationsTask()
     {
-        this.tasksTimer.schedule(new NotificationsTask(), new Date(), this.settings.getUpdateDelay() * 60 * 1000);
+        NotificationsTask.getInstance().cancel();
+        this.tasksTimer.schedule(NotificationsTask.getInstance(), new Date(), this.settings.getUpdateDelay() * 60 * 1000);
     }
 }

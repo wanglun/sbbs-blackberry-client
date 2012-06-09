@@ -13,6 +13,7 @@ public class NotificationsTask extends TimerTask
     private static Vector ats = null;
     private static Vector replies = null;
     private Listener successListener = null;
+    private static NotificationsTask task = null;
 
     public NotificationsTask()
     {
@@ -21,6 +22,22 @@ public class NotificationsTask extends TimerTask
     public NotificationsTask(Listener listener)
     {
         successListener = listener;
+    }
+
+    public static NotificationsTask getInstance()
+    {
+        if (task == null) {
+            task = new NotificationsTask();
+        }
+        
+        return task;
+    }
+
+    public boolean cancel()
+    {
+        task = null;
+
+        return super.cancel();
     }
 
     public void run()
