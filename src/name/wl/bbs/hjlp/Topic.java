@@ -126,6 +126,7 @@ public class Topic
         topic.setAuthor(data.getString("user"));
         topic.setBoard(data.getString("board"));
         topic.setTitle(data.getString("title"));
+        topic.setTime(data.getLong("time"));
 
         return topic;
     }
