@@ -2,6 +2,7 @@ package name.wl.bbs.ui;
 
 import java.util.*;
 import net.rim.device.api.ui.DrawStyle;
+import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Keypad;
@@ -98,10 +99,11 @@ public class BoardListField extends BbsObjectListField
             graphics.setColor(Color.GREEN);
         }
 
+        int w = Font.getDefault().getAdvance('+');
         if (!b.isLeaf()) {
-            graphics.drawText("+", 0, y, DrawStyle.ELLIPSIS, 16);
+            graphics.drawText("+", 0, y, DrawStyle.ELLIPSIS, w);
         }
 
-        graphics.drawText(b.getName() + " - " + b.getDescription(), 16, y, DrawStyle.ELLIPSIS, width - 16);
+        graphics.drawText(b.getName() + " - " + b.getDescription(), w, y, DrawStyle.ELLIPSIS, width - 16);
     }
 }
