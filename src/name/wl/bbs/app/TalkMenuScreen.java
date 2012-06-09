@@ -28,7 +28,11 @@ public class TalkMenuScreen extends BaseScreen
     public Listener queryListener = new Listener() {
         public void callback(Object o)
         {
-            bbs.pushScreen(new UserQueryScreen());
+            bbs.pushModalScreen(new SelectUserScreen(new Listener() {
+                public void callback(Object o) {
+                    bbs.pushScreen(new UserScreen(((User)o)));
+                }
+            }));
         }
     };
 

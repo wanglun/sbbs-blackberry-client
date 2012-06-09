@@ -152,7 +152,11 @@ public class BaseScreen extends MainScreen
                     }));
                     return true;
                 case 'u':
-                    bbs.pushScreen(new UserQueryScreen());
+                    bbs.pushModalScreen(new SelectUserScreen(new Listener() {
+                        public void callback(Object o) {
+                            bbs.pushScreen(new UserScreen(((User)o)));
+                        }
+                    }));
                     return true;
             }
         }

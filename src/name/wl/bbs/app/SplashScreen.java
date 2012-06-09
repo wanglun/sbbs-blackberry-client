@@ -46,6 +46,13 @@ public class SplashScreen extends BaseScreen
                 bbs.setBoards(new SelectList(boards.getBoards()));
             }
 
+            // get the cached friends
+            FriendsAllJSON friends = new FriendsAllJSON();
+            friends.loadCached();
+            if (friends.getSuccess()) {
+                bbs.setFriends(new SelectList(friends.getFriends()));
+            }
+
             destroy();
         }
     }

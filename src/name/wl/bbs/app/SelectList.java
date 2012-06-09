@@ -39,8 +39,8 @@ class SelectList implements ReadableList, KeywordProvider
         return this.vector.size();
     }
 
-    public String[] getKeywords( Object element )
+    public String[] getKeywords(Object element)
     {        
         return StringUtilities.stringToWords(element.toString());
-    }  
+    } 
 }

@@ -90,6 +90,11 @@ public class User
         return users;
     }
 
+    public String toString()
+    {
+        return id + " - " + name;
+    }
+
     public String getId()
     {
         return id;

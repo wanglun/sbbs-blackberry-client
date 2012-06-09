@@ -23,6 +23,7 @@ public class Bbs extends UiApplication
 
     // auto-complete
     private SelectList boards = null;
+    private SelectList friends = null;
 
     private Timer tasksTimer = null;
 
@@ -141,6 +142,16 @@ public class Bbs extends UiApplication
     public SelectList getBoards()
     {
         return this.boards;
+    }
+
+    public void setFriends(SelectList friends)
+    {
+        this.friends = friends;
+    }
+
+    public SelectList getFriends()
+    {
+        return this.friends;
     }
     
     public Timer getTasksTimer()
