@@ -27,6 +27,7 @@ public class FriendsScreen extends BaseScreen
             FriendsJSON obj = (FriendsJSON)o;
             if (obj.getSuccess()) {
                 friends = obj.getFriends();
+                bbs.setFriends(new SelectList(friends));
                 list = new FriendListField(friends, friendListener);
                 bbs.invokeLater(new Runnable() {
                     public void run() {

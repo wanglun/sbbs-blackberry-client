@@ -114,4 +114,23 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
             }
         }
     };
+
+    protected boolean keyChar(char key, int status, int time)
+    {
+        switch (key) {
+            case '@':
+                if (getFieldWithFocus() == content) {
+                    content.insert("@");
+                    bbs.pushModalScreen(new SelectUserScreen(new Listener() {
+                        public void callback(Object o) {
+                            content.insert(((User)o).getId());
+                        }
+                    }));
+                    return true;
+                }
+                break;
+        }
+
+        return super.keyChar(key, status, time);
+    }
 }

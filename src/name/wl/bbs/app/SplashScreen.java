@@ -47,7 +47,7 @@ public class SplashScreen extends BaseScreen
             }
 
             // get the cached friends
-            FriendsAllJSON friends = new FriendsAllJSON();
+            FriendsJSON friends = new FriendsJSON();
             friends.loadCached();
             if (friends.getSuccess()) {
                 bbs.setFriends(new SelectList(friends.getFriends()));

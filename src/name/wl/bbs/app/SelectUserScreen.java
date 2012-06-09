@@ -24,7 +24,7 @@ public class SelectUserScreen extends BaseScreen
 
         if (bbs.getFriends() == null) {
             alert("Мгдижа", ALERT_WARNING);
-            new FriendsAllJSON().load(loadListener);
+            new FriendsJSON().load(loadListener);
         } else {
             addUserFilter();
         }
@@ -42,7 +42,7 @@ public class SelectUserScreen extends BaseScreen
     public Listener loadListener = new Listener() {
         public void callback(Object o)
         {
-            FriendsAllJSON obj = (FriendsAllJSON)o;
+            FriendsJSON obj = (FriendsJSON)o;
             if (obj.getSuccess()) {
                 bbs.setFriends(new SelectList(obj.getFriends()));
                 bbs.invokeLater(new Runnable() {
