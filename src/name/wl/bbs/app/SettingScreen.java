@@ -30,6 +30,23 @@ public class SettingScreen extends BaseScreen
         setStatusbarTitle("…Ë÷√");
     }
 
+    protected boolean keyChar(char key, int status, int time)
+    {
+        switch (key) {
+            case 'q':
+                if (isDirty()) {
+                    if (onSavePrompt()) {
+                        bbs.popScreen(this);
+                    }
+                } else {
+                    bbs.popScreen(this);
+                }
+                return true;
+        }
+
+        return super.keyChar(key, status, time);
+    }
+
     protected boolean onSavePrompt()
     {
         int ret = Dialog.ask(Dialog.D_SAVE, "±£¥Ê…Ë÷√£ø");
