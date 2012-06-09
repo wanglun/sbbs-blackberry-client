@@ -23,7 +23,6 @@ public class MailboxJSON extends ApiJSON
     /* 可选 起始下标 */
     private int start;
 
-    private static int LIMIT = 10;
     /* 可选 最多话题个数 */
     private int limit;
 
@@ -33,17 +32,21 @@ public class MailboxJSON extends ApiJSON
 
     public MailboxJSON(int type)
     {
-        this(type, 0, LIMIT);
+        this(type, 0, 0);
     }
     public MailboxJSON(int type, int start)
     {
-        this(type, start, LIMIT);
+        this(type, start, 0);
     }
     public MailboxJSON(int type, int start, int limit)
     {
         this.type = type;
         this.start = start;
-        this.limit = limit;
+
+        if (limit > 0)
+            this.limit = limit;
+        else
+            this.limit = bbs.getSettings().getLoadTopics();
 
         this.mails = null;
     }

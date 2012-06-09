@@ -17,7 +17,6 @@ public class SearchTopicsJSON extends ApiJSON
     /* 可选 起始下标 */
     private int start;
 
-    private static int LIMIT = 10;
     /* 可选 最多话题个数 */
     private int limit;
 
@@ -30,11 +29,11 @@ public class SearchTopicsJSON extends ApiJSON
 
     public SearchTopicsJSON(String keys)
     {
-        this(keys, 0, LIMIT, CHARSET);
+        this(keys, 0, 0, CHARSET);
     }
     public SearchTopicsJSON(String keys, int start)
     {
-        this(keys, start, LIMIT, CHARSET);
+        this(keys, start, 0, CHARSET);
     }
     public SearchTopicsJSON(String keys, int start, int limit)
     {
@@ -44,8 +43,12 @@ public class SearchTopicsJSON extends ApiJSON
     {
         this.keys = keys;
         this.start = start;
-        this.limit = limit;
         this.charset = charset;
+
+        if (limit > 0)
+            this.limit = limit;
+        else
+            this.limit = bbs.getSettings().getLoadTopics();
 
         this.topics = null;
     }

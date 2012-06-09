@@ -10,8 +10,6 @@ import name.wl.bbs.json.*;
 
 public class ThreadScreen extends BaseScreen
 {
-    private static final int LIMIT = 10;
-
     private Topic topic;
     private ThreadListField list;
 
@@ -63,7 +61,7 @@ public class ThreadScreen extends BaseScreen
         {
             if (!this.isLoading()) {
                 alert("¼ÓÔØ¸ü¶à", ALERT_WARNING);
-                new TopicJSON(topic, false, list.getSize(), LIMIT).load(loadListener);
+                new TopicJSON(topic, false, list.getSize()).load(loadListener);
                 this.setLoading();
             }
         }

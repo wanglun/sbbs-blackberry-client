@@ -8,7 +8,7 @@ public class Settings
     private Hashtable settings;
 
     private static final int updateDelayDefault = 10;
-    private static final int loadTopicsDefault = 10;
+    private static final int loadTopicsDefault = 20;
 
     private static final String updateDelay = "updateDelay";
     private static final String loadTopics = "loadTopics";

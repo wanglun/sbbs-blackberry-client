@@ -35,6 +35,7 @@ public class MailScreen extends BaseScreen
         } else if (mails != null) {
             this.mails = mails;
             this.mail = (Mail)this.mails.getMails().elementAt(this.mails.getSelectedIndex());
+            setStatusbarIndex(1, mails.getSize());
             new MailJSON(this.mail).load(loadListener);
         }
 
@@ -61,6 +62,10 @@ public class MailScreen extends BaseScreen
 
     public void update()
     {
+        if (mails != null) {
+            setStatusbarIndex(mails.getSelectedIndex() + 1, mails.getSize());
+        }
+
         header.invalidate();
         content.setText(mail.getContent());
         // FIXME

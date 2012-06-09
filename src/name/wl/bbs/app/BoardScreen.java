@@ -11,8 +11,6 @@ import name.wl.bbs.json.*;
 
 public class BoardScreen extends BaseScreen
 {
-    private static final int LIMIT = 10;
-
     private Board board;
     private TopicListField list = null;
     private boolean needRefresh = false;
@@ -75,7 +73,7 @@ public class BoardScreen extends BaseScreen
         {
             if (!this.isLoading()) {
                 alert("¼ÓÔØ¸ü¶à", ALERT_WARNING);
-                new BoardJSON(board, mode, list.getSize(), LIMIT).load(loadListener);
+                new BoardJSON(board, mode, list.getSize()).load(loadListener);
                 this.setLoading();
             }
         }

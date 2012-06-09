@@ -10,8 +10,6 @@ import name.wl.bbs.json.*;
 
 public class MailBoxScreen extends BaseScreen
 {
-    private static final int LIMIT = 10;
-
     private MailListField list = null;
     private boolean needRefresh = false;
 
@@ -73,7 +71,7 @@ public class MailBoxScreen extends BaseScreen
         {
             if (!this.isLoading()) {
                 alert("¼ÓÔØ¸ü¶à", ALERT_WARNING);
-                new MailboxJSON(type, list.getSize(), LIMIT).load(loadListener);
+                new MailboxJSON(type, list.getSize()).load(loadListener);
                 this.setLoading();
             }
         }
