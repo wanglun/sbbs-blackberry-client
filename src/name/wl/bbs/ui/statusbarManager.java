@@ -13,6 +13,8 @@ public class statusbarManager extends Field
 {
     private String title = "";
     private String info = "";
+    private int total = 0;
+    private int current = 0;
 
     private int info_color;
 
@@ -23,6 +25,14 @@ public class statusbarManager extends Field
     public void setTitle(String str)
     {
         title = str;
+        invalidate();
+    }
+
+    public void setIndex(int c, int t)
+    {
+        current = c;
+        total = t;
+
         invalidate();
     }
 
@@ -46,11 +56,19 @@ public class statusbarManager extends Field
     protected void paint(Graphics graphics)
     {
         int width = Display.getWidth();
+        int old_color = graphics.getColor();
 
         graphics.drawText(title, 2, 2);
 
         graphics.setColor(info_color);
         graphics.drawText(info, (int)(width*0.6), 2, DrawStyle.RIGHT, (int)(width*0.4 - 30));
+
+        if (info.length() == 0) {
+            if (total > 0 && current > 0) {
+                graphics.setColor(old_color);
+                graphics.drawText(current + "/" + total, (int)(width*0.6), 2, DrawStyle.RIGHT, (int)(width*0.4 - 30));
+            }
+        }
 
         //FIXME status icon
     }

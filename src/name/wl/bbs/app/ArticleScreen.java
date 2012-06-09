@@ -38,9 +38,12 @@ public class ArticleScreen extends BaseScreen
         } else if (thread != null) {
             this.thread = thread;
             this.topic = (Topic)this.thread.getTopics().elementAt(this.thread.getSelectedIndex());
+            setStatusbarIndex(1, thread.getSize());
         } else if (topics != null) {
             this.topics = topics;
             this.topic = (Topic)this.topics.getTopics().elementAt(this.topics.getSelectedIndex());
+            setStatusbarIndex(1, topics.getSize());
+
             loadingAlert();
             new TopicJSON(this.topic, false, 0, 1).load(loadListener);
         }
@@ -56,6 +59,12 @@ public class ArticleScreen extends BaseScreen
 
     public void update()
     {
+        if (thread != null) {
+            setStatusbarIndex(thread.getSelectedIndex() + 1, thread.getSize());
+        } else if (topics != null) {
+            setStatusbarIndex(topics.getSelectedIndex() + 1, topics.getSize());
+        }
+
         header.invalidate();
         content.setText(topic.getContent());
         // FIXME
@@ -133,46 +142,46 @@ public class ArticleScreen extends BaseScreen
                 scroll(Manager.BOTTOMMOST);
                 return true;
             case 'n':
-                if (this.thread != null) {
-                    int idx = this.thread.getSelectedIndex();
-                    int size = this.thread.getSize();
+                if (thread != null) {
+                    int idx = thread.getSelectedIndex();
+                    int size = thread.getSize();
                     if (idx < size - 1) {
-                        this.thread.setSelectedIndex(idx + 1);
-                        this.topic = (Topic)this.thread.getTopics().elementAt(idx + 1);
+                        thread.setSelectedIndex(idx + 1);
+                        topic = (Topic)thread.getTopics().elementAt(idx + 1);
                         update();
                     } else if (idx == size - 1) {
-                        this.thread.loadMore();
+                        thread.loadMore();
                     }
-                } else if (this.topics != null) {
-                    int idx = this.topics.getSelectedIndex();
-                    int size = this.topics.getSize();
+                } else if (topics != null) {
+                    int idx = topics.getSelectedIndex();
+                    int size = topics.getSize();
                     if (idx < size - 1) {
-                        this.topics.setSelectedIndex(idx + 1);
-                        this.topic = (Topic)this.topics.getTopics().elementAt(idx + 1);
+                        topics.setSelectedIndex(idx + 1);
+                        topic = (Topic)topics.getTopics().elementAt(idx + 1);
                         update();
                         loadingAlert();
-                        new TopicJSON(this.topic, false, 0, 1).load(loadListener);
+                        new TopicJSON(topic, false, 0, 1).load(loadListener);
                     } else if (idx == size - 1) {
-                        this.topics.loadMore();
+                        topics.loadMore();
                     }
                 }
                 return true;
             case 'p':
-                if (this.thread != null) {
-                    int idx = this.thread.getSelectedIndex();
+                if (thread != null) {
+                    int idx = thread.getSelectedIndex();
                     if (idx > 0) {
-                        this.thread.setSelectedIndex(idx - 1);
-                        this.topic = (Topic)this.thread.getTopics().elementAt(idx - 1);
+                        thread.setSelectedIndex(idx - 1);
+                        topic = (Topic)thread.getTopics().elementAt(idx - 1);
                         update();
                     }
-                } else if (this.topics != null) {
-                    int idx = this.topics.getSelectedIndex();
+                } else if (topics != null) {
+                    int idx = topics.getSelectedIndex();
                     if (idx > 0) {
-                        this.topics.setSelectedIndex(idx - 1);
-                        this.topic = (Topic)this.topics.getTopics().elementAt(idx - 1);
+                        topics.setSelectedIndex(idx - 1);
+                        topic = (Topic)topics.getTopics().elementAt(idx - 1);
                         update();
                         loadingAlert();
-                        new TopicJSON(this.topic, false, 0, 1).load(loadListener);
+                        new TopicJSON(topic, false, 0, 1).load(loadListener);
                     }
                 }
                 return true;

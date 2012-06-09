@@ -48,6 +48,11 @@ public class BaseScreen extends MainScreen
         }
     }
 
+    public void setStatusbarIndex(int current, int total)
+    {
+        statusbar.setIndex(current, total);
+    }
+
     public void setStatusbarInfoCleanId(int id)
     {
         statusbarInfoCleanId = id;

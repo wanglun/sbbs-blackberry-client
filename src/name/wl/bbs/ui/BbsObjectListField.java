@@ -41,6 +41,8 @@ public class BbsObjectListField extends ObjectListField
         Object objs[] = new Object[items.size()];
         items.copyInto(objs);
         set(objs);
+
+        setStatusbarIndex(1);
     }
 
     public void loadMore()
@@ -52,13 +54,12 @@ public class BbsObjectListField extends ObjectListField
 
     protected boolean keyChar(char key, int status, int time)
     {
-        BaseScreen screen = (BaseScreen)getScreen();
         switch (key) {
             case 'j':
-                screen.trackwheelRoll(1, 0, 0);
+                changeSelected(1);
                 return true;
             case 'k':
-                screen.trackwheelRoll(-1, 0, 0);
+                changeSelected(-1);
                 return true;
             case 'q':
                 if (this.setPrevious()) {
@@ -85,28 +86,40 @@ public class BbsObjectListField extends ObjectListField
 
     protected boolean keyRepeat(int keycode, int time)
     {
-        BaseScreen screen = (BaseScreen)getScreen();
         int j = KeypadUtil.getKeyCode('j', 0, KeypadUtil.MODE_UI_CURRENT_LOCALE);
         int k = KeypadUtil.getKeyCode('k', 0, KeypadUtil.MODE_UI_CURRENT_LOCALE);
         if (keycode == j) {
-            screen.trackwheelRoll(1, 0, 0);
+            changeSelected(1);
             return true;
         } else if (keycode == k) {
-            screen.trackwheelRoll(-1, 0, 0);
+            changeSelected(-1);
             return true;
         }
 
         return super.keyRepeat(keycode, time);
     }
 
+    protected void changeSelected(int direction)
+    {
+        moveFocus(direction, 0, 0);
+    }
+
     public int moveFocus(int amount, int status, int time)
     {
         int idx = this.getSelectedIndex();
-        if (amount > 0 && idx == this.getSize() - 1) {
-            loadMore();
+        if (amount > 0) {
+            if (idx == this.getSize() - 1) {
+                loadMore();
+            } else {
+                setSelectedIndex(idx + 1);
+            }
+        } else {
+            if (idx > 0) {
+                setSelectedIndex(idx - 1);
+            }
         }
 
-        return super.moveFocus(amount, status, time);
+        return 0;
     }
 
     public boolean trackwheelClick(int status, int time)
@@ -118,8 +131,33 @@ public class BbsObjectListField extends ObjectListField
     {
         int old_color = graphics.getColor();
 
+        if (index % 2 == 1 && getSelectedIndex() != index) {
+            graphics.setColor(0xF3F3F3);
+            graphics.fillRect(0, y, width, getRowHeight());
+            graphics.setColor(old_color);
+        }
+
         graphics.setColor(Color.GRAY);
         graphics.drawLine(0, y + getRowHeight() - 1, width, y + getRowHeight() - 1);
         graphics.setColor(old_color);
+    }
+
+    public void setSelectedIndex(int index)
+    {
+        setStatusbarIndex(index + 1);
+        super.setSelectedIndex(index);
+    }
+
+    public void setStatusbarIndex(int index)
+    {
+        BaseScreen screen = (BaseScreen)getScreen();
+        if (screen != null) {
+            screen.setStatusbarIndex(index, this.getSize());
+        }
+    }
+
+    protected void onDisplay()
+    {
+        setStatusbarIndex(1);
     }
 }
