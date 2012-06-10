@@ -75,4 +75,9 @@ public class SearchTopicsJSON extends ApiJSON
             }
         }
     }
+
+    public Vector getTopics()
+    {
+        return this.topics;
+    }
 }

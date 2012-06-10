@@ -97,6 +97,7 @@ public class HelpScreen extends BaseScreen
         items.addElement(new InfoListItem("s", "选择版面"));
         items.addElement(new InfoListItem("i", "查看帖子或版面信息"));
         items.addElement(new InfoListItem("u", "查找用户"));
+        items.addElement(new InfoListItem("/", "搜索"));
     }
 
     private void article(Vector items) {
@@ -123,6 +124,11 @@ public class HelpScreen extends BaseScreen
         items.addElement(new InfoListItem("M", "切换到保留模式"));
         items.addElement(new InfoListItem("D", "切换到文摘模式"));
         items.addElement(new InfoListItem("Z", "切换到置顶模式"));
+        items.addElement(new InfoListItem("文章列表背景色含义"));
+        items.addElement(new InfoListItem("绿色", "未读文章"));
+        items.addElement(new InfoListItem("橘色", "标记文章"));
+        items.addElement(new InfoListItem("红色", "置顶文章"));
+        items.addElement(new InfoListItem("灰色", "不可回复文章"));
     }
 
     private void fav(Vector items) {

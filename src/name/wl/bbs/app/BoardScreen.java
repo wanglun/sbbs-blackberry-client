@@ -198,6 +198,9 @@ public class BoardScreen extends BaseScreen
                     new BoardJSON(board, mode).load(loadListener);
                 }
                 return true;
+            case '/':
+                bbs.pushScreen(new SearchScreen(board.getName()));
+                return true;
         }
 
         return super.keyChar(key, status, time);

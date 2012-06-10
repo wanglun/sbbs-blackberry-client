@@ -153,7 +153,7 @@ public class Topic
         topic.setBoard(data.getString("board"));
         topic.setAuthor(data.getString("author"));
         // API目前返回的是String FIXME
-        topic.setTime(Long.parseLong(data.getString("time")));
+        //topic.setTime(Long.parseLong(data.getString("time")));
         topic.setMark(data.getBoolean("mark"));
         topic.setRead(data.getInt("read"));
 
