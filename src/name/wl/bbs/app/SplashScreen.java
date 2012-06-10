@@ -7,12 +7,13 @@ import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.DrawStyle;
 import net.rim.device.api.ui.Graphics;
+import net.rim.device.api.system.Bitmap;
 
 public class SplashScreen extends BaseScreen
 {
     public SplashScreen()
     {
-        bbs.invokeLater(new load());
+        (new Thread(new load())).start();
     }
 
     class load implements Runnable
@@ -53,7 +54,11 @@ public class SplashScreen extends BaseScreen
                 bbs.setFriends(new SelectList(friends.getFriends()));
             }
 
-            destroy();
+            bbs.invokeLater(new Runnable() {
+                public void run() {
+                    destroy();
+                }
+            });
         }
     }
 
@@ -73,7 +78,14 @@ public class SplashScreen extends BaseScreen
         int height = Display.getHeight();
         int width = Display.getWidth();
 
+        Bitmap logo = Bitmap.getBitmapResource("icon.png");
+        int b_w = logo.getWidth();
+        int b_h = logo.getHeight();
+        graphics.drawBitmap((int)((width - b_w)/2), (int)(height*0.3), b_w, b_h, logo, 0, 0);
+
         graphics.setColor(Color.GREEN);
+        graphics.drawText("ª¢æ·¡˙Û¥BBS - bbs.seu.edu.cn", 0, (int)(height*0.3 + b_h + 10), DrawStyle.HCENTER, width);
+        graphics.setColor(Color.BLUE);
         graphics.drawText("∆Ù∂Ø÷–...", 0, (int)(height*0.8), DrawStyle.HCENTER, width);
     }
 }
