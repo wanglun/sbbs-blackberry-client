@@ -59,10 +59,13 @@ public class SelectBoardScreen extends BaseScreen
     {
         switch (key) {
             case Characters.ENTER:
-                String board = (String)boardFilter.getSelectedElement();
-                listener.callback(board.substring(0, board.indexOf('-') - 1));
-                bbs.popScreen(this);
-                return true;
+                if (boardFilter.getResultListSize() > 0) {
+                    String board = (String)boardFilter.getSelectedElement();
+                    listener.callback(board.substring(0, board.indexOf('-') - 1));
+                    bbs.popScreen(this);
+                    return true;
+                }
+                break;
         }
 
         return super.keyChar(key, status, time);
