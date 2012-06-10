@@ -53,6 +53,32 @@ public class TopicListField extends BbsObjectListField
         return this.topics;
     }
 
+    public Topic getSelectedTopic()
+    {
+        return (Topic)topics.elementAt(getSelectedIndex());
+    }
+
+    public void setRead(int index)
+    {
+        Topic topic = (Topic)(topics.elementAt(index));
+        if (topic.isUnread()) {
+            topic.setUnread(false);
+            invalidate(index);
+        }
+    }
+
+    public void setAllRead()
+    {
+        Topic topic;
+        for (int i = 0; i < topics.size(); i++) {
+            topic = (Topic)(topics.elementAt(i));
+            if (topic.isUnread()) {
+                topic.setUnread(false);
+                invalidate(i);
+            }
+        }
+    }
+
     public void appendTopics(Vector topics)
     {
         for (int i = 0; i < topics.size(); i++) {
@@ -76,7 +102,7 @@ public class TopicListField extends BbsObjectListField
         switch (key) {
             case Keypad.KEY_ENTER:
             case 'o':
-                topicListener.callback(t);
+                topicListener.callback(this);
                 return true;
             case 'a':
                 bbs.pushScreen(new UserScreen(new User(t.getAuthor())));
@@ -112,7 +138,8 @@ public class TopicListField extends BbsObjectListField
         }
 
         graphics.drawText(t.getAuthor(), 16, y, DrawStyle.ELLIPSIS, (int)(width*0.3));
-        graphics.drawText(GenTimeStr.pretty(t.getTime()), (int)(width*0.3), y, DrawStyle.RIGHT, (int)(width*0.7) - 10);
+        if (t.getTime() > 0)
+            graphics.drawText(GenTimeStr.pretty(t.getTime()), (int)(width*0.3), y, DrawStyle.RIGHT, (int)(width*0.7) - 10);
         graphics.drawText(t.getTitle(), 16, y + lineHeight, DrawStyle.ELLIPSIS, width - 10);
     }
 }

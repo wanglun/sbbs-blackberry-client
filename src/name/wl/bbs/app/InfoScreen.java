@@ -49,7 +49,7 @@ public class InfoScreen extends BaseScreen
 
         items.addElement(new InfoListItem("ID：", this.topic.getId()));
         items.addElement(new InfoListItem("主题ID：", this.topic.getGid()));
-        items.addElement(new InfoListItem("回复帖子ID：", this.topic.getReid()));
+        items.addElement(new InfoListItem("回复帖ID：", this.topic.getReid()));
         items.addElement(new InfoListItem("所在版面：", this.topic.getBoard()));
         items.addElement(new InfoListItem("作者：", this.topic.getAuthor()));
         items.addElement(new InfoListItem("大小：", this.topic.getSize()));

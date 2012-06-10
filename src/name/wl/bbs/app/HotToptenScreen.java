@@ -63,7 +63,7 @@ public class HotToptenScreen extends BaseScreen
     public Listener topicListener = new Listener() {
         public void callback(Object o)
         {
-            bbs.pushScreen(new ThreadScreen((Topic)o));
+            bbs.pushScreen(new ThreadScreen((TopicListField)o));
         }
     };
 

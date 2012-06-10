@@ -146,27 +146,27 @@ public class Board
         return unread;
     }
 
-    protected void setName(String name)
+    public void setName(String name)
     {
         this.name = name;
     }
 
-    protected void setDescription(String description)
+    public void setDescription(String description)
     {
         this.description = description;
     }
 
-    protected void setCount(int count)
+    public void setCount(int count)
     {
         this.count = count;
     }
 
-    protected void setUsers(int users)
+    public void setUsers(int users)
     {
         this.users = users;
     }
 
-    protected void setBm(String bm) throws JSONException
+    public void setBm(String bm) throws JSONException
     {
         JSONArray arr = new JSONArray(bm);
 
@@ -175,17 +175,17 @@ public class Board
         }
     }
 
-    protected void setBoards(Vector boards)
+    public void setBoards(Vector boards)
     {
         this.boards = boards;
     }
 
-    protected void setLeaf(boolean leaf)
+    public void setLeaf(boolean leaf)
     {
         this.leaf = leaf;
     }
 
-    protected void setUnread(boolean unread)
+    public void setUnread(boolean unread)
     {
         this.unread = unread;
     }

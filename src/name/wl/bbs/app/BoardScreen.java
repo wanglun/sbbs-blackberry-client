@@ -11,19 +11,35 @@ import name.wl.bbs.json.*;
 
 public class BoardScreen extends BaseScreen
 {
-    private Board board;
+    private BoardListField boards = null;
+    private Board board = null;
     private TopicListField list = null;
     private boolean needRefresh = false;
     private static int mode = BoardJSON.NORMAL;
 
+    public BoardScreen(BoardListField boards)
+    {
+        this(boards, null);
+    }
+
     public BoardScreen(Board board)
     {
-        this.board = board;
+        this(null, board);
+    }
+
+    public BoardScreen(BoardListField boards, Board board)
+    {
+        if (boards != null) {
+            this.boards = boards;
+            this.board = this.boards.getSelectedBoard();
+        } else {
+            this.board = board;
+        }
 
         alert("加载中", ALERT_WARNING);
-        new BoardJSON(board, mode).load(loadListener);
+        new BoardJSON(this.board, mode).load(loadListener);
 
-        setStatusbarTitle(board.getName() + " - " + BoardJSON.getModeString(mode));
+        setStatusbarTitle(this.board.getName() + " - " + BoardJSON.getModeString(mode));
     }
 
     public Listener loadListener = new Listener() {
@@ -90,7 +106,7 @@ public class BoardScreen extends BaseScreen
                     break;
                 case BoardJSON.THREAD:
                 case BoardJSON.FORUM:
-                    bbs.pushScreen(new ThreadScreen((Topic)o));
+                    bbs.pushScreen(new ThreadScreen((TopicListField)o));
                     break;
             }
         }
@@ -101,6 +117,10 @@ public class BoardScreen extends BaseScreen
         {
             BoardMarkreadJSON obj = (BoardMarkreadJSON)o;
             if (obj.getSuccess()) {
+                if (boards != null) {
+                    boards.setRead(boards.getSelectedIndex());
+                }
+                list.setAllRead();
                 alert("已清除未读");
             } else {
                 alert(obj.getError(), ALERT_ERROR);

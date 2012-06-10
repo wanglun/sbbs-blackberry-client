@@ -55,6 +55,27 @@ public class ThreadListField extends BbsObjectListField
         return this.topics;
     }
 
+    public void setAllRead()
+    {
+        Topic topic;
+        for (int i = 0; i < topics.size(); i++) {
+            topic = (Topic)(topics.elementAt(i));
+            if (topic.isUnread()) {
+                topic.setUnread(false);
+                invalidate(i);
+            }
+        }
+    }
+
+    public void setRead(int index)
+    {
+        Topic topic = (Topic)(topics.elementAt(index));
+        if (topic.isUnread()) {
+            topic.setUnread(false);
+            invalidate(index);
+        }
+    }
+
     protected boolean keyChar(char key, int status, int time)
     {
         int idx = this.getSelectedIndex();

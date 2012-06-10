@@ -10,15 +10,17 @@ import name.wl.bbs.json.*;
 
 public class ThreadScreen extends BaseScreen
 {
+    private TopicListField topics;
     private Topic topic;
     private ThreadListField list;
 
-    public ThreadScreen(Topic topic)
+    public ThreadScreen(TopicListField topics)
     {
-        this.topic = topic;
+        this.topics = topics;
+        this.topic = this.topics.getSelectedTopic();
 
         alert("Мгдижа", ALERT_WARNING);
-        new TopicJSON(topic).load(loadListener);
+        new TopicJSON(this.topic).load(loadListener);
 
         setStatusbarTitle(this.topic.getBoard());
     }
@@ -30,6 +32,7 @@ public class ThreadScreen extends BaseScreen
             if (obj.getSuccess()) {
                 final Vector topics = obj.getTopics();
                 if (list == null) {
+                    ThreadScreen.this.topics.setRead(ThreadScreen.this.topics.getSelectedIndex());
                     list = new ThreadListField(topics, moreListener);
                     bbs.invokeLater(new Runnable() {
                         public void run() {

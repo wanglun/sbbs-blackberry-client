@@ -62,6 +62,17 @@ public class BoardListField extends BbsObjectListField
         this.setCurrent(boards);
     }
 
+    public void setRead(int index)
+    {
+        ((Board)(current.elementAt(index))).setUnread(false);
+        invalidate(index);
+    }
+
+    public Board getSelectedBoard()
+    {
+        return (Board)current.elementAt(getSelectedIndex());
+    }
+
     protected boolean keyChar(char key, int status, int time)
     {
         int idx = this.getSelectedIndex();
@@ -78,7 +89,7 @@ public class BoardListField extends BbsObjectListField
                     this.preIndex.push(new Integer(idx));
                     this.setCurrent(b.getBoards());
                 } else {
-                    bbs.pushScreen(new BoardScreen(b));
+                    bbs.pushScreen(new BoardScreen(this));
                 }
                 return true;
             case 'i':

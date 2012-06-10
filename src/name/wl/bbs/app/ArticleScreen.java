@@ -39,6 +39,7 @@ public class ArticleScreen extends BaseScreen
             this.thread = thread;
             this.topic = (Topic)this.thread.getTopics().elementAt(this.thread.getSelectedIndex());
             setStatusbarIndex(1, thread.getSize());
+            thread.setRead(thread.getSelectedIndex());
         } else if (topics != null) {
             this.topics = topics;
             this.topic = (Topic)this.topics.getTopics().elementAt(this.topics.getSelectedIndex());
@@ -61,8 +62,10 @@ public class ArticleScreen extends BaseScreen
     {
         if (thread != null) {
             setStatusbarIndex(thread.getSelectedIndex() + 1, thread.getSize());
+            thread.setRead(thread.getSelectedIndex());
         } else if (topics != null) {
             setStatusbarIndex(topics.getSelectedIndex() + 1, topics.getSize());
+            topics.setRead(topics.getSelectedIndex());
         }
 
         header.invalidate();
@@ -92,8 +95,9 @@ public class ArticleScreen extends BaseScreen
 
             graphics.drawText(topic.getAuthor(), 10, marginTD,
                     DrawStyle.ELLIPSIS, (int)(width*0.3));
-            graphics.drawText(GenTimeStr.standard(topic.getTime()), (int)(width*0.3), marginTD,
-                    DrawStyle.RIGHT, (int)(width*0.7) - 10);
+            if (topic.getTime() > 0)
+                graphics.drawText(GenTimeStr.standard(topic.getTime()), (int)(width*0.3), marginTD,
+                        DrawStyle.RIGHT, (int)(width*0.7) - 10);
             graphics.drawText(topic.getTitle(), 10, obj.getRowHeight() + marginTD,
                     DrawStyle.ELLIPSIS, width - 10);
         }

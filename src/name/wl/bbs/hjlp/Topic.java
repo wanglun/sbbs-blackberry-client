@@ -126,7 +126,6 @@ public class Topic
         topic.setAuthor(data.getString("user"));
         topic.setBoard(data.getString("board"));
         topic.setTitle(data.getString("title"));
-        topic.setTime(data.getLong("time"));
 
         return topic;
     }
@@ -298,97 +297,97 @@ public class Topic
         return last_time;
     }
 
-    protected void setId(int id)
+    public void setId(int id)
     {
         this.id = id;
     }
 
-    protected void setGid(int gid)
+    public void setGid(int gid)
     {
         this.gid = gid;
     }
 
-    protected void setBoard(String board)
+    public void setBoard(String board)
     {
         this.board = board;
     }
 
-    protected void setSize(int size)
+    public void setSize(int size)
     {
         this.size = size;
     }
 
-    protected void setRead(int read)
+    public void setRead(int read)
     {
         this.read = read;
     }
 
-    protected void setReplies(int replies)
+    public void setReplies(int replies)
     {
         this.replies = replies;
     }
 
-    protected void setReid(int reid)
+    public void setReid(int reid)
     {
         this.reid = reid;
     }
 
-    protected void setUnread(boolean unread)
+    public void setUnread(boolean unread)
     {
         this.unread = unread;
     }
 
-    protected void setTop(boolean top)
+    public void setTop(boolean top)
     {
         this.top = top;
     }
 
-    protected void setMark(boolean mark)
+    public void setMark(boolean mark)
     {
         this.mark = mark;
     }
 
-    protected void setNorep(boolean norep)
+    public void setNorep(boolean norep)
     {
         this.norep = norep;
     }
 
-    protected void setAuthor(String author)
+    public void setAuthor(String author)
     {
         this.author = author;
     }
 
-    protected void setTime(long time)
+    public void setTime(long time)
     {
         this.time = time;
     }
 
-    protected void setTitle(String title)
+    public void setTitle(String title)
     {
         this.title = title;
     }
 
-    protected void setContent(String content)
+    public void setContent(String content)
     {
         this.content = content;
     }
 
-    protected void setQuote(String quote)
+    public void setQuote(String quote)
     {
         this.quote = quote;
     }
 
-    protected void setQuoter(String quoter)
+    public void setQuoter(String quoter)
     {
         this.quoter = quoter;
     }
 
-    protected void setLastAuthor(String last_author)
+    public void setLastAuthor(String last_author)
     {
         this.last_author = last_author;
     }
 
-    protected void setLastTime(long last_time)
+    public void setLastTime(long last_time)
     {
         this.last_time = last_time;
     }
