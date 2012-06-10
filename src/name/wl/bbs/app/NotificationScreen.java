@@ -47,13 +47,13 @@ public class NotificationScreen extends BaseScreen
         {
             switch (type) {
                 case MAILS:
-                    bbs.pushScreen(new MailScreen((Mail)o));
+                    bbs.pushScreen(new MailScreen((Mail)list.getSelectedTopic()));
                     break;
                 case ATS:
-                    bbs.pushScreen(new ArticleScreen((Topic)o));
+                    bbs.pushScreen(new ArticleScreen(list));
                     break;
                 case REPLIES:
-                    bbs.pushScreen(new ArticleScreen((Topic)o));
+                    bbs.pushScreen(new ArticleScreen(list));
                     break;
             }
         }

@@ -6,6 +6,8 @@ import name.wl.bbs.json.*;
 import name.wl.bbs.util.*;
 import net.rim.device.api.system.Alert;
 import net.rim.device.api.system.LED;
+import net.rim.blackberry.api.homescreen.HomeScreen;
+import net.rim.device.api.system.Bitmap;
 
 public class NotificationsTask extends TimerTask
 {
@@ -54,12 +56,19 @@ public class NotificationsTask extends TimerTask
                 ats = obj.getAts();
                 replies = obj.getReplies();
 
-                if (getCount() > 0) {
+                int count = getCount();
+                if (count > 0) {
+                    if (count < 4) {
+                        HomeScreen.updateIcon(Bitmap.getBitmapResource("icon_notifications_" + count + ".png"));
+                    } else {
+                        HomeScreen.updateIcon(Bitmap.getBitmapResource("icon_notifications_3_plus.png"));
+                    }
                     Alert.startVibrate(400);
 
                     LED.setConfiguration(LED.LED_TYPE_STATUS, 500, 500, LED.BRIGHTNESS_50);
                     LED.setState(LED.STATE_BLINKING);
                 } else {
+                    HomeScreen.updateIcon(Bitmap.getBitmapResource("icon.png"));
                     LED.setState(LED.STATE_OFF);
                 }
 

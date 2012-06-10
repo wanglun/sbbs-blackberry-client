@@ -106,7 +106,7 @@ public class BoardScreen extends BaseScreen
                     break;
                 case BoardJSON.THREAD:
                 case BoardJSON.FORUM:
-                    bbs.pushScreen(new ThreadScreen((TopicListField)o));
+                    bbs.pushScreen(new ThreadScreen(list));
                     break;
             }
         }
