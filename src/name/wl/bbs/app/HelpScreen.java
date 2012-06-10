@@ -102,6 +102,7 @@ public class HelpScreen extends BaseScreen
     private void article(Vector items) {
         items.addElement(new InfoListItem("查看文章 - 快捷键"));
         items.addElement(new InfoListItem("r", "回复文章"));
+        items.addElement(new InfoListItem("e", "修改文章"));
         items.addElement(new InfoListItem("n", "下一篇文章"));
         items.addElement(new InfoListItem("p", "上一篇文章"));
         items.addElement(new InfoListItem("V", "进入/离开文字选择模式"));

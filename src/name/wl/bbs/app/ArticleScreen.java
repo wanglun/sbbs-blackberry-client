@@ -189,6 +189,9 @@ public class ArticleScreen extends BaseScreen
                     }
                 }
                 return true;
+            case 'e':
+                bbs.pushScreen(new EditScreen(topic));
+                return true;
         }
 
         return super.keyChar(key, status, time);
