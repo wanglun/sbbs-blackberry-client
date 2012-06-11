@@ -3,6 +3,7 @@ package name.wl.bbs.app;
 import net.rim.device.api.ui.component.KeywordFilterField;
 import net.rim.device.api.collection.util.UnsortedReadableList;
 import net.rim.device.api.system.Characters;
+import net.rim.device.api.ui.MenuItem;
 
 import name.wl.bbs.json.*;
 import name.wl.bbs.util.*;
@@ -22,12 +23,12 @@ public class SelectBoardScreen extends BaseScreen
         boardFilter = new KeywordFilterField();
 
         if (bbs.getBoards() == null) {
-            alert("Мгдижа", ALERT_WARNING);
             new BoardListJSON().load(loadBoardsListener);
         } else {
             addBoardFilter();
         }
 
+        addMenuItem(refreshMenuItem);
     }
 
     private void addBoardFilter()
@@ -50,7 +51,24 @@ public class SelectBoardScreen extends BaseScreen
                     }
                 });
             } else {
-                alert(obj.getError(), ALERT_ERROR);
+                alert(obj.getError(), ALERT_CONFIRM);
+            }
+        }
+    };
+
+    public Listener refreshListener = new Listener() {
+        public void callback(Object o)
+        {
+            BoardListJSON obj = (BoardListJSON)o;
+            if (obj.getSuccess()) {
+                bbs.setBoards(new SelectList(obj.getBoards()));
+                bbs.invokeLater(new Runnable() {
+                    public void run() {
+                        boardFilter.setSourceList(bbs.getBoards(), bbs.getBoards());
+                    }
+                });
+            } else {
+                alert(obj.getError(), ALERT_CONFIRM);
             }
         }
     };
@@ -70,4 +88,13 @@ public class SelectBoardScreen extends BaseScreen
 
         return super.keyChar(key, status, time);
     }
+
+    final MenuItem refreshMenuItem = new MenuItem("Refresh", 0, 0)
+    {       
+        public void run() { 
+            if (bbs.getBoards() != null) {
+                new BoardListJSON().refresh(refreshListener);
+            }
+        }
+    }; 
 }
