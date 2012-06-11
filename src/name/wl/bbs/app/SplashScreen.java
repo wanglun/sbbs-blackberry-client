@@ -86,7 +86,7 @@ public class SplashScreen extends BaseScreen
         graphics.drawBitmap((int)((width - b_w)/2), (int)(height*0.3), b_w, b_h, logo, 0, 0);
 
         graphics.setColor(Color.GREEN);
-        graphics.drawText("ª¢æ·¡˙Û¥BBS - bbs.seu.edu.cn", 0, (int)(height*0.3 + b_h + 10), DrawStyle.HCENTER, width);
+        graphics.drawText("ª¢æ·¡˙Û¥BBS", 0, (int)(height*0.3 + b_h + 10), DrawStyle.HCENTER, width);
         graphics.setColor(Color.BLUE);
         graphics.drawText("∆Ù∂Ø÷–...", 0, (int)(height*0.8), DrawStyle.HCENTER, width);
     }

@@ -11,7 +11,7 @@ import name.wl.bbs.app.Bbs;
 
 public class ApiJSON
 {
-    protected static final String BASEAPI = "http://bbs.seu.edu.cn/api";
+    protected static final String BASEAPI = "http://58.192.114.8/api";
 
     protected static final boolean AUTH = true;
     protected static final boolean NOAUTH = false;

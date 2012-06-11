@@ -1,6 +1,8 @@
 package name.wl.bbs.app;
 
 import java.util.*;
+import net.rim.device.api.system.ApplicationDescriptor;
+
 import name.wl.bbs.json.*;
 import name.wl.bbs.util.*;
 import name.wl.bbs.ui.*;
@@ -98,6 +100,10 @@ public class HelpScreen extends BaseScreen
         items.addElement(new InfoListItem("i", "查看帖子或版面信息"));
         items.addElement(new InfoListItem("u", "查找用户"));
         items.addElement(new InfoListItem("/", "搜索"));
+        items.addElement(new InfoListItem("关于本程序"));
+        items.addElement(new InfoListItem("作者", "irun@SBBS"));
+        items.addElement(new InfoListItem("版本", ApplicationDescriptor.currentApplicationDescriptor().getVersion()));
+        items.addElement(new InfoListItem("祝Gumtree天天开心 少生我气 :)"));
     }
 
     private void article(Vector items) {
