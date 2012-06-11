@@ -51,6 +51,7 @@ public class TopicPostJSON extends ApiJSON
         posts.put("title", this.title);
         posts.put("content", this.content);
         posts.put("reid", Integer.toString(this.reid));
+        posts.put("type", "4");
 
         if (this.notopten)
             posts.put("notopten", "true");
