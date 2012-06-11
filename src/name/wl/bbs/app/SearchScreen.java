@@ -9,10 +9,11 @@ import name.wl.bbs.json.*;
 public class SearchScreen extends BaseScreen implements FieldChangeListener
 {
     private BbsEditField board;
+    private BbsEditField author;
     private BbsEditField keyword;
     private BbsButtonField search;
 
-    private String keys = null;
+    private String keys = "";
     private TopicListField list = null;
 
     public SearchScreen()
@@ -24,13 +25,17 @@ public class SearchScreen extends BaseScreen implements FieldChangeListener
     {
         editable = true;
 
-        board = new BbsEditField("版面:");
+        board = new BbsEditField("版面(可选)：");
         add(board);
 
-        keyword = new BbsEditField("关键字:");
+        author = new BbsEditField("作者(可选)：");
+        if (boardName != null)
+            add(author);
+
+        keyword = new BbsEditField("关键字：");
         add(keyword);
 
-        search = new BbsButtonField("搜索:");
+        search = new BbsButtonField("搜索");
         search.setChangeListener(this);
         add(search);
 
@@ -49,10 +54,12 @@ public class SearchScreen extends BaseScreen implements FieldChangeListener
             } else {
                 alert("搜索中", ALERT_WARNING);
                 if (board.getText().length() > 0) {
-                    keys = "board:" + board.getText() + " " + keyword.getText();
-                } else {
-                    keys = keyword.getText();
+                    keys += "board:" + board.getText() + " ";
                 }
+                if (author.getText().length() > 0) {
+                    keys += "author:" + author.getText() + " ";
+                }
+                keys += keyword.getText();
                 new SearchTopicsJSON(keys).load(this.loadListener);
             }
         }

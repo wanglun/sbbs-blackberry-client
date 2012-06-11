@@ -61,9 +61,11 @@ public class ArticleScreen extends BaseScreen
     public void update()
     {
         if (thread != null) {
+            setStatusbarTitle(topic.getBoard());
             setStatusbarIndex(thread.getSelectedIndex() + 1, thread.getSize());
             thread.setRead(thread.getSelectedIndex());
         } else if (topics != null) {
+            setStatusbarTitle(topic.getBoard());
             setStatusbarIndex(topics.getSelectedIndex() + 1, topics.getSize());
             topics.setRead(topics.getSelectedIndex());
         }

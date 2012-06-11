@@ -21,11 +21,11 @@ public class EditScreen extends BaseScreen implements FieldChangeListener
 
         this.topic = topic;
 
-        title = new BbsEditField("标题:");
+        title = new BbsEditField("标题：");
         title.setText(topic.getTitle());
         add(title);
 
-        content = new BbsEditField("内容:", 3);
+        content = new BbsEditField("内容：", 3);
         content.setText(topic.getContent());
         add(content);
 

@@ -15,10 +15,10 @@ public class LoginScreen extends BaseScreen implements FieldChangeListener
     {
         editable = true;
 
-        user = new BbsEditField("用户名:");
+        user = new BbsEditField("用户名：");
         add(user);
 
-        passwd = new BbsPasswordEditField("密码:");
+        passwd = new BbsPasswordEditField("密码：");
         add(passwd);
 
         login = new BbsButtonField("登录");

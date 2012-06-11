@@ -37,13 +37,13 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
         this.board = board;
         this.topic = topic;
 
-        title = new BbsEditField("标题:");
+        title = new BbsEditField("标题：");
         if (topic != null) {
             title.setText(topic.getTitle().indexOf("Re: ") == 0 ? topic.getTitle() : "Re: " + topic.getTitle());
         }
         add(title);
 
-        content = new BbsEditField("内容:", 3);
+        content = new BbsEditField("内容：", 3);
         add(content);
 
         if (topic == null) {
