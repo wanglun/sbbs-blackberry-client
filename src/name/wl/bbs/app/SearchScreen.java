@@ -47,27 +47,27 @@ public class SearchScreen extends BaseScreen implements FieldChangeListener
 
         if (this.boardArg != null) {
             board.setText(boardArg.getName());
-            keyword.setFocus();
         }
+        keyword.setFocus();
 
         setStatusbarTitle("搜索");
     }
 
     public void fieldChanged(Field field, int context) {
         if (field == search) {
-            if (keyword.getText().length() == 0) {
-                alert("关键字不能为空", ALERT_ERROR);
-            } else {
-                alert("搜索中", ALERT_WARNING);
-                if (board.getText().length() > 0) {
-                    keys += "board:" + board.getText() + " ";
-                }
-                if (author.getText().length() > 0) {
-                    keys += "author:" + author.getText() + " ";
-                }
-                keys += keyword.getText();
-                new SearchTopicsJSON(keys).load(this.loadListener);
+            alert("搜索中", ALERT_WARNING);
+            if (board.getText().length() > 0) {
+                keys += "board:" + board.getText() + " ";
             }
+            if (author.getText().length() > 0) {
+                keys += "author:" + author.getText() + " ";
+            }
+            if (keyword.getText().length() > 0) {
+                keys += keyword.getText();
+            } else {
+                keys += "*";
+            }
+            new SearchTopicsJSON(keys).load(this.loadListener);
         }
     }
 

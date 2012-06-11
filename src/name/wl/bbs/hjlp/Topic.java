@@ -147,11 +147,20 @@ public class Topic
         Topic topic = new Topic();
         JSONObject data = new JSONObject(json);
 
-        // FIXME 目前返回的是String
-        topic.setId(Integer.parseInt(data.getString("id")));
+        // FIXME 目前返回的是String. API BUG 有时会返回错误过大的id
+        try {
+            topic.setId(Integer.parseInt(data.getString("id")));
+        } catch (Exception e) {
+            return null;
+        }
         topic.setTitle(data.getString("title"));
         topic.setBoard(data.getString("board"));
-        topic.setAuthor(data.getString("author"));
+        // FIXME API BUG 有时会返回 null
+        try {
+            topic.setAuthor(data.getString("author"));
+        } catch (Exception e) {
+            topic.setAuthor("-null-");
+        }
 
         // API目前返回的是String FIXME
         String t = data.getString("time");
@@ -176,7 +185,9 @@ public class Topic
         JSONArray arr = new JSONArray(json);
 
         for (int i = 0; i < arr.length(); i++) {
-            topics.addElement(SearchJSON(arr.getString(i)));
+            Topic t = SearchJSON(arr.getString(i));
+            if (t != null)
+                topics.addElement(t);
         }
 
         return topics;
