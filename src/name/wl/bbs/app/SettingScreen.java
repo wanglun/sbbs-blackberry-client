@@ -15,6 +15,8 @@ public class SettingScreen extends BaseScreen
     private NumericChoiceField updateDelay;
     // 每次加载文章数
     private NumericChoiceField loadTopics;
+    // 是否显示分类讨论区
+    private BbsCheckboxField showSections;
 
     private Settings settings;
     public SettingScreen()
@@ -23,9 +25,11 @@ public class SettingScreen extends BaseScreen
 
         updateDelay = new NumericChoiceField("检查新通知间隔(分钟)", 5, 30, 5, this.settings.getUpdateDelay()/5 - 1);
         loadTopics = new NumericChoiceField("每次加载文章数", 5, 30, 5, this.settings.getLoadTopics()/5 - 1);
+        showSections = new BbsCheckboxField("显示分类讨论区(会增加启动时间/重启生效)", this.settings.isShowSections());
 
         add(updateDelay);
         add(loadTopics);
+        add(showSections);
 
         setStatusbarTitle("设置");
     }
@@ -56,6 +60,7 @@ public class SettingScreen extends BaseScreen
             bbs.scheduleNotificationsTask();
 
             this.settings.setLoadTopics(loadTopics.getSelectedValue());
+            this.settings.setShowSections(showSections.getChecked());
             return true;
         } else if (ret == Dialog.DISCARD) {
             return true;

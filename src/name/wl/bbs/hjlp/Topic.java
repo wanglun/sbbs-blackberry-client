@@ -3,7 +3,7 @@ package name.wl.bbs.hjlp;
 import org.json.me.*;
 import java.util.*;
 
-import name.wl.bbs.util.GenTimeStr;
+import name.wl.bbs.util.*;
 
 public class Topic
 {
@@ -152,8 +152,18 @@ public class Topic
         topic.setTitle(data.getString("title"));
         topic.setBoard(data.getString("board"));
         topic.setAuthor(data.getString("author"));
+
         // API目前返回的是String FIXME
-        //topic.setTime(Long.parseLong(data.getString("time")));
+        String t = data.getString("time");
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, Integer.parseInt(t.substring(0, 4)));
+        cal.set(Calendar.MONTH, Integer.parseInt(t.substring(4, 6)) - 1);
+        cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(t.substring(6, 8)));
+        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        topic.setTime(new Double(cal.getTime().getTime()*0.001).longValue());
+
         topic.setMark(data.getBoolean("mark"));
         topic.setRead(data.getInt("read"));
 

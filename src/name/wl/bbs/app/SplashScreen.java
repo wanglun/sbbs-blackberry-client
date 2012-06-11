@@ -34,10 +34,12 @@ public class SplashScreen extends BaseScreen
             }
 
             // get the cached sections
-            SectionsJSON sections = new SectionsJSON();
-            sections.loadCached();
-            if (sections.getSuccess()) {
-                bbs.setSections(sections.getBoards());
+            if (bbs.getSettings().isShowSections()) {
+                SectionsJSON sections = new SectionsJSON();
+                sections.loadCached();
+                if (sections.getSuccess()) {
+                    bbs.setSections(sections.getBoards());
+                }
             }
 
             // get the cached boards

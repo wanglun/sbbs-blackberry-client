@@ -5,6 +5,7 @@ import net.rim.device.api.ui.*;
 import name.wl.bbs.ui.*;
 import name.wl.bbs.util.*;
 import name.wl.bbs.json.*;
+import name.wl.bbs.hjlp.*;
 
 public class SearchScreen extends BaseScreen implements FieldChangeListener
 {
@@ -12,6 +13,8 @@ public class SearchScreen extends BaseScreen implements FieldChangeListener
     private BbsEditField author;
     private BbsEditField keyword;
     private BbsButtonField search;
+
+    private Board boardArg = null;
 
     private String keys = "";
     private TopicListField list = null;
@@ -21,16 +24,19 @@ public class SearchScreen extends BaseScreen implements FieldChangeListener
         this(null);
     }
 
-    public SearchScreen(String boardName)
+    public SearchScreen(Board b)
     {
         editable = true;
+
+        this.boardArg = b;
 
         board = new BbsEditField("版面(可选)：");
         add(board);
 
         author = new BbsEditField("作者(可选)：");
-        if (boardName != null)
+        if (this.boardArg != null) {
             add(author);
+        }
 
         keyword = new BbsEditField("关键字：");
         add(keyword);
@@ -39,8 +45,8 @@ public class SearchScreen extends BaseScreen implements FieldChangeListener
         search.setChangeListener(this);
         add(search);
 
-        if (boardName != null) {
-            board.setText(boardName);
+        if (this.boardArg != null) {
+            board.setText(boardArg.getName());
             keyword.setFocus();
         }
 
@@ -77,6 +83,8 @@ public class SearchScreen extends BaseScreen implements FieldChangeListener
                         public void run() {
                             editable = false;
                             SearchScreen.this.delete(board);
+                            if (boardArg != null)
+                                SearchScreen.this.delete(author);
                             SearchScreen.this.delete(keyword);
                             SearchScreen.this.delete(search);
                             SearchScreen.this.add(list);

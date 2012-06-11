@@ -11,15 +11,16 @@ public class HotSectionMenuScreen extends BaseScreen
 {
     private Vector items;
     private MenuListField list;
+    private static final String[] sections = {
+        "本站系统", "东南大学", "电脑技术", "学术科学", "艺术文化", "乡情校谊",
+        "休闲娱乐", "知性感性", "人文信息", "体坛风暴", "校务信箱", "社团群体"
+    };
 
     public HotSectionMenuScreen()
     {
-        Vector sections = bbs.getSections();
         items = new Vector();
-        Board board = null;
-        for (int i = 0; i < sections.size(); i++) {
-            board = (Board)sections.elementAt(i);
-            items.addElement(new MenuListItem(board.getName(), hotsectionListener, i));
+        for (int i = 0; i < sections.length; i++) {
+            items.addElement(new MenuListItem(sections[i], hotsectionListener, i));
         }
 
         list = new MenuListField(items);

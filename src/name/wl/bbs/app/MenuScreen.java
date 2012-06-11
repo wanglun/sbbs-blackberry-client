@@ -15,7 +15,9 @@ public class MenuScreen extends BaseScreen
     public MenuScreen()
     {
         items = new Vector();
-        items.addElement(new MenuListItem("分类讨论区", sectionsListener));
+        if (bbs.getSettings().isShowSections())
+            items.addElement(new MenuListItem("分类讨论区", sectionsListener));
+        items.addElement(new MenuListItem("全部讨论区", boardsListener));
         items.addElement(new MenuListItem("热门信息", hotListener));
         items.addElement(new MenuListItem("收藏夹", favListener));
         items.addElement(new MenuListItem("信箱", mailListener));
@@ -37,6 +39,17 @@ public class MenuScreen extends BaseScreen
         public void callback(Object o)
         {
             bbs.pushScreen(new SectionsScreen());
+        }
+    };
+
+    public Listener boardsListener = new Listener() {
+        public void callback(Object o)
+        {
+            bbs.pushModalScreen(new SelectBoardScreen(new Listener() {
+                public void callback(Object o) {
+                    bbs.pushScreen(new BoardScreen(new Board((String)o)));
+                }
+            }));
         }
     };
 

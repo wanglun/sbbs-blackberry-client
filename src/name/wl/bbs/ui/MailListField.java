@@ -8,6 +8,7 @@ import net.rim.device.api.ui.component.ListField;
 
 import name.wl.bbs.util.*;
 import name.wl.bbs.hjlp.*;
+import name.wl.bbs.app.*;
 
 public class MailListField extends BbsObjectListField
 {
@@ -66,11 +67,17 @@ public class MailListField extends BbsObjectListField
         if (mails.isEmpty()) {
             return super.keyChar(key, status, time);
         }
+        Mail t = (Mail)mails.elementAt(idx);
         switch (key) {
             case Keypad.KEY_ENTER:
             case 'o':
-                Mail t = (Mail)mails.elementAt(idx);
                 mailListener.callback(t);
+                return true;
+            case 'a':
+                bbs.pushScreen(new UserScreen(new User(t.getAuthor())));
+                return true;
+            case 'i':
+                bbs.pushScreen(new InfoScreen((Topic)t));
                 return true;
         }
 

@@ -199,7 +199,7 @@ public class BoardScreen extends BaseScreen
                 }
                 return true;
             case '/':
-                bbs.pushScreen(new SearchScreen(board.getName()));
+                bbs.pushScreen(new SearchScreen(board));
                 return true;
         }
 
