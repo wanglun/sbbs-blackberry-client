@@ -97,8 +97,23 @@ public class NotificationMenuScreen extends BaseScreen
             case 'c':
                 new ClearNotificationsJSON().load(clearListener);
                 return true;
+            case 'q':
+                refreshNotifications();
+                break;
         }
 
         return super.keyChar(key, status, time);
+    }
+
+    private void refreshNotifications()
+    {
+        if (NotificationsTask.getCount() > 0)
+            new NotificationsTask().run();
+    }
+
+    public boolean onClose()
+    {
+        refreshNotifications();
+        return super.onClose();
     }
 }
