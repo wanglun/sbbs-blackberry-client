@@ -101,6 +101,11 @@ public class MailboxJSON extends ApiJSON
         }
     }
 
+    public void delCache()
+    {
+        Cache.del(getKey());
+    }
+
     public Vector getMails()
     {
         return this.mails;
