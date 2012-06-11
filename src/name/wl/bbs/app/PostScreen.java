@@ -46,20 +46,28 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
         content = new BbsEditField("内容：", 3);
         add(content);
 
+        String boardName = "";
         if (topic == null) {
+            boardName = board.getName();
+
             notopten = new BbsCheckboxField("不上十大", false);
             add(notopten);
         }
 
         if (topic != null) {
+            boardName = topic.getBoard();
+
             noquote = new BbsCheckboxField("不引原文", false);
             add(noquote);
 
             content.setFocus();
         }
 
-        anony = new BbsCheckboxField("匿名发文", false);
-        add(anony);
+        // FIXME 当前只有心理健康版是匿名版
+        if (boardName.equals("Psychology")) {
+            anony = new BbsCheckboxField("匿名发文", true);
+            add(anony);
+        }
 
         post = new BbsButtonField("发表");
         post.setChangeListener(this);
