@@ -16,7 +16,7 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
 
     private BbsCheckboxField notopten;
     private BbsCheckboxField noquote;
-    private BbsCheckboxField anony;
+    private BbsCheckboxField anony = null;
 
     private BbsButtonField post;
 
@@ -88,7 +88,7 @@ public class PostScreen extends BaseScreen implements FieldChangeListener
             if (topic != null) {
                 noquoteBool = noquote.getChecked();
             }
-            boolean anonyBool = anony.getChecked();
+            boolean anonyBool = anony != null ? anony.getChecked() : false;
             if (titleStr.length() == 0 ||
                     contentStr.length() == 0) {
                 alert("标题/内容不能为空", ALERT_ERROR);
