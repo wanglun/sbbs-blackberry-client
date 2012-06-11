@@ -29,7 +29,7 @@ public class EditScreen extends BaseScreen implements FieldChangeListener
         content.setText(topic.getContent());
         add(content);
 
-        edit = new BbsButtonField("发表");
+        edit = new BbsButtonField("提交");
         edit.setChangeListener(this);
         add(edit);
 
@@ -45,6 +45,8 @@ public class EditScreen extends BaseScreen implements FieldChangeListener
                 alert("标题/内容不能为空", ALERT_ERROR);
             } else {
                 TopicEditJSON json;
+                topic.setTitle(titleStr);
+                topic.setContent(contentStr);
                 json = new TopicEditJSON(topic);
                 alert("修改中", ALERT_WARNING);
                 json.load(this.editListener);
