@@ -33,6 +33,9 @@ public class AccountMenuScreen extends BaseScreen
             (new FavJSON()).delCache();
             (new FriendsJSON()).delCache();
             (new FriendsAllJSON()).delCache();
+            (new MailboxJSON(MailboxJSON.INBOX)).delCache();
+            (new MailboxJSON(MailboxJSON.SENT)).delCache();
+            (new MailboxJSON(MailboxJSON.DELETED)).delCache();
 
             System.exit(0);
         }
